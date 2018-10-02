@@ -1,8 +1,9 @@
 context('Reusable "login" custom command', function(){
 
   before(function() {
-			cy.visit('https://authoring.staging.concord.org/activities/20001/pages/304604')
+    cy.visit('https://authoring.staging.concord.org/activities/20001/pages/304604')
 	})
+  
     it('verifies whether glossary is used or not', () => {
         cy.get('.sidebar-hdr').should('be.visible');
     })
