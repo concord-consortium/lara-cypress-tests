@@ -38,3 +38,4 @@ context('Glossary default test', function(){
   it('Verifies that predefined words are visible in glossary', () => {
     cy.get('.sidebar-content').should('not.have.value', 'Words I Have Defined');
   })
+})

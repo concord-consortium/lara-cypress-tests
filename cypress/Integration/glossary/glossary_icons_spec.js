@@ -24,3 +24,4 @@ context('Glossary Icon Test', function(){
     cy.get('.definition--caption--2GD2UvrL').should('be.visible');
     cy.get('.sidebar-hdr').click()
   })
+})
