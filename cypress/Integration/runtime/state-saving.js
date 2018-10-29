@@ -1,12 +1,12 @@
 context('Runtime state saving', function () {
   let activityUrl
-  before(() => {
+  beforeEach(() => {
     cy.login()
     cy.importMaterial("activities/open-response-simple.json").then(url =>
       activityUrl = url
     )
   })
-  after(() => {
+  afterEach(() => {
     cy.deleteMaterial(activityUrl)
   })
 

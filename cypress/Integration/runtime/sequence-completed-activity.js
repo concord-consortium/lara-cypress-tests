@@ -1,12 +1,12 @@
 context('Runtime state saving', function () {
   let materialUrl
-  before(() => {
+  beforeEach(() => {
     cy.login()
     cy.importMaterial("sequences/simple-sequence.json").then(url =>
       materialUrl = url
     )
   })
-  after(() => {
+  afterEach(() => {
     cy.deleteMaterial(materialUrl)
   })
 

@@ -28,6 +28,8 @@ Cypress.Commands.add("logout", () => {
 
 Cypress.Commands.add("importMaterial", fixturePath => {
   return cy.fixture(fixturePath).then(materialJSON => {
+    const name = materialJSON.name || materialJSON.title
+    expect(name, "Wrong material name - no [Cypress] prefix").to.match(/^\[Cypress]/)
     return cy.requestWithToken({
       url: `${Cypress.config("baseUrl")}/api/v1/import`,
       method: "POST",

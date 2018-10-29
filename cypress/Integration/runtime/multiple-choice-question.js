@@ -1,12 +1,12 @@
 context('Multiple choice question', function () {
   let activityUrl
-  before(() => {
+  beforeEach(() => {
     cy.login()
     cy.importMaterial("activities/multiple-choice-simple.json").then(url =>
       activityUrl = url
     )
   })
-  after(() => {
+  afterEach(() => {
     cy.deleteMaterial(activityUrl)
   })
 
