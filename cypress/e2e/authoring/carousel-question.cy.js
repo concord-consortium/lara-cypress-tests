@@ -7,7 +7,7 @@ const carouselAuthoringPage = new CarouselAuthoringPage;
 context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("https://lara2-staging.concordqa.org/");
-    cy.loginLARAWithSSO("sara_teacher1", "password1");
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.deleteItem();
   });
