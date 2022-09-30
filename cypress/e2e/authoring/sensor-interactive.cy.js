@@ -6,8 +6,8 @@ const sensorInteractiveAuthoringPage = new SensorInteractiveAuthoringPage;
 
 context("Test Authoring Preview", () => {
   before(() => {
-    cy.visit("https://lara2-staging.concordqa.org/");
-    cy.loginLARAWithSSO("sara_teacher1", "password1");
+    cy.visit(Cypress.config().baseUrl);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.deleteItem();
   });
@@ -36,8 +36,8 @@ context("Test Authoring Preview", () => {
 
 context("Test Item Preview", () => {
   before(() => {
-    cy.visit("https://lara2-staging.concordqa.org/");
-    cy.loginLARA("sara_teacher1");
+    cy.visit(Cypress.config().baseUrl);
+    cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
 
@@ -54,8 +54,8 @@ context("Test Item Preview", () => {
 
 context("Delete Sensor Interactive", () => {
   before(() => {
-    cy.visit("https://lara2-staging.concordqa.org/");
-    cy.loginLARA("sara_teacher1");
+    cy.visit(Cypress.config().baseUrl);
+    cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
 

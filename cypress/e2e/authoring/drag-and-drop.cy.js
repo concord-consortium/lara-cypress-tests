@@ -4,10 +4,17 @@ import DragAndDropAuthoringPage from "../../support/drag-and-drop-authoring.cy.j
 const authoringPage = new AuthoringPage;
 const dragAndDropAuthoringPage = new DragAndDropAuthoringPage;
 
+const image = {
+    imageUrl1: "https://placekitten.com/50/60",
+    imageUrl2: "https://placekitten.com/50/61",
+    imageUrl3: "https://placekitten.com/50/62",
+    imageUrl4: "https://placekitten.com/50/65"
+};
+
 context("Test Authoring Preview", () => {
   before(() => {
-    cy.visit("https://lara2-staging.concordqa.org/");
-    cy.loginLARAWithSSO("sara_teacher1", "password1");
+    cy.visit(Cypress.config().baseUrl);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.deleteItem();
   });
@@ -23,30 +30,30 @@ context("Test Authoring Preview", () => {
       authoringPage.getPromptField(" Drag the cats to the right positions");
       dragAndDropAuthoringPage.getBackgroundImageUrl().type("https://placekitten.com/392/343");
       dragAndDropAuthoringPage.clickPlusButton();
-      dragAndDropAuthoringPage.getImageUrl(0).type("https://placekitten.com/50/60");
+      dragAndDropAuthoringPage.getImageUrl(0).type(image.imageUrl1);
       dragAndDropAuthoringPage.clickPlusButton();
-      dragAndDropAuthoringPage.getImageUrl(1).type("https://placekitten.com/50/61");
+      dragAndDropAuthoringPage.getImageUrl(1).type(image.imageUrl2);
       dragAndDropAuthoringPage.clickPlusButton();
-      dragAndDropAuthoringPage.getImageUrl(2).type("https://placekitten.com/50/62");
+      dragAndDropAuthoringPage.getImageUrl(2).type(image.imageUrl3);
       dragAndDropAuthoringPage.clickPlusButton();
-      dragAndDropAuthoringPage.getImageUrl(3).type("https://placekitten.com/50/65");
+      dragAndDropAuthoringPage.getImageUrl(3).type(image.imageUrl4);
       authoringPage.getSaveButton().click();
     });
     it("Verify Added Drag And Drop Item In Authoring Preview", () => {
       cy.wait(2000);
       authoringPage.getSectionItemHeader().should("contain", "Drag and Drop Question");
-      dragAndDropAuthoringPage.getDraggableItem(0, "https://placekitten.com/50/60");
-      dragAndDropAuthoringPage.getDraggableItem(1, "https://placekitten.com/50/61");
-      dragAndDropAuthoringPage.getDraggableItem(2, "https://placekitten.com/50/62");
-      dragAndDropAuthoringPage.getDraggableItem(3, "https://placekitten.com/50/65");
+      dragAndDropAuthoringPage.getDraggableItem(0, image.imageUrl1);
+      dragAndDropAuthoringPage.getDraggableItem(1, image.imageUrl2);
+      dragAndDropAuthoringPage.getDraggableItem(2, image.imageUrl3);
+      dragAndDropAuthoringPage.getDraggableItem(3, image.imageUrl4);
     });
   });
 });
 
 context("Test Item Preview", () => {
   before(() => {
-    cy.visit("https://lara2-staging.concordqa.org/");
-    cy.loginLARA("sara_teacher1");
+    cy.visit(Cypress.config().baseUrl);
+    cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
 
@@ -55,18 +62,18 @@ context("Test Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
-      dragAndDropAuthoringPage.getItemPreviewDraggableItem(0, "https://placekitten.com/50/60");
-      dragAndDropAuthoringPage.getItemPreviewDraggableItem(1, "https://placekitten.com/50/61");
-      dragAndDropAuthoringPage.getItemPreviewDraggableItem(2, "https://placekitten.com/50/62");
-      dragAndDropAuthoringPage.getItemPreviewDraggableItem(3, "https://placekitten.com/50/65");
+      dragAndDropAuthoringPage.getItemPreviewDraggableItem(0, image.imageUrl1);
+      dragAndDropAuthoringPage.getItemPreviewDraggableItem(1, image.imageUrl2);
+      dragAndDropAuthoringPage.getItemPreviewDraggableItem(2, image.imageUrl3);
+      dragAndDropAuthoringPage.getItemPreviewDraggableItem(3, image.imageUrl4);
     });
   });
 });
 
 context("Delete Drag And Drop", () => {
   before(() => {
-    cy.visit("https://lara2-staging.concordqa.org/");
-    cy.loginLARA("sara_teacher1");
+    cy.visit(Cypress.config().baseUrl);
+    cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
 
