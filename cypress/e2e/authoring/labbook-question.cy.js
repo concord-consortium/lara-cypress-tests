@@ -6,7 +6,7 @@ const labbookAuthoringPage = new LabbookAuthoringPage;
 
 context("Test Background Source As URL", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.deleteItem();
@@ -32,7 +32,7 @@ context("Test Background Source As URL", () => {
 
 context("Test In Authoring Preview", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
@@ -52,7 +52,7 @@ context("Test In Authoring Preview", () => {
 
 context("Test In Item Preview", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
@@ -74,7 +74,7 @@ context("Test In Item Preview", () => {
 
 context("Delete Image", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });

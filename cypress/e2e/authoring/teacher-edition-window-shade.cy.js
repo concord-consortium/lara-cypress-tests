@@ -25,7 +25,7 @@ const tip = {
 
 context("Test Authoring Preview", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.deleteItem();
@@ -88,7 +88,7 @@ context("Test Authoring Preview", () => {
 
 context("Delete Item", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });

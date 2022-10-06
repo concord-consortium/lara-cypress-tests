@@ -6,7 +6,7 @@ const scaffoldedAuthoringPage = new ScaffoldedAuthoringPage;
 
 context("Test Authoring Preview", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.deleteItem();
@@ -58,7 +58,7 @@ context("Test Authoring Preview", () => {
 
 context("Test Item Preview", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
@@ -84,7 +84,7 @@ context("Test Item Preview", () => {
 
 context("Delete scaffolded", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });

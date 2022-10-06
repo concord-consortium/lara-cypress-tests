@@ -6,7 +6,7 @@ const imageAuthoringPage = new ImageAuthoringPage;
 
 context("Test Background Source As URL", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.deleteItem();
@@ -38,7 +38,7 @@ context("Test Background Source As URL", () => {
 
 context("Test Background Source As Upload", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
@@ -71,7 +71,7 @@ context("Test Background Source As Upload", () => {
 
 context("Test Background Source As Upload In Item Preview", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
@@ -93,7 +93,7 @@ context("Test Background Source As Upload In Item Preview", () => {
 
 context("Delete Image", () => {
   before(() => {
-    cy.visit(Cypress.config().baseUrl);
+    cy.visit("");
     cy.loginLARA(Cypress.config().username);
     cy.launchActivty();
   });
