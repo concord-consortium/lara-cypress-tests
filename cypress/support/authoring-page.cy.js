@@ -17,6 +17,9 @@ class AuthoringPage {
   getEditItemDialog() {
     return cy.get(".modalContainer.itemEditDialog");
   }
+  getCloseButton() {
+    return this.getEditItemDialog().find(".modalClose");
+  }
   getEditItemForm() {
     return this.getEditItemDialog().find('#itemEditForm');
   }
@@ -95,8 +98,17 @@ class AuthoringPage {
   getSectionItemHeader() {
     return this.getInteractive().find(".menuStart");
   }
+  getSectionMenuCollapse() {
+    return this.getInteractive().find(".menuEnd button").eq(0);
+  }
   getSectionMenuEdit() {
     return this.getInteractive().find(".menuEnd button").eq(1);
+  }
+  getSectionMenuMove() {
+    return this.getInteractive().find(".menuEnd button").eq(2);
+  }
+  getSectionMenuCopy() {
+    return this.getInteractive().find(".menuEnd button").eq(3);
   }
   getSectionMenuDelete() {
     return this.getInteractive().find(".menuEnd button").eq(4);
@@ -125,5 +137,309 @@ class AuthoringPage {
             cy.wrap($body).find('.locked-info--feedback--question-int');
     });
   }
+  getMoveModel() {
+    return cy.get("#sections-container #modal");
+  }
+  getMoveModelHeader(header) {
+    this.getMoveModel().find('header').should("contain", header);
+  }
+  getMoveModelClose() {
+    return this.getMoveModel().find('.modalClose');
+    cy.wait(1000);
+  }
+  getCopySectionItemHeader() {
+    return this.getInteractive().eq(1).find(".menuStart");
+  }
+  getCopySectionMenuDelete() {
+    return this.getInteractive().eq(1).find(".menuEnd button").eq(4);
+  }
+
+  //***************************************************************************************************************
+
+  addSection() {
+  cy.get('.bigButton .lineAdjust').click();
+  cy.wait(4000);
+  }
+  getSection() {
+    return cy.get("#sections-container .sectionMenu");
+  }
+  getSectionHeader() {
+    return this.getSection().find(".menuStart");
+  }
+  getSectionCollapse() {
+    return this.getSection().find(".menuEnd button").eq(0);
+  }
+  getSectionMove() {
+    return this.getSection().find(".menuEnd button").eq(1);
+  }
+  getSectionCopy() {
+    return this.getSection().find(".menuEnd button").eq(2);
+  }
+  getSectionHide() {
+    return this.getSection().find(".menuEnd button").eq(3);
+  }
+  verfiySectionHidden() {
+    cy.get("#sections-container .editPageContainer .edit-page-grid-container.sectionContainer").invoke("attr", "class").should("contain", "hidden");
+  }
+  verfiySectionShow() {
+    cy.get("#sections-container .editPageContainer .edit-page-grid-container.sectionContainer").invoke("attr", "class").should("not.contain", "hidden");
+  }
+  getSectionDelete() {
+    return this.getSection().find(".menuEnd button").eq(4);
+  }
+  getCopySectionHeader() {
+    return this.getSection().eq(1).find(".menuStart");
+  }
+  getCopySectionDelete() {
+    return this.getSection().eq(1).find(".menuEnd button").eq(4);
+  }
+
+  //***************************************************************************************************************
+
+  getActivity() {
+    return cy.get('[id^=item_lightweight_activity]');
+  }
+  getActivityActionMenu() {
+    return this.getActivity().find('.action_menu_header_right');
+  }
+  getActivityExportMenu() {
+    return this.getActivityActionMenu().find('.export a');
+  }
+  getActivityConvertMenu() {
+    return this.getActivityActionMenu().find('.convert a');
+  }
+  getActivityCopyMenu() {
+    return this.getActivityActionMenu().find('.copy a');
+  }
+  getActivityEditMenu() {
+    return this.getActivityActionMenu().find('.edit a');
+  }
+  getActivityDeleteMenu() {
+    return this.getActivityActionMenu().find('.delete a');
+  }
+  getActivityPublishMenu() {
+    return this.getActivityActionMenu().find('.publish a');
+  }
+  getActivityPrintMenu() {
+    return this.getActivityActionMenu().find('.print a');
+  }
+  getActivityRunMenu() {
+    return this.getActivityActionMenu().find('.run a');
+  }
+
+  getSequence() {
+    return cy.get('[id^=item_sequence]');
+  }
+  getSequenceActionMenu() {
+    return this.getSequence().find('.action_menu_header_right');
+  }
+  getSequenceExportMenu() {
+    return this.getSequenceActionMenu().find('.export a');
+  }
+  getSequenceConvertMenu() {
+    return this.getSequenceActionMenu().find('.convert a');
+  }
+  getSequenceCopyMenu() {
+    return this.getSequenceActionMenu().find('.copy a');
+  }
+  getSequenceEditMenu() {
+    return this.getSequenceActionMenu().find('.edit a');
+  }
+  getSequenceDeleteMenu() {
+    return this.getSequenceActionMenu().find('.delete a');
+  }
+  getSequencePublishMenu() {
+    return this.getSequenceActionMenu().find('.publish a');
+  }
+  getSequencePrintMenu() {
+    return this.getSequenceActionMenu().find('.print a');
+  }
+  getSequenceRunMenu() {
+    return this.getSequenceActionMenu().find('.run a');
+  }
+
+  getGlossary() {
+    return cy.get('[id^=item_glossary]');
+  }
+  getGlossaryActionMenu() {
+    return this.getGlossary().find('.action_menu_header_right');
+  }
+  getGlossaryExportMenu() {
+    return this.getGlossaryActionMenu().find('.copy a').eq(0);
+  }
+  getGlossaryCopyMenu() {
+    return this.getGlossaryActionMenu().find('.copy a').eq(1);
+  }
+  getGlossaryEditMenu() {
+    return this.getGlossaryActionMenu().find('.edit a');
+  }
+  getGlossaryDeleteMenu() {
+    return this.getGlossaryActionMenu().find('.delete a');
+  }
+
+  //***************************************************************************************************************
+  clickHomePageLink() {
+    cy.get('.breadcrumbs a').eq(0).click();
+    cy.wait(2000);
+  }
+  searchActivitySequence(name) {
+    cy.get("#search input").eq(0).type(name);
+    cy.get("#search input").eq(1).click();
+  }
+  getActivityDetails() {
+    return this.getActivity().find('[id^=details_lightweight_activity]');
+  }
+  getActivityDetailAuthor() {
+    return this.getActivityDetails().find('.author');
+  }
+  getActivityDetailUpdated() {
+    return this.getActivityDetails().find('.updated');
+  }
+  getActivityDetailPublished() {
+    return this.getActivityDetails().find('.published');
+  }
+  getActivityDetailPublished() {
+    return this.getActivityDetails().find('.published');
+  }
+  getActivityDetailImage(url) {
+    this.getActivityDetails().find('img').invoke("attr", "src").should("contain", url);
+  }
+
+  getSequenceDetails() {
+    return this.getSequence().find('[id^=details_sequence]');
+  }
+  getSequenceDetailImage(url) {
+    this.getSequenceDetails().find('img').invoke("attr", "src").should("contain", url);
+  }
+
+  getPublishModel() {
+    return cy.get('#modal .publication');
+  }
+  getPublishLink() {
+    return this.getPublishModel().find('.info a');
+  }
+  getPublishStatus(){
+    return this.getPublishModel().find('.info .disabled');
+  }
+  getPublishModelClose() {
+    return this.getPublishModel().find('.header .close_link');
+  }
+  //***************************************************************************************************************
+  getSettingsPage() {
+    return cy.get('#leftcol .sequence_form');
+  }
+  getSettingsPageSave() {
+    return this.getSettingsPage().find('#save-top');
+  }
+  //***************************************************************************************************************
+  selectPreviewIn(value) {
+    cy.get('#preview-links-select').select(value);
+  }
+  getPreviewInButton() {
+    return cy.get('#preview-links button');
+  }
+  getActivityPlayerPreview() {
+    cy.get('#preview-links-select option').eq(1).invoke("attr", "value")
+    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&page=page_167");
+  }
+  getActivityPlayerTEPreview() {
+    cy.get('#preview-links-select option').eq(2).invoke("attr", "value")
+    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&page=page_167&mode=teacher-edition");
+  }
+  getActivityLevelPreview() {
+    cy.get('#preview-links-select option').eq(1).invoke("attr", "value")
+    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json");
+  }
+  getActivityLevelTEPreview() {
+    cy.get('#preview-links-select option').eq(2).invoke("attr", "value")
+    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&mode=teacher-edition");
+  }
+  getActivityRunLinkPreview() {
+    this.getActivityRunMenu().invoke("attr", "href")
+    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&preview");
+  }
+  getSequenceRunLinkPreview() {
+    this.getSequenceRunMenu().invoke("attr", "href")
+    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&sequence=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Fsequences%2F5.json&preview");
+  }
+
+  clickActivityPageLink() {
+    cy.get('.breadcrumbs a').eq(2).click();
+    cy.wait(2000);
+  }
+
+  //***************************************************************************************************************
+
+  selectSharingPlugin() {
+    this.getInteractive().find('.availablePlugins [name=embeddable_type]').select("Sharing: Interactives");
+  }
+  clickAddButton() {
+    this.getInteractive().find('.availablePlugins button').click();
+    cy.wait(2000);
+  }
+  getPromptSharingPlugin(prompt) {
+    cy.get('.modalContainer.itemEditDialog .authoring-interactive-preview').find('iframe').then($iframe => {
+      const $body = $iframe.contents().find('#app')
+            cy.wrap($body).find('.runtime--prompt--question-int').should("contain", prompt);
+    });
+  }
+  getPluginDelete() {
+    return this.getInteractive().find('.pluginsList button').eq(1);
+    cy.wait(2000);
+  }
+
+  //***************************************************************************************************************
+
+  getImportButton() {
+    return cy.get('#content .top-header .buttons-menu a').eq(3);
+  }
+  getImportModel() {
+    return cy.get('#modal .import_activity_sequence');
+  }
+  getImportModelHeader() {
+    return this.getImportModel().find('.title').should("contain", "Import Activity/Sequence/Glossary");
+  }
+  getImportFile(file) {
+    return this.getImportModel().find('#import_import').selectFile(file);
+  }
+  getImportModelButton() {
+    return this.getImportModel().find('.import');
+  }
+
+  getExportModel() {
+    return cy.get('#modal .export');
+  }
+  getExportModelHeader(title) {
+    return this.getExportModel().find('.title').should("contain", title);
+  }
+  getExportModelInfo(info) {
+    return this.getExportModel().find('.info').should("contain", info);
+  }
+  clickExportButton() {
+    cy.window().document().then(function (doc) {
+    doc.addEventListener('click', () => {
+      setTimeout(function () { doc.location.reload() }, 5000)
+      })
+    cy.get('#modal .export #export').click();
+    })
+  }
+  getExportModelCloseButton() {
+    return this.getExportModel().find('.close_link');
+  }
+  readJsonFile(file, name) {
+    cy.readFile(file).its('name').should('eq', name)
+  }
+  readSequenceJsonFile(file, name) {
+    cy.readFile(file).its('title').should('eq', name)
+  }
+  clickGlossaryExportButton() {
+    cy.window().document().then(function (doc) {
+    doc.addEventListener('click', () => {
+      setTimeout(function () { doc.location.reload() }, 5000)
+      })
+    cy.get('[id^=item_glossary] .action_menu_header_right .copy a').eq(0).click();
+    })
+  }
+
 }
 export default AuthoringPage;

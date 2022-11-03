@@ -1,4 +1,6 @@
 {
     "username": "sara_teacher1",
+    "teacher": "sara_teacher2",
+    "student": "sstudent11000",
     "baseUrl": "https://lara2-staging.concordqa.org/"
 }
