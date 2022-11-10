@@ -27,6 +27,12 @@ context("Test Authoring Preview", () => {
       textBlockAuthoringPage.getAuthoringPreviewTextBlockName().should("contain", "Text Block Heading");
       textBlockAuthoringPage.getAuthoringPreviewTextBlockContent().should("contain", "Text Block Content");
     });
+    it("Verify Activity Player Runtime Preview", () => {
+      authoringPage.selectPreviewIn("Activity Player");
+      authoringPage.getActivityPlayerPreview();
+      authoringPage.getActivityPlayerTEPreview();
+      authoringPage.getPreviewInButton().click();
+    });
   });
 });
 

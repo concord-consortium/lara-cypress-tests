@@ -109,18 +109,6 @@ context("Test Item Preview", () => {
   });
 });
 
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("LARA2 MCQ Item Preview", () => {
-
-  });
-});
-
 context("Delete MCQ", () => {
   before(() => {
     cy.visit("");
