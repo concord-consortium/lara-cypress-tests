@@ -11,6 +11,9 @@ class AuthoringPage {
   getAddItemButton() {
     return cy.get("#modalContent .actionButtons .lineAdjust");
   }
+  clickAddItem(index) {
+    return cy.get(".editPageContainer .edit-items-container.full-row .lineAdjust").eq(index).click();
+  }
 
 //*******************************************************************************************
 
@@ -193,6 +196,25 @@ class AuthoringPage {
   getCopySectionDelete() {
     return this.getSection().eq(1).find(".menuEnd button").eq(4);
   }
+  getSectionName(index) {
+    return this.getSectionHeader().find('.sectionName').eq(index);
+  }
+  verifySectionName(index, name) {
+    this.getSectionName(index).find('h3').should("contain", name);
+  }
+  clickButton(sectionIndex, buttonIndex) {
+    this.getSectionName(sectionIndex).find('button').eq(buttonIndex).click();
+  }
+  verifyButton(sectionIndex, buttonIndex, name) {
+    this.getSectionName(sectionIndex).find('button').eq(buttonIndex).should("contain", name);
+  }
+  getSectionNameTextBox(index) {
+    return this.getSectionName(index).find('input');
+  }
+  verifyPlaceHolderText(index) {
+    this.getSectionNameTextBox(index).invoke("attr", "placeholder").should("contain", "Section name...");
+  }
+
 
   //***************************************************************************************************************
 
@@ -439,6 +461,24 @@ class AuthoringPage {
       })
     cy.get('[id^=item_glossary] .action_menu_header_right .copy a').eq(0).click();
     })
+  }
+
+  //***************************************************************************************************************
+  previewActivity(name) {
+    cy.log("Launch Test Activity : ");
+    cy.get("#search input").eq(0).type(name);
+    cy.get("#search input").eq(1).click();
+    cy.wait(1000);
+    cy.get(".item.community .action_menu_header_left a").click();
+    cy.wait(2000);
+  }
+  previewSequence(name) {
+    cy.log("Launch Test Sequence : ");
+    cy.get("#search input").eq(0).type(name);
+    cy.get("#search input").eq(1).click();
+    cy.wait(1000);
+    cy.get(".quiet_list.sequences .action_menu_header_left a").click();
+    cy.wait(2000);
   }
 
 }

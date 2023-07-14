@@ -51,6 +51,9 @@ class ActivitySequenceSettingsPage {
   getInsertImageOkButton() {
     return this.getEditImageDialog().find('.mce-panel.mce-foot button').eq(0);
   }
+  selectActivityLayout(value) {
+    cy.get('#lightweight_activity_layout').select(value);
+  }
 
   //*******************************
 
@@ -71,6 +74,18 @@ class ActivitySequenceSettingsPage {
       const $body = $iframe.contents().find('#tinymce')
             cy.wrap($body).find('p');
     });
+  }
+  selectActivityLayoutOverride(value) {
+    cy.get('#sequence_layout_override').select(value);
+  }
+  addActivity() {
+    cy.get('#activity_id_chosen').click();
+    cy.get('#activity_id_chosen').contains("49. Authoring LARA Staging Question Interactives Master Branch").click();
+    cy.wait(4000);
+  }
+  clickAddButton() {
+    cy.get('#activities .btn-primary').click();
+    cy.wait(4000);
   }
 
   //*******************************
