@@ -12,7 +12,7 @@ context("Test Authoring Preview", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 Text Block In Authoring Preview", () => {
+  describe("LARA Text Block In Authoring Preview", () => {
     it("Add Text Block", () => {
       authoringPage.getAddItem().click();
       textBlockAuthoringPage.getTextBlockQuickAddButton().click();
@@ -39,11 +39,11 @@ context("Test Authoring Preview", () => {
 context("Test Item Preview", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
-  describe("LARA2 Text Block In Item Preview", () => {
+  describe("LARA Text Block In Item Preview", () => {
     it("Verify Added Text Block In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -57,7 +57,7 @@ context("Test Item Preview", () => {
 context("Delete Text Block", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

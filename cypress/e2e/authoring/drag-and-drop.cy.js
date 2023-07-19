@@ -19,11 +19,11 @@ context("Test Authoring Preview", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 Drag And Drop Authoring Preview", () => {
+  describe("LARA Drag And Drop Authoring Preview", () => {
     it("Add Drag And Drop Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Drag and Drop");
-      authoringPage.getItemPickerList().contains("Drag and Drop (Master)").click();
+      authoringPage.getItemPickerList().contains("Drag and Drop (AWS)").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Drag and Drop Question");
@@ -53,11 +53,11 @@ context("Test Authoring Preview", () => {
 context("Test Item Preview", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
-  describe("LARA2 Drag And Drop Item Preview", () => {
+  describe("LARA Drag And Drop Item Preview", () => {
     it("Verify Added Drag And Drop Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -73,7 +73,7 @@ context("Test Item Preview", () => {
 context("Delete Drag And Drop", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

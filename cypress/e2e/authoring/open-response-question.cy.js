@@ -12,20 +12,21 @@ context("Test Authoring Preview", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 OR Authoring Preview", () => {
+  describe("LARA OR Authoring Preview", () => {
     it("Add OR Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Open Response");
-      authoringPage.getItemPickerList().contains("Open Response (master)").click();
+      authoringPage.getItemPickerList().contains("Open Response (AWS)").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Open Response Question");
-      authoringPage.getPromptField(" Open Response Prompt");
-      authoringPage.getHintField(" Open Response Hint");
+      authoringPage.getPromptField(" Open Response Prompt ");
+      authoringPage.getHintField(" Open Response Hint ");
       authoringPage.selectRequiredCheckBox();
       authoringPage.enterPostSubmissionFeedback(" Answer Submitted");
       orAuthoringPage.selectRecordAudioResponseCheckBox();
       authoringPage.getSaveButton().click();
+      cy.wait(6000);
     });
     it("Verify Added OR Item In Authoring Preview", () => {
       cy.wait(2000);
@@ -49,11 +50,11 @@ context("Test Authoring Preview", () => {
 context("Test Item Preview", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
-  describe("LARA2 OR Item Preview", () => {
+  describe("LARA OR Item Preview", () => {
     it("Verify Added OR Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -84,7 +85,7 @@ context("Test Item Preview", () => {
 context("Delete OR", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

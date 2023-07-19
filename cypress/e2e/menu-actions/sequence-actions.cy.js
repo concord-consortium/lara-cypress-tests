@@ -24,7 +24,7 @@ context("Test Sequence Copy Action Menu", () => {
 context("Test Sequence Publish Action Menu", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.searchSequence();
   });
 
@@ -46,7 +46,7 @@ context("Test Sequence Publish Action Menu", () => {
 context("Test Sequence Delete Action Menu", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.searchSequence();
   });
 

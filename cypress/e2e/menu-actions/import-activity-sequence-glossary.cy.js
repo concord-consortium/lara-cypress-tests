@@ -39,7 +39,7 @@ context("Test Import Activity", () => {
 context("Delete Import Test Activity", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Delete Import Test Activity", () => {
@@ -57,7 +57,7 @@ context("Delete Import Test Activity", () => {
 context("Test Import Sequence", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.deleteImportSequence();
   });
 
@@ -81,7 +81,7 @@ context("Test Import Sequence", () => {
 context("Delete Import Test Sequence", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Delete Import Test Sequence", () => {
@@ -99,7 +99,7 @@ context("Delete Import Test Sequence", () => {
 context("Test Import Glossary", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.deleteImportGlossary();
   });
 
@@ -123,7 +123,7 @@ context("Test Import Glossary", () => {
 context("Delete Import Test Glossary", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Delete Import Test Glossary", () => {

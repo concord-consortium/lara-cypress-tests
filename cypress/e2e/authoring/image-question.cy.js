@@ -12,18 +12,18 @@ context("Test Background Source As URL", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 Image Question With Background Source As URL", () => {
+  describe("LARA Image Question With Background Source As URL", () => {
     it("Add Image Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Image Question");
-      authoringPage.getItemPickerList().contains("Image Question (master)").click();
+      authoringPage.getItemPickerList().contains("Image Question (AWS)").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Image Question");
       authoringPage.getPromptField(" Image Question Prompt");
       authoringPage.getHintField(" Image Question Hint");
       imageAuthoringPage.selectBackgroundSource("URL");
-      imageAuthoringPage.enterBackgroundImageUrl("https://hurricane.concord.org/branch/master/4ec21af35f2e4a7ebce0d2f991cbc25c.png");
+      imageAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
       authoringPage.getSaveButton().click();
     });
     it("Verify Added Image Item In Authoring Preview", () => {
@@ -39,11 +39,11 @@ context("Test Background Source As URL", () => {
 context("Test Background Source As Upload", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
-  describe("LARA2 Image Question With Background Source As Upload", () => {
+  describe("LARA Image Question With Background Source As Upload", () => {
 
     it("Add Background Source As Upload", () => {
       cy.wait(6000);
@@ -72,7 +72,7 @@ context("Test Background Source As Upload", () => {
 context("Test Background Source As Upload In Item Preview", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
@@ -94,7 +94,7 @@ context("Test Background Source As Upload In Item Preview", () => {
 context("Delete Image", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

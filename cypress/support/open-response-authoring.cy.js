@@ -24,7 +24,7 @@ class OpenResponseAuthoringPage {
   getAudioControls() {
   return  this.getEditItemPreview().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('.runtime--audioControls--question-int');
+            cy.wrap($body).find('.runtime--controls--question-int');
     });
   }
 //***************************************************************************************************************
@@ -34,6 +34,7 @@ class OpenResponseAuthoringPage {
       const $body = $iframe.contents().find('#app')
             cy.wrap($body).find('#root_audioEnabled').click();
     });
+    cy.wait(4000);
   }
   enterDeafultAnswer(answer) {
     this.getEditItemForm().find('iframe').then($iframe => {
@@ -55,7 +56,7 @@ class OpenResponseAuthoringPage {
   getAuthoringPreviewAudioControls() {
   return  this.getInteractive().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('.runtime--audioControls--question-int');
+            cy.wrap($body).find('.runtime--controls--question-int');
     });
   }
 

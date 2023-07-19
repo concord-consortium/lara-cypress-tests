@@ -31,7 +31,7 @@ context("Test Authoring Preview", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 TE Window Shade", () => {
+  describe("LARA TE Window Shade", () => {
     it("Add TE Window Shade", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Teacher Edition");
@@ -89,7 +89,7 @@ context("Test Authoring Preview", () => {
 context("Delete Item", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

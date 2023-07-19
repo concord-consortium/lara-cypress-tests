@@ -12,11 +12,11 @@ context("Test Sharing Interactive Plugin", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 MCQ Authoring Preview", () => {
+  describe("LARA MCQ Authoring Preview", () => {
     it("Add MCQ Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Multiple Choice");
-      authoringPage.getItemPickerList().contains("Multiple Choice (master)").click();
+      authoringPage.getItemPickerList().contains("Multiple Choice AWS S3").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Multiple Choice Question");
@@ -44,7 +44,7 @@ context("Test Sharing Interactive Plugin", () => {
 context("Delete MCQ", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

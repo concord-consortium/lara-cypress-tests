@@ -12,7 +12,7 @@ context("Test Authoring Preview", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 TE Side Tip", () => {
+  describe("LARA TE Side Tip", () => {
     it("Add TE Side Tip", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Teacher Edition");
@@ -36,7 +36,7 @@ context("Test Authoring Preview", () => {
 context("Delete Item", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
