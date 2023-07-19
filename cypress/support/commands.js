@@ -254,3 +254,23 @@ Cypress.Commands.add("deleteImportGlossary", () => {
     }
   });
 })
+
+Cypress.Commands.add("launchNotebookActivty", () => {
+  cy.log("Launch Test Notebook Activity : ");
+  cy.get("#search input").eq(0).type("Automation Notebook");
+  cy.get("#search input").eq(1).click();
+  cy.wait(500);
+  cy.get("#item_lightweight_activity_199 .action_menu_header_right .edit a").click();
+  cy.wait(500);
+  cy.get('#rightcol #pages [id^=item_interactive_page] .edit').click();
+  cy.wait(2000);
+})
+
+Cypress.Commands.add("previewNotebookActivty", () => {
+  cy.log("Launch Test Activity : ");
+  cy.get("#search input").eq(0).type("Automation Notebook");
+  cy.get("#search input").eq(1).click();
+  cy.wait(1000);
+  cy.get("#item_lightweight_activity_199 .action_menu_header_left a").click();
+  cy.wait(2000);
+})
