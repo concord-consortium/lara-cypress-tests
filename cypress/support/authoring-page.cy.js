@@ -362,27 +362,27 @@ class AuthoringPage {
   }
   getActivityPlayerPreview() {
     cy.get('#preview-links-select option').eq(1).invoke("attr", "value")
-    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&page=page_167");
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json&page=page_1372");
   }
   getActivityPlayerTEPreview() {
     cy.get('#preview-links-select option').eq(2).invoke("attr", "value")
-    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&page=page_167&mode=teacher-edition");
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json&page=page_1372&mode=teacher-edition");
   }
   getActivityLevelPreview() {
     cy.get('#preview-links-select option').eq(1).invoke("attr", "value")
-    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json");
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json");
   }
   getActivityLevelTEPreview() {
     cy.get('#preview-links-select option').eq(2).invoke("attr", "value")
-    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&mode=teacher-edition");
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json&mode=teacher-edition");
   }
   getActivityRunLinkPreview() {
     this.getActivityRunMenu().invoke("attr", "href")
-    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&activity=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Factivities%2F31.json&preview");
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F215.json&preview");
   }
   getSequenceRunLinkPreview() {
     this.getSequenceRunMenu().invoke("attr", "href")
-    .should("contain", "https://activity-player.concord.org/branch/master/?firebaseApp=report-service-dev&sequence=https%3A%2F%2Flara2-staging.concordqa.org%2Fapi%2Fv1%2Fsequences%2F5.json&preview");
+    .should("contain", "https://activity-player.concord.org/branch/master/?sequence=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Fsequences%2F49.json&preview");
   }
 
   clickActivityPageLink() {

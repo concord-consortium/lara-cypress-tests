@@ -8,7 +8,7 @@ Cypress.Commands.add("login", (username, password) => {
 Cypress.Commands.add("loginLARAWithSSO", (username, password) => {
   cy.log("Logging in as user : " + username);
   cy.get("[data-cy=header-menu] .login-link").click();
-  cy.wait(1000);
+  cy.wait(2000);
   cy.get("[data-cy=header-menu] .header-menu-links.show a").eq(0).click();
   cy.wait(2000);
   cy.login(username, password);
@@ -27,7 +27,7 @@ Cypress.Commands.add("launchActivty", () => {
   cy.get("#search input").eq(0).type("Automation");
   cy.get("#search input").eq(1).click();
   cy.wait(500);
-  cy.get("#item_lightweight_activity_31 .action_menu_header_right .edit a").click();
+  cy.get("#item_lightweight_activity_212 .action_menu_header_right .edit a").click();
   cy.wait(500);
   cy.get('#rightcol #pages [id^=item_interactive_page] .edit').click();
   cy.wait(2000);
@@ -75,7 +75,7 @@ Cypress.Commands.add("launchGlossary", () => {
   cy.get("#search input").eq(0).type("Automation Glossary");
   cy.get("#search input").eq(1).click();
   cy.wait(500);
-  cy.get("#item_glossary_12 .action_menu_header_right .edit a").click();
+  cy.get("#item_glossary_20 .action_menu_header_right .edit a").click();
   cy.wait(2000);
 })
 

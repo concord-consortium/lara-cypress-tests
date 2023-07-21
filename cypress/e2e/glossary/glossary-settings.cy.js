@@ -98,7 +98,7 @@ context("Test Authoring Preview", () => {
 context("Delete Glossary", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Delete Glossary", () => {

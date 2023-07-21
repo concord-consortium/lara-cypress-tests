@@ -8,13 +8,13 @@ const mcqAuthoringPage = new MCQAuthoringPage;
 
 const mcq = {
     itemSearch: "Multiple Choice",
-    itemList: "Multiple Choice (master)",
+    itemList: "Multiple Choice AWS S3",
     name: "Multiple Choice Question",
     prompt: " Multiple Choice Prompt",
     promptAuthoring: "Multiple Choice Prompt"
 };
 
-context("Test LARA2 Layout 60-40", () => {
+context("Test LARA Layout 60-40", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
@@ -22,7 +22,7 @@ context("Test LARA2 Layout 60-40", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 Layouts", () => {
+  describe("LARA Layouts", () => {
     it("Verify 60-40 Layout", () => {
       layoutAuthoringPage.selectLayout("60-40");
       layoutAuthoringPage.getAddItem("60-40", "60").click();
@@ -55,15 +55,15 @@ context("Test LARA2 Layout 60-40", () => {
   });
 });
 
-context("Test LARA2 Layout 40-60", () => {
+context("Test LARA Layout 40-60", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.sectionDelete();
   });
 
-  describe("LARA2 Layouts", () => {
+  describe("LARA Layouts", () => {
     it("Verify 40-60 Layout", () => {
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("40-60");
@@ -86,6 +86,7 @@ context("Test LARA2 Layout 40-60", () => {
       authoringPage.getPromptField(mcq.prompt);
       mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
+      cy.wait(6000);
     });
     it("Verify Added MCQ Item In Authoring Preview", () => {
       cy.wait(6000);
@@ -97,15 +98,15 @@ context("Test LARA2 Layout 40-60", () => {
   });
 });
 
-context("Test LARA2 Layout 70-30", () => {
+context("Test LARA Layout 70-30", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.sectionDelete();
   });
 
-  describe("LARA2 Layouts", () => {
+  describe("LARA Layouts", () => {
     it("Verify 70-30 Layout", () => {
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("70-30");
@@ -139,15 +140,15 @@ context("Test LARA2 Layout 70-30", () => {
   });
 });
 
-context("Test LARA2 Layout 30-70", () => {
+context("Test LARA Layout 30-70", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.sectionDelete();
   });
 
-  describe("LARA2 Layouts", () => {
+  describe("LARA Layouts", () => {
     it("Verify 30-70 Layout", () => {
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("30-70");
@@ -181,15 +182,15 @@ context("Test LARA2 Layout 30-70", () => {
   });
 });
 
-context("Test LARA2 Layout Responsive-2-Columns", () => {
+context("Test LARA Layout Responsive-2-Columns", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.sectionDelete();
   });
 
-  describe("LARA2 Layouts", () => {
+  describe("LARA Layouts", () => {
     it("Verify responsive-2-columns Layout", () => {
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("responsive-2-columns");
@@ -223,15 +224,15 @@ context("Test LARA2 Layout Responsive-2-Columns", () => {
   });
 });
 
-context("Test LARA2 Layout Responsive Full Width", () => {
+context("Test LARA Layout Responsive Full Width", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.sectionDelete();
   });
 
-  describe("LARA2 Layouts", () => {
+  describe("LARA Layouts", () => {
     it("Verify responsive-full-width Layout", () => {
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("responsive-full-width");
@@ -257,12 +258,12 @@ context("Test LARA2 Layout Responsive Full Width", () => {
 context("Create Full Width Section", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
     cy.sectionDelete();
   });
 
-  describe("LARA2 Layouts", () => {
+  describe("LARA Layouts", () => {
     it("Add Full Width Layout Section", () => {
       authoringPage.addSection();
       cy.wait(6000);

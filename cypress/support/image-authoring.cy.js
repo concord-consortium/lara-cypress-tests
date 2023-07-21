@@ -25,7 +25,7 @@ class ImageAuthoringPage {
   getImage() {
     return this.getEditItemPreview().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('.runtime--inlineImg--question-int');
+            cy.wrap($body).find('.inline-content--inlineImg--question-int');
     });
   }
   getUploadButton() {
@@ -83,7 +83,7 @@ class ImageAuthoringPage {
   getAuthoringPreviewImage() {
     return this.getInteractive().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('.runtime--inlineImg--question-int');
+            cy.wrap($body).find('.inline-content--inlineImg--question-int');
     });
   }
   getAuthoringPreviewUploadButton() {

@@ -12,11 +12,11 @@ context("Test Authoring Preview", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 FIB Authoring Preview", () => {
+  describe("LARA FIB Authoring Preview", () => {
     it("Add FIB Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Fill in the Blank");
-      authoringPage.getItemPickerList().contains("Fill In The Blank (master)").click();
+      authoringPage.getItemPickerList().contains("Fill In The Blank (AWS)").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Fill in the Blank Question");
@@ -43,11 +43,11 @@ context("Test Authoring Preview", () => {
 context("Test Item Preview", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
-  describe("LARA2 FIB Item Preview", () => {
+  describe("LARA FIB Item Preview", () => {
     it("Verify Added FIB Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -68,7 +68,7 @@ context("Test Item Preview", () => {
 context("Delete FIB", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

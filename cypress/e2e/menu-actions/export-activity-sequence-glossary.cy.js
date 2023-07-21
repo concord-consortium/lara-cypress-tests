@@ -37,7 +37,7 @@ context("Test Export Activity", () => {
 context("Test Export Sequence", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Export Sequence", () => {
@@ -56,7 +56,7 @@ context("Test Export Sequence", () => {
 context("Test Export Glossary", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Export Glossary", () => {

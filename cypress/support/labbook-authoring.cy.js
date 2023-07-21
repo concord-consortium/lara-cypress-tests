@@ -18,13 +18,13 @@ class LabbookAuthoringPage {
   getEditPreviewDrawingTool() {
     return this.getEditItemPreview().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('#drawing-tool-container');
+            cy.wrap($body).find('[data-testid=draw-tool]');
     });
   }
   getEditPreviewUploadButton() {
     return this.getEditItemPreview().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('[data-test=upload-btn]');
+            cy.wrap($body).find('[data-testid=upload-btn]');
     });
   }
   getEditPreviewCommentField() {
@@ -70,13 +70,13 @@ class LabbookAuthoringPage {
   getAuthoringPreviewDrawingTool() {
     return this.getInteractive().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('#drawing-tool-container');
+            cy.wrap($body).find('[data-testid=draw-tool]');
     });
   }
   getAuthoringPreviewUploadButton() {
     return this.getInteractive().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('[data-test=upload-btn]');
+            cy.wrap($body).find('[data-testid=upload-btn]');
     });
   }
   getAuthoringPreviewCommentField() {

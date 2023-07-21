@@ -70,6 +70,7 @@ context("Test Additional Language", () => {
       addLanguage.getTermPopupPreviewVideoCaption().should("contain", langProperties.videoCaption);
       addLanguage.getTermPopupPreviewVideoCaptionReadAloud().should("exist");
       addLanguage.getSaveCloseButton().click();
+      cy.wait(2000);
     });
     it("Verify Edited Language In Table", () => {
       addLanguage.getLanguageFirstRow().should("contain", "Test Term");

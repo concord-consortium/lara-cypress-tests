@@ -1,8 +1,10 @@
 import AuthoringPage from "../../support/authoring-page.cy.js";
 import ActivitySequenceSettingsPage from "../../support/activity-sequence-settings.cy.js";
+import ActivityPlayerPreview from "../../support/activity-player-preview.cy.js";
 
 const authoringPage = new AuthoringPage;
 const settingsPage = new ActivitySequenceSettingsPage;
+const activityPreview = new ActivityPlayerPreview;
 
 const url = {
     imageUrl: "https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg"
@@ -30,7 +32,7 @@ context("Test Create Activity", () => {
 context("Test Activity Settings", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Activity Settings", () => {
@@ -42,7 +44,7 @@ context("Test Activity Settings", () => {
       settingsPage.getPreviewImageUrl().type(url.imageUrl);
       settingsPage.clickThumbailPreview();
       settingsPage.getThumbailPreview(url.imageUrl);
-      settingsPage.getIndexPageText().type("This Is Index Page Text");
+      settingsPage.getIndexPageText().type("This Is Home Page Text");
       settingsPage.clickInsertImage();
       settingsPage.getEditImageDialog().should("exist");
       settingsPage.getSourceField().type(url.imageUrl);
@@ -53,17 +55,26 @@ context("Test Activity Settings", () => {
   });
 });
 
-context("Test Activity Settings In Authoring Home Page", () => {
+context("Test Activity Settings In Authoring Home Page & Activity Player Runtime Preview", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   });
 
   describe("Verify Activity Settings In Home Page", () => {
-    it("Activity Settings In Home Page", () => {
+    it("Activity Settings In Authoring Home Page", () => {
       authoringPage.searchActivitySequence("Test Automation Create Activity");
-      authoringPage.getActivityDetails().should("contain", "This Is Index Page Text");
+      authoringPage.getActivityDetails().should("contain", "This Is Home Page Text");
       authoringPage.getActivityDetailImage(url.imageUrl);
+    });
+    it("Verify Activity Preview In Activity Player Runtime", () => {
+      authoringPage.previewActivity("Test Automation Create Activity");
+      activityPreview.getActivityTitle().should("contain", "Test Automation Create Activity");
+      activityPreview.getReadAloudToggle().should("exist");
+      activityPreview.getIntroText().should("contain", "This Is Home Page Text");
+      activityPreview.getIntroTextImage(url.imageUrl);
+      activityPreview.getActivityThumbnail(url.imageUrl);
+      activityPreview.getPagesHeader().should("contain", "Pages in this Activity");
     });
   });
 });

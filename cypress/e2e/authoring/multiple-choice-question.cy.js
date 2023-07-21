@@ -12,11 +12,11 @@ context("Test Authoring Preview", () => {
     cy.deleteItem();
   });
 
-  describe("LARA2 MCQ Authoring Preview", () => {
+  describe("LARA MCQ Authoring Preview", () => {
     it("Add MCQ Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Multiple Choice");
-      authoringPage.getItemPickerList().contains("Multiple Choice (master)").click();
+      authoringPage.getItemPickerList().contains("Multiple Choice AWS S3").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Multiple Choice Question");
@@ -63,11 +63,11 @@ context("Test Authoring Preview", () => {
 context("Test Item Preview", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 
-  describe("LARA2 MCQ Item Preview", () => {
+  describe("LARA MCQ Item Preview", () => {
     it("Verify Added MCQ Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -112,7 +112,7 @@ context("Test Item Preview", () => {
 context("Delete MCQ", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.launchActivty();
   });
 

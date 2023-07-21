@@ -11,7 +11,7 @@ context("Test Authoring Runtime Preview", () => {
     cy.launchActivty();
   });
 
-  describe("LARA2 Activity Player Runtime Preview", () => {
+  describe("LARA Activity Player Runtime Preview", () => {
     it("Verify Activity Player Runtime Preview", () => {
       authoringPage.selectPreviewIn("Activity Player");
       authoringPage.getActivityPlayerPreview();
@@ -26,7 +26,7 @@ context("Test Authoring Runtime Preview", () => {
 context("Test Activity Run Link", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.searchActivty();
   });
 
@@ -40,11 +40,11 @@ context("Test Activity Run Link", () => {
 context("Test Sequence Run Link", () => {
   before(() => {
     cy.visit("");
-    cy.loginLARA(Cypress.config().username);
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.searchSequence();
   });
 
-  describe("LARA2 Sequence Run Link", () => {
+  describe("LARA Sequence Run Link", () => {
     it("Verify Sequence Run Link", () => {
       authoringPage.getSequenceRunLinkPreview();
       authoringPage.getSequenceRunMenu().click();
