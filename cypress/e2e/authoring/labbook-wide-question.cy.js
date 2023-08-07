@@ -24,6 +24,15 @@ context("Test Background Source As URL", () => {
       authoringPage.getHintField(" Labbook Wide Question Hint");
       labbookAuthoringPage.selectBackgroundSource("URL");
       labbookAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
+      authoringPage.verifyExportToMediaLibraryLabel();
+      authoringPage.verifyExportToMediaLibraryCheckboxLabel();
+      authoringPage.verifyExportToMediaLibraryHelpContent();
+      authoringPage.getExportToMediaLibraryCheckbox().click();
+      authoringPage.verifyUploadFromLibraryLabel();
+      authoringPage.verifyUploadFromMediaLibraryCheckboxLabel();
+      authoringPage.verifyUploadFromMediaLibraryHelpContent();
+      authoringPage.getUploadFromMediaLibraryCheckbox().click();
+      cy.wait(2000);
       authoringPage.getSaveButton().click();
       cy.wait(6000);
     });
@@ -68,6 +77,8 @@ context("Test In Item Preview", () => {
       labbookAuthoringPage.getEditPreviewUploadButton().should("exist");
       labbookAuthoringPage.getEditPreviewCommentField().should("exist");
       labbookAuthoringPage.getEditPreviewThumbnailChooser().should("exist");
+      authoringPage.verifyExportToMediaLibraryCheckboxChecked();
+      authoringPage.verifyUploadFromMediaLibraryCheckboxChecked();
     });
   });
 });

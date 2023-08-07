@@ -480,6 +480,81 @@ class AuthoringPage {
     cy.get(".quiet_list.sequences .action_menu_header_left a").click();
     cy.wait(2000);
   }
+  launchActivity(name) {
+    cy.log("Launch Test Activity : ");
+    cy.get("#search input").eq(0).type(name);
+    cy.get("#search input").eq(1).click();
+    cy.wait(500);
+    cy.get(".action_menu_header_right .edit a").click();
+    cy.wait(500);
+    cy.get('#rightcol #pages [id^=item_interactive_page] .edit').click();
+    cy.wait(2000);
+  }
+
+  //Export to Media
+  getEditItemDialog() {
+    return cy.get(".modalContainer.itemEditDialog");
+  }
+  getEditItemForm() {
+    return this.getEditItemDialog().find('#itemEditForm');
+  }
+  getExportToMediaLibrary() {
+    return  this.getEditItemForm().find('iframe').then($iframe => {
+        const $body = $iframe.contents().find('#app')
+              cy.wrap($body).find('#root_exportToMediaLibrary__help').parent();
+      });
+  }
+  verifyExportToMediaLibraryLabel() {
+    this.getExportToMediaLibrary().find('.control-label').should("contain", "Export To Media Library");
+  }
+  getExportToMediaLibraryCheckbox() {
+    return this.getExportToMediaLibrary().find('#root_exportToMediaLibrary');
+  }
+  verifyExportToMediaLibraryCheckboxLabel() {
+    this.getExportToMediaLibrary().find('.checkbox label').should("contain", "Export Background Image URL To Media Library");
+  }
+  verifyExportToMediaLibraryHelpContent() {
+    this.getExportToMediaLibrary().find('#root_exportToMediaLibrary__help').should("contain", "Check this option to allow students to select this image in interactives that support image upload");
+  }
+  verifyExportToMediaLibraryCheckboxChecked() {
+    this.getExportToMediaLibraryCheckbox().invoke("attr", "checked").should("exist");
+  }
+  getUploadFromMediaLibrary() {
+    return  this.getEditItemForm().find('iframe').then($iframe => {
+        const $body = $iframe.contents().find('#app')
+              cy.wrap($body).find('#root_allowUploadFromMediaLibrary__help').parent();
+      });
+  }
+  verifyUploadFromLibraryLabel() {
+    this.getUploadFromMediaLibrary().find('.control-label').should("contain", "Upload From Media Library");
+  }
+  getUploadFromMediaLibraryCheckbox() {
+    return this.getUploadFromMediaLibrary().find('#root_allowUploadFromMediaLibrary');
+  }
+  verifyUploadFromMediaLibraryCheckboxLabel() {
+    this.getUploadFromMediaLibrary().find('.checkbox label').should("contain", "Allow Student to Upload from Media Library");
+  }
+  verifyUploadFromMediaLibraryHelpContent() {
+    this.getUploadFromMediaLibrary().find('#root_allowUploadFromMediaLibrary__help').should("contain", "Check this option to allow students to upload images from this activity's Media Library");
+  }
+  verifyUploadFromMediaLibraryCheckboxChecked() {
+    this.getUploadFromMediaLibraryCheckbox().invoke("attr", "checked").should("exist");
+  }
+  getHideAnnotationTool() {
+    return  this.getEditItemForm().find('iframe').then($iframe => {
+        const $body = $iframe.contents().find('#app')
+              cy.wrap($body).find('#root_hideAnnotationTool').parent().parent().parent();
+      });
+  }
+  verifyHideAnnotationToolLabel() {
+    this.getHideAnnotationTool().find('.control-label').should("contain", "Toolbar Modifications");
+  }
+  getHideAnnotationToolCheckbox() {
+    return this.getHideAnnotationTool().find('#root_hideAnnotationTool');
+  }
+  verifyHideAnnotationToolCheckboxLabel() {
+    this.getHideAnnotationTool().find('.checkbox label').should("contain", "Hide Annotation Tool");
+  }
 
 }
 export default AuthoringPage;

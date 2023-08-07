@@ -37,10 +37,15 @@ context("Test Authoring Preview", () => {
       dragAndDropAuthoringPage.getImageUrl(2).type(image.imageUrl3);
       dragAndDropAuthoringPage.clickPlusButton();
       dragAndDropAuthoringPage.getImageUrl(3).type(image.imageUrl4);
+      authoringPage.verifyExportToMediaLibraryLabel();
+      authoringPage.verifyExportToMediaLibraryCheckboxLabel();
+      authoringPage.verifyExportToMediaLibraryHelpContent();
+      authoringPage.getExportToMediaLibraryCheckbox().click();
+      cy.wait(2000);
       authoringPage.getSaveButton().click();
     });
     it("Verify Added Drag And Drop Item In Authoring Preview", () => {
-      cy.wait(2000);
+      cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", "Drag and Drop Question");
       dragAndDropAuthoringPage.getDraggableItem(0, image.imageUrl1);
       dragAndDropAuthoringPage.getDraggableItem(1, image.imageUrl2);
@@ -62,6 +67,7 @@ context("Test Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
+      authoringPage.verifyExportToMediaLibraryCheckboxChecked();
       dragAndDropAuthoringPage.getItemPreviewDraggableItem(0, image.imageUrl1);
       dragAndDropAuthoringPage.getItemPreviewDraggableItem(1, image.imageUrl2);
       dragAndDropAuthoringPage.getItemPreviewDraggableItem(2, image.imageUrl3);
