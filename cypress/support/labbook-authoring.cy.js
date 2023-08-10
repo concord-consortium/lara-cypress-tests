@@ -1,3 +1,17 @@
+let iFrameSelector =  'div.embeddable:nth-child(1) div.managed-interactive iframe';
+
+const getIframeBody = (iFrameSelector) => {
+  // get the iframe > document > body
+  // and retry until the body element is not empty
+  return cy
+      .get(iFrameSelector)
+      .its('0.contentDocument.body').should('not.be.empty')
+      // wraps "body" DOM element to allow
+      // chaining more Cypress commands, like ".find(...)"
+      // https://on.cypress.io/wrap
+      .then(cy.wrap)
+}
+
 class LabbookAuthoringPage {
   getEditItemDialog() {
     return cy.get(".modalContainer.itemEditDialog");
@@ -90,6 +104,17 @@ class LabbookAuthoringPage {
       const $body = $iframe.contents().find('#app')
             cy.wrap($body).find('.thumbnail-chooser--thumbnail-chooser-list--question-int');
     });
+  }
+
+  //Activity Player Runtime Preview
+  getDrawToolContainer() {
+    return getIframeBody(iFrameSelector).find('[data-testid=draw-tool]');
+  }
+  verifyAnnotationToolNotDisplayed() {
+    return this.getDrawToolContainer().find('.dt-palette.dt-vertical .dt-btn.dt-keep-text-edit-mode').should("not.exist");
+  }
+  verifyAnnotationToolDisplayed() {
+    return this.getDrawToolContainer().find('.dt-palette.dt-vertical .dt-btn.dt-keep-text-edit-mode').should("exist");
   }
 }
 export default LabbookAuthoringPage;

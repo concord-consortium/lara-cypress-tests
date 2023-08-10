@@ -24,6 +24,15 @@ context("Test Background Source As URL", () => {
       authoringPage.getHintField(" Image Question Hint");
       imageAuthoringPage.selectBackgroundSource("URL");
       imageAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
+      authoringPage.verifyExportToMediaLibraryLabel();
+      authoringPage.verifyExportToMediaLibraryCheckboxLabel();
+      authoringPage.verifyExportToMediaLibraryHelpContent();
+      authoringPage.getExportToMediaLibraryCheckbox().click();
+      authoringPage.verifyUploadFromLibraryLabel();
+      authoringPage.verifyUploadFromMediaLibraryCheckboxLabel();
+      authoringPage.verifyUploadFromMediaLibraryHelpContent();
+      authoringPage.getUploadFromMediaLibraryCheckbox().click();
+      cy.wait(2000);
       authoringPage.getSaveButton().click();
     });
     it("Verify Added Image Item In Authoring Preview", () => {
@@ -86,6 +95,8 @@ context("Test Background Source As Upload In Item Preview", () => {
       imageAuthoringPage.getUploadButton().click();
       imageAuthoringPage.getDropArea().should("contain", "Drop an image here or click the button below to choose an image");
       imageAuthoringPage.getChooseFile().should("exist");
+      authoringPage.verifyExportToMediaLibraryCheckboxChecked();
+      authoringPage.verifyUploadFromMediaLibraryCheckboxChecked();
       authoringPage.getCancelButton().click();
     });
   });
