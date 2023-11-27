@@ -50,13 +50,11 @@ context("Test Authoring Preview", () => {
       glossarySettings.getTermPopupPreviewImageZoomClose().click();
     });
 
-    it("Verify Second Language In Term Popup Preview", () => {
-      glossarySettings.selectSecondLanguage();
-      glossarySettings.getLanguageSelector().should("exist");
-      glossarySettings.selectLanguage("Spanish").click();
-      glossarySettings.getTermPopupPreviewSubmitButton().should("contain", "Enviar");
-      glossarySettings.selectLanguage("English").click();
-      glossarySettings.getTermPopupPreviewSubmitButton().should("contain", "Submit");
+    it("Verify Display Second Language First Option", () => {
+      glossarySettings.getDisplaySecondLanguageFirstCheckBox().should("exist");
+      glossarySettings.verifyDisplaySecondLanguageFirstLabel();
+      glossarySettings.getDisplaySecondLanguageFirstCheckBox().click();
+      glossarySettings.verifyDisplaySecondLanguageFirstHelpText();
     });
 
     it("Verify Reset Term Popup Preview", () => {

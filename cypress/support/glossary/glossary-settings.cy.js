@@ -17,6 +17,9 @@ class GlossarySettings {
   getShowGlossarySidebarCheckBox() {
     return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(7) input");
   }
+  getDisplaySecondLanguageFirstCheckBox() {
+    return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(8) input");
+  }
 
   getTermPopup() {
     return cy.get("[class^=term-popup-preview--termPopupPreview]");
@@ -118,6 +121,13 @@ class GlossarySettings {
   }
   getEditNameErrorMessage() {
     return cy.get("[class^=edit-name--editName] [class^=edit-name--error]");
+  }
+
+  verifyDisplaySecondLanguageFirstLabel() {
+    cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(8) label").should("contain", "Display Second Language First");
+  }
+  verifyDisplaySecondLanguageFirstHelpText() {
+    cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(8) [class^=glossary-settings--help]").should("contain", "When this option is enabled, students will see their assigned second language first in the term popup. Second language is set per student by the teacher via the Glossary Dashboard in the Portal.")
   }
 }
 export default GlossarySettings;
