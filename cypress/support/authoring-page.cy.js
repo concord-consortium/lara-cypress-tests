@@ -490,6 +490,40 @@ class AuthoringPage {
     cy.get('#rightcol #pages [id^=item_interactive_page] .edit').click();
     cy.wait(2000);
   }
+  deleteActivity(name) {
+    cy.log("Delete Test Activity : ");
+    cy.get("#search input").eq(0).type(name);
+    cy.get("#search input").eq(1).click();
+    cy.wait(1000);
+    cy.get("body").then($body => {
+      if ($body.find("[id^=item_lightweight_activity]").length > 0) {
+        cy.log("Delete Copy Activity");
+        cy.get('[id^=item_lightweight_activity] .action_menu_header_right .delete a').click();
+        cy.wait(2000);
+        cy.get('.breadcrumbs a').click();
+        cy.wait(1000);
+      } else {
+        cy.log("No Activity To Delete");
+      }
+    });
+  }
+  deleteSequence(name) {
+    cy.log("Delete Test Sequence : ");
+    cy.get("#search input").eq(0).type(name);
+    cy.get("#search input").eq(1).click();
+    cy.wait(1000);
+    cy.get("body").then($body => {
+      if ($body.find("[id^=item_sequence]").length > 0) {
+        cy.log("Delete Copy Sequence");
+        cy.get('[id^=item_sequence] .action_menu_header_right .delete a').click();
+        cy.wait(2000);
+        cy.get('.breadcrumbs a').click();
+        cy.wait(1000);
+      } else {
+        cy.log("No Sequence To Delete");
+      }
+    });
+  }
 
   //Export to Media
   getEditItemDialog() {

@@ -54,6 +54,24 @@ class ActivitySequenceSettingsPage {
   selectActivityLayout(value) {
     cy.get('#lightweight_activity_layout').select(value);
   }
+  getHideQuestionNumbersCheckbox() {
+    return cy.get('#lightweight_activity_hide_question_numbers');
+  }
+  verifyHideQuestionNumbersLabel(label) {
+    this.getHideQuestionNumbersCheckbox().parent().find('label').should("contain", label);
+  }
+  verifyHideQuestionNumbersHint(hint) {
+    this.getHideQuestionNumbersCheckbox().parent().find('.hint').should("contain", hint);
+  }
+  getSequenceHideQuestionNumbersCheckbox() {
+    return cy.get('#sequence_hide_question_numbers');
+  }
+  verifySequenceHideQuestionNumbersLabel(label) {
+    this.getSequenceHideQuestionNumbersCheckbox().parent().find('label').should("contain", label);
+  }
+  verifySequenceHideQuestionNumbersHint(hint) {
+    this.getSequenceHideQuestionNumbersCheckbox().parent().find('.hint').should("contain", hint);
+  }
 
   //*******************************
 
