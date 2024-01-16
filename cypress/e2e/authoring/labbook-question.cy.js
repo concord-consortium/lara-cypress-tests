@@ -1,8 +1,10 @@
 import AuthoringPage from "../../support/authoring-page.cy.js";
+import ActivityPlayerPreview from "../../support/activity-player-preview.cy.js";
 import LabbookAuthoringPage from "../../support/labbook-authoring.cy.js";
 
 const authoringPage = new AuthoringPage;
 const labbookAuthoringPage = new LabbookAuthoringPage;
+const activityPlayerPreview = new ActivityPlayerPreview;
 
 context("Test Background Source As URL", () => {
   before(() => {
@@ -24,6 +26,11 @@ context("Test Background Source As URL", () => {
       authoringPage.getHintField(" Labbook Question Hint");
       labbookAuthoringPage.selectBackgroundSource("URL");
       labbookAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
+      labbookAuthoringPage.getHideToolbarButtonsField().should("exist");
+      labbookAuthoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
+      labbookAuthoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar:");
+      labbookAuthoringPage.verifyHideToolbarButtons();
+      labbookAuthoringPage.selectHideToolbarButtons(2);
       authoringPage.verifyExportToMediaLibraryLabel();
       authoringPage.verifyExportToMediaLibraryCheckboxLabel();
       authoringPage.verifyExportToMediaLibraryHelpContent();
@@ -79,6 +86,25 @@ context("Test In Item Preview", () => {
       labbookAuthoringPage.getEditPreviewThumbnailChooser().should("exist");
       authoringPage.verifyExportToMediaLibraryCheckboxChecked();
       authoringPage.verifyUploadFromMediaLibraryCheckboxChecked();
+    });
+  });
+});
+
+context("Labbook Preview In Activity Player Runtime", () => {
+  before(() => {
+    cy.visit("");
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
+    authoringPage.previewActivity("Automation Question Interactives Activity");
+  });
+
+  describe("Preview activity in Activity Player Runtime", () => {
+    it("Verify hidden draw tool is not displayed", () => {
+      activityPlayerPreview.getActivityTitle().should("contain", "Automation Question Interactives Activity");
+      activityPlayerPreview.clickPageItem(0);
+      cy.wait(10000);
+      labbookAuthoringPage.verifyDrawToolDisplayed("Free hand drawing tool");
+      labbookAuthoringPage.verifyDrawToolDisplayed("Basic shape tool");
+      labbookAuthoringPage.verifyDrawToolNotDisplayed("Annotation tool");
     });
   });
 });

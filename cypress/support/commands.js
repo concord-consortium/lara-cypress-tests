@@ -24,7 +24,7 @@ Cypress.Commands.add("loginLARA", (username) => {
 
 Cypress.Commands.add("launchActivty", () => {
   cy.log("Launch Test Activity : ");
-  cy.get("#search input").eq(0).type("Automation");
+  cy.get("#search input").eq(0).type("Automation Question Interactives Activity");
   cy.get("#search input").eq(1).click();
   cy.wait(500);
   cy.get("#item_lightweight_activity_212 .action_menu_header_right .edit a").click();

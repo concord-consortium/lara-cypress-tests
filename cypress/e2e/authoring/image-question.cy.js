@@ -1,8 +1,10 @@
 import AuthoringPage from "../../support/authoring-page.cy.js";
+import ActivityPlayerPreview from "../../support/activity-player-preview.cy.js";
 import ImageAuthoringPage from "../../support/image-authoring.cy.js";
 
 const authoringPage = new AuthoringPage;
 const imageAuthoringPage = new ImageAuthoringPage;
+const activityPlayerPreview = new ActivityPlayerPreview;
 
 context("Test Background Source As URL", () => {
   before(() => {
@@ -24,6 +26,13 @@ context("Test Background Source As URL", () => {
       authoringPage.getHintField(" Image Question Hint");
       imageAuthoringPage.selectBackgroundSource("URL");
       imageAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
+      authoringPage.getHideToolbarButtonsField().should("exist");
+      authoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
+      authoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar:");
+      authoringPage.verifyHideToolbarButtons();
+      authoringPage.selectHideToolbarButtons(0);
+      authoringPage.selectHideToolbarButtons(1);
+      authoringPage.selectHideToolbarButtons(2);
       authoringPage.verifyExportToMediaLibraryLabel();
       authoringPage.verifyExportToMediaLibraryCheckboxLabel();
       authoringPage.verifyExportToMediaLibraryHelpContent();
@@ -41,6 +50,31 @@ context("Test Background Source As URL", () => {
       imageAuthoringPage.getAuthoringPreviewPrompt("Image Question Prompt");
       imageAuthoringPage.getAuthoringPreviewDrawingButton().should("exist");
       imageAuthoringPage.getAuthoringPreviewImage().should("exist");
+    });
+  });
+});
+
+context("Image Question Preview In Activity Player Runtime", () => {
+  before(() => {
+    cy.visit("");
+    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
+    authoringPage.previewActivity("Automation Question Interactives Activity");
+  });
+
+  describe("Preview activity in Activity Player Runtime", () => {
+    it("Verify hidden draw tools are not displayed", () => {
+      activityPlayerPreview.getActivityTitle().should("contain", "Automation Question Interactives Activity");
+      activityPlayerPreview.clickPageItem(0);
+      cy.wait(10000);
+      imageAuthoringPage.getEditButton().click();
+      cy.wait(5000);
+      imageAuthoringPage.verifyDrawToolNotDisplayed("Free hand drawing tool");
+      imageAuthoringPage.verifyDrawToolNotDisplayed("Line tool");
+      imageAuthoringPage.verifyDrawToolNotDisplayed("Basic shape tool");
+      imageAuthoringPage.verifyDrawToolDisplayed("Text tool");
+      imageAuthoringPage.verifyDrawToolDisplayed("Stroke color");
+      imageAuthoringPage.verifyDrawToolDisplayed("Fill color");
+
     });
   });
 });

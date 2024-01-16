@@ -62,6 +62,29 @@ class AuthoringPage {
     });
     // cy.wait(6000);
   }
+  getHideToolbarButtonsField() {
+    return this.getEditItemForm().find('iframe').then($iframe => {
+      const $body = $iframe.contents().find('#app')
+            cy.wrap($body).find('#root_drawingTools');
+    });
+  }
+  verifyHideToolbarButtons() {
+    this.getHideToolbarButtonsField()
+    .should("contain", "Free hand drawing tool")
+    .should("contain", "Line tool")
+    .should("contain", "Basic shape tool")
+    .should("contain", "Text tool")
+    .should("contain", "Stroke color")
+    .should("contain", "Fill color")
+    .should("contain", "Stroke Width")
+    .should("contain", "Clone tool")
+    .should("contain", "Send selected objects to back")
+    .should("contain", "Send selected objects to front");
+  }
+
+  selectHideToolbarButtons(id) {
+    this.getHideToolbarButtonsField().find('#root_drawingTools-'+id).click();
+  }
 
 //*******************************************************************************************
 
