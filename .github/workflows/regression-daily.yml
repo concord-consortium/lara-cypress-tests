@@ -1,4 +1,4 @@
-name: Manual Regression
+name: Regression Daily
 
 on:
   schedule:
