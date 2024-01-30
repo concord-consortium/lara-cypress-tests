@@ -7,11 +7,12 @@
     "test:dev": "cypress open --env testEnv=dev",
     "test:staging": "cypress open --env testEnv=staging",
     "test:production": "cypress open --env testEnv=production",
-    "test:cypress:open": "cypress open"
+    "test:cypress:open": "cypress open",
+    "test:cypress": "cypress run"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^10.8.0"
+    "cypress": "^13.6.3"
   }
 }
