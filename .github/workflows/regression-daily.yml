@@ -32,9 +32,10 @@ jobs:
           # only do parallel if we have a record key
           parallel: ${{ !!secrets.CYPRESS_RECORD_KEY }}
           browser: ${{ env.BROWSER }}
-          testEnv: ${{ env.ENVIRONMENT }}
           spec: cypress/e2e/**
         env:
+          CYPRESS_password: ${{ secrets.STAGING_PASSWORD }}
+          CYPRESS_testEnv: staging
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
