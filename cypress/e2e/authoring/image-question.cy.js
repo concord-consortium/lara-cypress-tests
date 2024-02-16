@@ -6,11 +6,21 @@ const authoringPage = new AuthoringPage;
 const imageAuthoringPage = new ImageAuthoringPage;
 const activityPlayerPreview = new ActivityPlayerPreview;
 
+function previewTest() {
+  cy.visit("");
+  authoringPage.previewActivity("Test Automation Image Question Activity");
+}
+
+function beforeTest() {
+  cy.visit("");
+  authoringPage.launchActivity("Test Automation Image Question Activity");
+}
+
 context("Test Background Source As URL", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Image Question Activity");
     cy.deleteItem();
   });
 
@@ -28,7 +38,7 @@ context("Test Background Source As URL", () => {
       imageAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
       authoringPage.getHideToolbarButtonsField().should("exist");
       authoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
-      authoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar:");
+      authoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar.");
       authoringPage.verifyHideToolbarButtons();
       authoringPage.selectHideToolbarButtons(0);
       authoringPage.selectHideToolbarButtons(1);
@@ -51,19 +61,9 @@ context("Test Background Source As URL", () => {
       imageAuthoringPage.getAuthoringPreviewDrawingButton().should("exist");
       imageAuthoringPage.getAuthoringPreviewImage().should("exist");
     });
-  });
-});
-
-context("Image Question Preview In Activity Player Runtime", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    authoringPage.previewActivity("Automation Question Interactives Activity");
-  });
-
-  describe("Preview activity in Activity Player Runtime", () => {
     it("Verify hidden draw tools are not displayed", () => {
-      activityPlayerPreview.getActivityTitle().should("contain", "Automation Question Interactives Activity");
+      previewTest();
+      activityPlayerPreview.getActivityTitle().should("contain", "Test Automation Image Question Activity");
       activityPlayerPreview.clickPageItem(0);
       cy.wait(10000);
       imageAuthoringPage.getEditButton().click();
@@ -76,19 +76,8 @@ context("Image Question Preview In Activity Player Runtime", () => {
       imageAuthoringPage.verifyDrawToolDisplayed("Fill color");
 
     });
-  });
-});
-
-context("Test Background Source As Upload", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA Image Question With Background Source As Upload", () => {
-
     it("Add Background Source As Upload", () => {
+      beforeTest();
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
@@ -107,19 +96,6 @@ context("Test Background Source As Upload", () => {
       imageAuthoringPage.getAuthoringPreviewDropArea().should("contain", "Drop an image here or click the button below to choose an image");
       imageAuthoringPage.getAuthoringPreviewChooseFile().should("exist");
     });
-  });
-});
-
-// Background Soruce as Sanpshot - Blocked due to bug #182437851
-
-context("Test Background Source As Upload In Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Upload In Item Preview", () => {
     it("Verify In Item Preview With Background Source As Upload", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -133,17 +109,6 @@ context("Test Background Source As Upload In Item Preview", () => {
       authoringPage.verifyUploadFromMediaLibraryCheckboxChecked();
       authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete Image", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete Image Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

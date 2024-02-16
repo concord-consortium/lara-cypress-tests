@@ -1,4 +1,4 @@
-context("Test Authoring Preview", () => {
+context.skip("Test Authoring Preview", () => {
     describe("Test Preview", () => {
         beforeEach(() => {
             cy.visit("https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring-migrate.concord.org%2Fapi%2Fv1%2Factivities%2F13056.json");

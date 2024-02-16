@@ -14,16 +14,23 @@ const mcq = {
     promptAuthoring: "Multiple Choice Prompt"
 };
 
-context("Test LARA Layout 60-40", () => {
+function beforeTest() {
+  cy.visit("");
+  authoringPage.launchActivity("Test Automation Layout Activity");
+  cy.sectionDelete();
+}
+
+context("Test LARA Layouts", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.deleteItem();
+    authoringPage.launchActivity("Test Automation Layout Activity");
+    cy.sectionDelete();
   });
 
   describe("LARA Layouts", () => {
     it("Verify 60-40 Layout", () => {
+      authoringPage.addSection();
       layoutAuthoringPage.selectLayout("60-40");
       layoutAuthoringPage.getAddItem("60-40", "60").click();
       authoringPage.getItemPickerSearch().type(mcq.itemSearch);
@@ -52,19 +59,8 @@ context("Test LARA Layout 60-40", () => {
       layoutAuthoringPage.getSectionItemHeader(40).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(40, mcq.promptAuthoring);
     });
-  });
-});
-
-context("Test LARA Layout 40-60", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.sectionDelete();
-  });
-
-  describe("LARA Layouts", () => {
     it("Verify 40-60 Layout", () => {
+      beforeTest();
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("40-60");
       layoutAuthoringPage.getAddItem("40-60", "40").click();
@@ -95,19 +91,8 @@ context("Test LARA Layout 40-60", () => {
       layoutAuthoringPage.getSectionItemHeader(40).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(40, mcq.promptAuthoring);
     });
-  });
-});
-
-context("Test LARA Layout 70-30", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.sectionDelete();
-  });
-
-  describe("LARA Layouts", () => {
     it("Verify 70-30 Layout", () => {
+      beforeTest();
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("70-30");
       layoutAuthoringPage.getAddItem("70-30", "70").click();
@@ -137,19 +122,8 @@ context("Test LARA Layout 70-30", () => {
       layoutAuthoringPage.getSectionItemHeader(30).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(30, mcq.promptAuthoring);
     });
-  });
-});
-
-context("Test LARA Layout 30-70", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.sectionDelete();
-  });
-
-  describe("LARA Layouts", () => {
     it("Verify 30-70 Layout", () => {
+      beforeTest();
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("30-70");
       layoutAuthoringPage.getAddItem("30-70", "30").click();
@@ -179,19 +153,8 @@ context("Test LARA Layout 30-70", () => {
       layoutAuthoringPage.getSectionItemHeader(70).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(70, mcq.promptAuthoring);
     });
-  });
-});
-
-context("Test LARA Layout Responsive-2-Columns", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.sectionDelete();
-  });
-
-  describe("LARA Layouts", () => {
     it("Verify responsive-2-columns Layout", () => {
+      beforeTest();
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("responsive-2-columns");
       layoutAuthoringPage.getAddItem("responsive-2-columns", "responsive-static").click();
@@ -221,19 +184,8 @@ context("Test LARA Layout Responsive-2-Columns", () => {
       layoutAuthoringPage.getSectionItemHeader("responsive-fluid").should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt("responsive-fluid", mcq.promptAuthoring);
     });
-  });
-});
-
-context("Test LARA Layout Responsive Full Width", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.sectionDelete();
-  });
-
-  describe("LARA Layouts", () => {
     it("Verify responsive-full-width Layout", () => {
+      beforeTest();
       authoringPage.addSection();
       layoutAuthoringPage.selectLayout("responsive-full-width");
       authoringPage.getAddItem().click();
@@ -252,19 +204,8 @@ context("Test LARA Layout Responsive Full Width", () => {
       authoringPage.getSectionItemHeader().should("contain", mcq.name);
       authoringPage.getAuthoringPreviewPrompt(mcq.promptAuthoring);
     });
-  });
-});
-
-context("Create Full Width Section", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.sectionDelete();
-  });
-
-  describe("LARA Layouts", () => {
     it("Add Full Width Layout Section", () => {
+      beforeTest();
       authoringPage.addSection();
       cy.wait(6000);
     });

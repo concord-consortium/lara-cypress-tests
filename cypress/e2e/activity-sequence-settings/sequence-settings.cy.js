@@ -10,34 +10,27 @@ const url = {
     imageUrl: "https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg"
 };
 
-context("Test Create Sequence", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteNewSequence();
-  });
-
-  describe("Create Sequence", () => {
-    it("Create Sequence", () => {
-      settingsPage.getCreateSequenceButton().click();
-      settingsPage.getSettingsPage().should("exist");
-      settingsPage.getSeqTitle().type("Test Automation Create Sequence");
-      settingsPage.getSettingsPageSave().click();
-      cy.wait(2000);
-    });
-  });
-});
+function previewTest() {
+  cy.visit("");
+  authoringPage.previewSequence("Test Automation Sequence Settings");
+}
 
 context("Test Sequence Settings", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
+    authoringPage.deleteSequence("Test Automation Sequence Settings");
   });
 
-  describe("Sequence Settings", () => {
+  describe("Test Sequence Settings", () => {
+    it("Create Sequence", () => {
+      settingsPage.getCreateSequenceButton().click();
+      settingsPage.getSettingsPage().should("exist");
+      settingsPage.getSeqTitle().type("Test Automation Sequence Settings");
+      settingsPage.getSettingsPageSave().click();
+      cy.wait(2000);
+    });
     it("Sequence Settings", () => {
-      authoringPage.searchActivitySequence("Test Automation Create Sequence");
-      authoringPage.getSequenceEditMenu().click();
       settingsPage.getGlossaryDropDown().should("not.exist");
       settingsPage.getSeqBackgroundImageUrl().type(url.imageUrl);
       settingsPage.getSeqPreviewImageUrl().type(url.imageUrl);
@@ -53,25 +46,16 @@ context("Test Sequence Settings", () => {
       settingsPage.addActivity();
       settingsPage.clickAddButton();
     });
-  });
-});
-
-context("Test Sequence Settings In Authoring Home Page & Activity Player Runtime Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Verify Sequence Settings In Home Page", () => {
     it("Sequence Settings In Authoring Home Page", () => {
-      authoringPage.searchActivitySequence("Test Automation Create Sequence");
+      cy.visit("");
+      authoringPage.searchActivitySequence("Test Automation Sequence Settings");
       authoringPage.getSequenceDetails().should("contain", "This Is Home Page Text");
       authoringPage.getSequenceDetailImage(url.imageUrl);
     });
-    it("Verify Activity Preview In Activity Player Runtime", () => {
-      authoringPage.previewSequence("Test Automation Create Sequence");
-      activityPreview.getSequenceActivityTitle().should("contain", "Test Automation Create Sequence");
-      activityPreview.getSequenceTitle().should("contain", "Test Automation Create Sequence");
+    it("Verify Sequence Preview In Activity Player Runtime", () => {
+      previewTest();
+      activityPreview.getSequenceActivityTitle().should("contain", "Test Automation Sequence Settings");
+      activityPreview.getSequenceTitle().should("contain", "Test Automation Sequence Settings");
       activityPreview.getSequenceDescription().should("contain", "This Is Home Page Text");
       activityPreview.getSequenceEstimate().should("contain", "Estimated Time to Complete This Module:");
     });

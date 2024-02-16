@@ -6,6 +6,11 @@ const authoringPage = new AuthoringPage;
 const textBlockAuthoringPage = new TextBlockAuthoringPage;
 const notebookLayout = new NotebookLayout;
 
+function previewTest() {
+  cy.visit("");
+  cy.previewNotebookActivty();
+}
+
 context("Test Section Action Menus", () => {
   before(() => {
     cy.visit("");
@@ -45,18 +50,8 @@ context("Test Section Action Menus", () => {
       cy.wait(2000);
       authoringPage.verifySectionName(1, "Section Name Edit");
     });
-  });   
-});
-
-context("Preview In Activity Player Runtime", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.previewNotebookActivty();
-  });
-
-  describe("Preview activity in notebook layout", () => {
     it("Verify activity is previewed in notebook layout", () => {
+      previewTest();
       notebookLayout.getPreviousPageButton().should("not.exist");
       notebookLayout.getNextPageButton().should("not.exist");
       notebookLayout.getActivityNavHeader(0).should("exist");
@@ -72,5 +67,5 @@ context("Preview In Activity Player Runtime", () => {
       notebookLayout.getSeparator().should("exist");
       notebookLayout.getSectionTab(0).invoke("attr", "class").should("contains", "selected");    
     });
-  });
+  });   
 });

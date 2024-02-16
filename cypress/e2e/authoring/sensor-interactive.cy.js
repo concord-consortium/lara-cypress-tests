@@ -8,7 +8,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Sensor Interactive Activity");
     cy.deleteItem();
   });
 
@@ -16,7 +16,7 @@ context("Test Authoring Preview", () => {
     it("Add Sensor Interactive Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("AP Sensor Interactive");
-      authoringPage.getItemPickerList().contains("AP Sensor Interactive (master)").click();
+      authoringPage.getItemPickerList().contains("AP Sensor Interactive (AWS)").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Sensor Interactive Question");
@@ -31,35 +31,14 @@ context("Test Authoring Preview", () => {
       sensorInteractiveAuthoringPage.getSensorGraph();
       sensorInteractiveAuthoringPage.getRescaleButton();
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("LARA2 Sensor Interactive Item Preview", () => {
     it("Verify Added Sensor Interactive Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
       sensorInteractiveAuthoringPage.getItemPreviewSensorGraph();
       sensorInteractiveAuthoringPage.getItemPreviewRescaleButton();
+      authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete Sensor Interactive", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("Delete Sensor Interactive Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

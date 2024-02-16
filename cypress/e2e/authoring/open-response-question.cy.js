@@ -8,7 +8,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Open Response Activity");
     cy.deleteItem();
   });
 
@@ -44,17 +44,6 @@ context("Test Authoring Preview", () => {
       authoringPage.getAuthoringPreviewLockedInfoFeedback().should("contain", "Answer Submitted");
       orAuthoringPage.getAuthoringPreviewAudioControls().should("not.exist");
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA OR Item Preview", () => {
     it("Verify Added OR Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -79,17 +68,6 @@ context("Test Item Preview", () => {
       orAuthoringPage.getAudioControls().should("not.exist");
       authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete OR", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete OR Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

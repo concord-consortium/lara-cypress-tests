@@ -8,7 +8,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Multiple Choice Activity");
     cy.deleteItem();
   });
 
@@ -57,17 +57,6 @@ context("Test Authoring Preview", () => {
       authoringPage.getAuthoringPreviewLockedInfoFeedback().should("contain", "Answer Submitted");
       mcqAuthoringPage.getAuthoringPreviewChoiceDisabled();
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA MCQ Item Preview", () => {
     it("Verify Added MCQ Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -106,17 +95,6 @@ context("Test Item Preview", () => {
       mcqAuthoringPage.getChoiceDisabled();
       authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete MCQ", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete MCQ Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

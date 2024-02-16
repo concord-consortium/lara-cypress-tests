@@ -12,14 +12,24 @@ const file = {
     glossary: "cypress/fixtures/glossary/test-automation-glossary.json"
 };
 
-context("Test Import Activity", () => {
+function beforeSequence() {
+  cy.visit("");
+  cy.deleteImportSequence();
+}
+
+function beforeGlossary() {
+  cy.visit("");
+  cy.deleteImportGlossary();
+}
+
+context("Test Import Activity, Sequence and Glossary", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.deleteImportActivity();
   });
 
-  describe("Import Activity", () => {
+  describe("Import Activity, Sequence and Glossary", () => {
     it("Import Test Activity", () => {
       authoringPage.getImportButton().click();
       authoringPage.getImportModel().should("exist");
@@ -33,17 +43,8 @@ context("Test Import Activity", () => {
       settingsPage.getEditActivitySaveButton().click();
       cy.wait(2000);
     });
-  });
-});
-
-context("Delete Import Test Activity", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Delete Import Test Activity", () => {
     it("Verify Delete Import Activity", () => {
+      cy.visit("");
       authoringPage.searchActivitySequence("Import Test Automation Activity");
       authoringPage.getActivityDeleteMenu().click();
       cy.wait(2000);
@@ -51,18 +52,8 @@ context("Delete Import Test Activity", () => {
       authoringPage.searchActivitySequence("Import Test Automation Activity");
       authoringPage.getActivity().should("not.exist");
     });
-  });
-});
-
-context("Test Import Sequence", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteImportSequence();
-  });
-
-  describe("Import Sequence", () => {
     it("Import Test Sequence", () => {
+      beforeSequence();
       authoringPage.getImportButton().click();
       authoringPage.getImportModel().should("exist");
       authoringPage.getImportModelHeader();
@@ -75,17 +66,8 @@ context("Test Import Sequence", () => {
       settingsPage.getEditSequenceSaveButton().click();
       cy.wait(2000);
     });
-  });
-});
-
-context("Delete Import Test Sequence", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Delete Import Test Sequence", () => {
     it("Verify Delete Import Sequence", () => {
+      cy.visit("");
       authoringPage.searchActivitySequence("Import Test Automation Sequence");
       authoringPage.getSequenceDeleteMenu().click();
       cy.wait(2000);
@@ -93,18 +75,8 @@ context("Delete Import Test Sequence", () => {
       authoringPage.searchActivitySequence("Import Test Automation Activity");
       authoringPage.getSequence().should("not.exist");
     });
-  });
-});
-
-context("Test Import Glossary", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteImportGlossary();
-  });
-
-  describe("Import Glossary", () => {
     it("Import Test Glossary", () => {
+      beforeGlossary();
       authoringPage.getImportButton().click();
       authoringPage.getImportModel().should("exist");
       authoringPage.getImportModelHeader();
@@ -117,17 +89,8 @@ context("Test Import Glossary", () => {
       glossarySettings.getEditSaveButton().click();
       cy.wait(2000);
     });
-  });
-});
-
-context("Delete Import Test Glossary", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Delete Import Test Glossary", () => {
     it("Verify Delete Import Glossary", () => {
+      cy.visit("");
       authoringPage.searchActivitySequence("Import Test Automation Glossary");
       authoringPage.getGlossaryDeleteMenu().click();
       cy.wait(2000);
@@ -137,3 +100,4 @@ context("Delete Import Test Glossary", () => {
     });
   });
 });
+

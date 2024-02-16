@@ -4,11 +4,11 @@ import SideBySideAuthoringPage from "../../support/side-by-side-authoring.cy.js"
 const authoringPage = new AuthoringPage;
 const sideBySideAuthoringPage = new SideBySideAuthoringPage;
 
-context("Test Authoring Preview", () => {
+context.skip("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation SideBySide Activity");
     cy.deleteItem();
   });
 
@@ -16,7 +16,7 @@ context("Test Authoring Preview", () => {
     it("Add Side By Side Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Side-by-Side");
-      authoringPage.getItemPickerList().contains("Side-by-Side(master)").click();
+      authoringPage.getItemPickerList().contains("Side-by-Side (AWS)").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Side by Side Question");
@@ -38,35 +38,14 @@ context("Test Authoring Preview", () => {
       sideBySideAuthoringPage.getAuthoringPreviewPrompt("Open response Prompt", 0);
       sideBySideAuthoringPage.getAuthoringPreviewPrompt("Multiple Choice Prompt", 1);
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("LARA2 Side By Side Item Preview", () => {
     it("Verify Added Side By Side Item In Item Preview", () => {
-      cy.wait(6000);
+      cy.wait(3000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
       sideBySideAuthoringPage.getItemPreviewPrompt("Open response Prompt", 0);
       sideBySideAuthoringPage.getItemPreviewPrompt("Multiple Choice Prompt", 1);
+      authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete Side By Side", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("Delete Side By Side Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

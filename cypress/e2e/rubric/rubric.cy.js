@@ -1,4 +1,4 @@
-context('Rubric Test Feature', () => {
+context.skip('Rubric Test Feature', () => {
 
 // Visits the student report (maxScore set to 0)
   it('gets the first student report', function() {

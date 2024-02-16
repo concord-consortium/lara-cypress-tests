@@ -15,15 +15,15 @@ context("Test Admin User Role", () => {
       settingsPage.getCreateActivityButton().should("exist");
       settingsPage.getCreateSequenceButton().should("exist");
       settingsPage.getCreateGlossaryButton().should("exist");
-      authoringPage.searchActivitySequence("Teacher 2 Automation Activity");
+      authoringPage.searchActivitySequence("Test Automation Activity Settings");
       authoringPage.getActivityEditMenu().should("exist");
       authoringPage.getActivityDeleteMenu().should("exist");
       authoringPage.getActivityPublishMenu().should("exist");
-      authoringPage.searchActivitySequence("Teacher 2 Automation Sequence");
+      authoringPage.searchActivitySequence("Test Automation Sequence Settings");
       authoringPage.getSequenceEditMenu().should("exist");
       authoringPage.getSequenceDeleteMenu().should("exist");
       authoringPage.getSequencePublishMenu().should("exist");
-      authoringPage.searchActivitySequence("Teacher 2 Automation Glossary");
+      authoringPage.searchActivitySequence("Test Automation Glossary Settings 1");
       authoringPage.getGlossaryEditMenu().should("exist");
       authoringPage.getGlossaryDeleteMenu().should("exist");
     });

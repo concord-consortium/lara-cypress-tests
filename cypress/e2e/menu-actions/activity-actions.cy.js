@@ -2,15 +2,15 @@ import AuthoringPage from "../../support/authoring-page.cy.js";
 
 const authoringPage = new AuthoringPage;
 
-context("Test Activity Copy Action Menu", () => {
+context("Test Activity Action Menu", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteCopyActivity();
-    cy.searchActivty();
+    cy.deleteCopyActivity("Copy of Test Automation Activity Menu Actions");
+    cy.searchActivity("Test Automation Activity Menu Actions");
   });
 
-  describe("Copy Activity Action Menu", () => {
+  describe("Test Activity Action Menu", () => {
     it("Verify Copy Actions", () => {
       authoringPage.getActivityCopyMenu().click();
       cy.wait(2000);
@@ -18,19 +18,8 @@ context("Test Activity Copy Action Menu", () => {
       authoringPage.getSettingsPageSave();
       authoringPage.clickHomePageLink();
     });
-  });
-});
-
-context("Test Activity Publish Action Menu", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.searchActivty();
-  });
-
-  describe("Publish Activity Action Menu", () => {
     it("Verify Publish Actions", () => {
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity");
+      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
       authoringPage.getActivityPublishMenu().click();
       cy.wait(2000);
       authoringPage.getPublishModel().should("exist");
@@ -38,27 +27,16 @@ context("Test Activity Publish Action Menu", () => {
       cy.wait(2000);
       authoringPage.getPublishStatus().should("contain", "published");
       authoringPage.getPublishModelClose().click();
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity");
+      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
       authoringPage.getActivityDetailPublished().should("contain", "last published");
       cy.wait(2000);
     });
-  });
-});
-
-context("Test Activity Delete Action Menu", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.searchActivty();
-  });
-
-  describe("Delete Activity Action Menu", () => {
     it("Verify Delete Actions", () => {
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity");
+      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
       authoringPage.getActivityDeleteMenu().click();
       cy.wait(2000);
       authoringPage.clickHomePageLink();
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity");
+      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
       authoringPage.getActivity().should("not.exist");
     });
   });

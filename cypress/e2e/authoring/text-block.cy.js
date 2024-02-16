@@ -4,11 +4,17 @@ import TextBlockAuthoringPage from "../../support/text-block-authoring.cy.js";
 const authoringPage = new AuthoringPage;
 const textBlockAuthoringPage = new TextBlockAuthoringPage;
 
+function beforeTest() {
+  cy.visit("");
+  cy.wait(2000);
+  authoringPage.launchActivity("Test Automation TextBlock Activity");
+}
+
 context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation TextBlock Activity");
     cy.deleteItem();
   });
 
@@ -33,17 +39,6 @@ context("Test Authoring Preview", () => {
       authoringPage.getActivityPlayerTEPreview();
       authoringPage.getPreviewInButton().click();
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA Text Block In Item Preview", () => {
     it("Verify Added Text Block In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -51,18 +46,8 @@ context("Test Item Preview", () => {
       textBlockAuthoringPage.getTextBlockName().should("contain", "Text Block Heading");
       textBlockAuthoringPage.getTextBlockContent().should("contain", "Text Block Content");
     });
-  });
-});
-
-context("Delete Text Block", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete Text Block", () => {
     it("Delete Text Block", () => {
+      beforeTest();
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();
     });

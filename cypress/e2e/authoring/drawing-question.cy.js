@@ -6,11 +6,16 @@ const authoringPage = new AuthoringPage;
 const drawingAuthoringPage = new DrawingAuthoringPage;
 const activityPlayerPreview = new ActivityPlayerPreview;
 
+function previewTest() {
+  cy.visit("");
+  authoringPage.previewActivity("Test Automation Drawing Question Activity");
+}
+
 context("Test Background Source As URL", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Drawing Question Activity");
     cy.deleteItem();
   });
 
@@ -26,7 +31,7 @@ context("Test Background Source As URL", () => {
       authoringPage.getHintField(" Drawing Question Hint");
       authoringPage.getHideToolbarButtonsField().should("exist");
       authoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
-      authoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar:");
+      authoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar");
       authoringPage.verifyHideToolbarButtons();
       authoringPage.selectHideToolbarButtons(0);
       authoringPage.selectHideToolbarButtons(1);
@@ -35,19 +40,9 @@ context("Test Background Source As URL", () => {
       authoringPage.getSaveButton().click();
       cy.wait(5000);
     });
-  });
-});
-
-context("Draw tool Preview In Activity Player Runtime", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    authoringPage.previewActivity("Automation Question Interactives Activity");
-  });
-
-  describe("Preview activity in Activity Player Runtime", () => {
     it("Verify hidden draw tools are not displayed", () => {
-      activityPlayerPreview.getActivityTitle().should("contain", "Automation Question Interactives Activity");
+      previewTest();
+      activityPlayerPreview.getActivityTitle().should("contain", "Test Automation Drawing Question Activity");
       activityPlayerPreview.clickPageItem(0);
       cy.wait(10000);
       drawingAuthoringPage.verifyDrawToolNotDisplayed("Free hand drawing tool");
@@ -56,20 +51,10 @@ context("Draw tool Preview In Activity Player Runtime", () => {
       drawingAuthoringPage.verifyDrawToolDisplayed("Text tool");
       drawingAuthoringPage.verifyDrawToolDisplayed("Stroke color");
       drawingAuthoringPage.verifyDrawToolDisplayed("Fill color");
-
     });
-  });
-});
-
-context("Delete Drawing Tool", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete Drawing Tool Item", () => {
     it("Delete Item", () => {
+      cy.visit("");
+      authoringPage.launchActivity("Test Automation Drawing Question Activity");
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();
     });
