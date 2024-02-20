@@ -97,7 +97,7 @@ class AddLanguage {
     return this.getTermPopupPreviewDefinitionIcons().find("[class^=icons--iconButton]").eq(2);
   }
   getTermPopupPreviewDiggingDeeper() {
-    return this.getTermPopupPreviewDefinitionIcons().find("[title^='View Digging Deeper']");
+    return this.getTermPopupPreviewDefinitionIcons().find("[class^=icons--iconButton]").eq(3);
   }
   getTermPopupPreviewDiggingDeeperContainer() {
     return this.getTermPopupPreviewInnerPopup().find("[class^=digging-deeper--container]");

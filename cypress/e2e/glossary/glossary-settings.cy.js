@@ -6,8 +6,8 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteGlossary();
-    cy.createGlossary();
+    cy.deleteGlossary("Automation Glossary Setting Test");
+    cy.createGlossary("Automation Glossary Setting Test");
   });
 
   describe("Verify Various Glossary Settings", () => {
@@ -66,14 +66,14 @@ context("Test Authoring Preview", () => {
 
     it("Verify Glossary Name", () => {
       glossarySettings.getGlossaryNameField().should('be.disabled');
-      glossarySettings.getGlossaryNameField().should('have.value', 'Test Automation Glossary Settings');
+      glossarySettings.getGlossaryNameField().should('have.value', 'Automation Glossary Setting Test');
       glossarySettings.getEditSaveButton().click();
       glossarySettings.getGlossaryNameField().clear();
       glossarySettings.getEditSaveButton().click();
       glossarySettings.getEditNameErrorMessage().should("contain", "Glossary name cannot be empty");
-      glossarySettings.getGlossaryNameField().type("Test Automation Glossary Settings 1");
+      glossarySettings.getGlossaryNameField().type("Automation Glossary Setting Test 1");
       glossarySettings.getEditSaveButton().click();
-      glossarySettings.getGlossaryNameField().should('have.value', 'Test Automation Glossary Settings 1');
+      glossarySettings.getGlossaryNameField().should('have.value', 'Automation Glossary Setting Test 1');
     });
 
     it("Verify View Photo In Term Popup Preview", () => {
@@ -90,18 +90,9 @@ context("Test Authoring Preview", () => {
       glossarySettings.getTermPopupPreviewInnerPopupDiggingDeeper().click();
       glossarySettings.getTermPopupPreviewDiggingDeeperContainer().should("not.exist");
     });
-  });
-});
-
-context("Delete Glossary", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Delete Glossary", () => {
     it("Delete Glossary", () => {
-      cy.deleteGlossary();
+      cy.visit("");
+      cy.deleteGlossary("Automation Glossary Setting Test 1");
     });
   });
 });

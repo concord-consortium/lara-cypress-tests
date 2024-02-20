@@ -1,24 +1,24 @@
 class GlossarySettings {
   getStudentProvidedDefinitionsCheckBox() {
-    return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(2) input");
-  }
-  getDisplayIDontKnowCheckBox() {
     return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(3) input");
   }
-  getStudentAudioRecordingCheckBox() {
+  getDisplayIDontKnowCheckBox() {
     return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(4) input");
   }
-  getShowMediaCheckBox() {
+  getStudentAudioRecordingCheckBox() {
     return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(5) input");
   }
-  getDisableReadAloudCheckBox() {
+  getShowMediaCheckBox() {
     return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(6) input");
   }
-  getShowGlossarySidebarCheckBox() {
+  getDisableReadAloudCheckBox() {
     return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(7) input");
   }
-  getDisplaySecondLanguageFirstCheckBox() {
+  getShowGlossarySidebarCheckBox() {
     return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(8) input");
+  }
+  getDisplaySecondLanguageFirstCheckBox() {
+    return cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(9) input");
   }
 
   getTermPopup() {
@@ -124,10 +124,10 @@ class GlossarySettings {
   }
 
   verifyDisplaySecondLanguageFirstLabel() {
-    cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(8) label").should("contain", "Display Second Language First");
+    cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(9) label").should("contain", "Display Second Language First");
   }
   verifyDisplaySecondLanguageFirstHelpText() {
-    cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(8) [class^=glossary-settings--help]").should("contain", "When this option is enabled, students will see their assigned second language first in the term popup. Second language is set per student by the teacher via the Glossary Dashboard in the Portal.")
+    cy.get("[class^=model-authoring-app--rightColumn] [class^=glossary-settings]:nth-child(9) [class^=glossary-settings--help]").should("contain", "When this option is enabled, students will see their assigned second language first in the term popup. Second language is set per student by the teacher via the Glossary Dashboard in the Portal.")
   }
 }
 export default GlossarySettings;

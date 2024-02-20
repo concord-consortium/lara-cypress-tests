@@ -8,7 +8,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation MultiSelect Activity");
     cy.deleteItem();
   });
 
@@ -61,17 +61,6 @@ context("Test Authoring Preview", () => {
       authoringPage.getAuthoringPreviewLockedInfoFeedback().should("contain", "Answer Submitted");
       multiSelectAuthoringPage.getAuthoringPreviewChoiceDisabled();
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA Multi Select Item Preview", () => {
     it("Verify Added Multi Select Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -112,17 +101,6 @@ context("Test Item Preview", () => {
       multiSelectAuthoringPage.getChoiceDisabled();
       authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete Multi Select", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete Multi Select Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

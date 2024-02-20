@@ -10,7 +10,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation TEQuestionWrapper Activity");
     cy.deleteItem();
   });
 
@@ -27,7 +27,7 @@ context("Test Authoring Preview", () => {
       authoringPage.getSaveButton().click();
     });
     it("Add TE Question Wrapper", () => {
-      cy.wait(6000);
+      cy.wait(4000);
       teQuestionWrapperAuthoringPage.selectQuestionWrapper();
       teQuestionWrapperAuthoringPage.clickAddButton();
       authoringPage.getEditItemDialog().should("exist");
@@ -37,7 +37,7 @@ context("Test Authoring Preview", () => {
       teQuestionWrapperAuthoringPage.getFormSection("Exemplar");
     });
     it("Verify TE Question Wrapper", () => {
-      cy.wait(6000);
+      cy.wait(4000);
       teQuestionWrapperAuthoringPage.clickHeader("correct");
       teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Correct");
       teQuestionWrapperAuthoringPage.clickHeader("distractors");
@@ -48,19 +48,8 @@ context("Test Authoring Preview", () => {
       teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Exemplar");
       teQuestionWrapperAuthoringPage.clickSaveButton();
     });
-  });
-});
-
-context("Delete Item", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete MCQ Item", () => {
     it("Delete Item", () => {
-      cy.wait(6000);
+      cy.wait(4000);
       authoringPage.getSectionMenuDelete().click();
     });
   });

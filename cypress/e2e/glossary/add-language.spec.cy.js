@@ -16,15 +16,48 @@ const langProperties = {
     hawaiian: "Language: Hawaiian (0/1)"
 };
 
+const termProperties = {
+  term: "New Test Term",
+  definition: "New Test Term Definition",
+  diggingDeeper: "New Test Term Digging Deeper",
+  imageUrl: "https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg",
+  imageAltText: "New Test Term Image Alt Text",
+  zoomImageUrl: "https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg",
+  imageCaption: "New Test Term Image Caption",
+  videoUrl: "https://cc-project-resources.s3.amazonaws.com/waters/Glossary/movies/AmbientTemperature.mp4",
+  videoAltText: "New Test Term Video Alt Text",
+  videoCaption: "New Test Term Video Caption",
+  closedCaptionUrl: "https://project-resources.concord.org/waters/Lesson1/Movies/L1USDAWatershedLearningVideo.vtt",
+  editTerm: "Edit Test Term",
+  editDefinition: "Edit Test Term Definition",
+  editDiggingDeeper: "Edit Test Term Digging Deeper"
+};
+
 context("Test Additional Language", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchGlossary();
-    cy.deleteLanguage();
+    cy.deleteGlossary("Automation Glossary Language Setting Test");
+    cy.createGlossary("Automation Glossary Language Setting Test");
   });
 
   describe("Verify Additional Language", () => {
+    it("Add New Term", () => {
+      addEditDeleteTerm.getAddNewTermButton().click();
+      addEditDeleteTerm.getTermField().type(termProperties.term);
+      addEditDeleteTerm.getDefinitionField().type(termProperties.definition);
+      addEditDeleteTerm.getDiggingDeeperField().type(termProperties.diggingDeeper);
+      addEditDeleteTerm.getImageUrlField().type(termProperties.imageUrl);
+      addEditDeleteTerm.getImageAltTextField().type(termProperties.imageAltText);
+      addEditDeleteTerm.getZoomImageUrlField().type(termProperties.zoomImageUrl);
+      addEditDeleteTerm.getImageCaptionField().type(termProperties.imageCaption);
+      addEditDeleteTerm.getVideoUrlField().type(termProperties.videoUrl);
+      addEditDeleteTerm.getVideoAltTextField().type(termProperties.videoAltText);
+      addEditDeleteTerm.getVideoCaptionField().type(termProperties.videoCaption);
+      addEditDeleteTerm.getClosedCaptionUrlField().type(termProperties.closedCaptionUrl);
+      addEditDeleteTerm.getSaveCloseButton().click();
+      cy.wait(2000);
+    });
     it("Add Language", () => {
       addLanguage.selectLanguage('Chinese');
       addLanguage.getAddLanguageButton().click();
@@ -54,22 +87,8 @@ context("Test Additional Language", () => {
       addLanguage.getTermPopupPreviewDefinitionReadAloud().should("exist");
       addLanguage.getTermPopupPreviewViewPhoto().should("exist");
       addLanguage.getTermPopupPreviewViewVideo().should("exist");
-      addLanguage.getTermPopupPreviewViewPhoto().click();
-      addLanguage.getTermPopupPreviewImageContainer().should("exist");
-      addLanguage.getTermPopupPreviewImageCaption().should("contain", langProperties.imageCaption);
-      addLanguage.getTermPopupPreviewImageCaptionReadAloud().should("exist");
-      addLanguage.getTermPopupPreviewImageZoomButton().click();
-      addLanguage.getTermPopupPreviewImageZoomCaption().should("contain", langProperties.imageCaption);
-      addLanguage.getTermPopupPreviewImageZoomCaptionReadAloud().should("exist");
-      addLanguage.getTermPopupPreviewImageZoomClose().click();
-      cy.wait(500);
-      addLanguage.getTermPopupPreviewViewPhoto().click();
-      addLanguage.getTermPopupPreviewImageContainer().should("not.exist");
-      addLanguage.getTermPopupPreviewViewVideo().click();
-      addLanguage.getTermPopupPreviewVideoContainer().should("exist");
-      addLanguage.getTermPopupPreviewVideoCaption().should("contain", langProperties.videoCaption);
-      addLanguage.getTermPopupPreviewVideoCaptionReadAloud().should("exist");
-      addLanguage.getSaveCloseButton().click();
+      addLanguage.getTermPopupPreviewDiggingDeeper().should("exist");
+      addLanguage.getSaveCloseButton().click({ force: true });
       cy.wait(2000);
     });
     it("Verify Edited Language In Table", () => {

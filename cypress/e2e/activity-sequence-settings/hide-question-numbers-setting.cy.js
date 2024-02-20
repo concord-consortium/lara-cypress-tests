@@ -20,12 +20,11 @@ function beforeTestActivity(activity) {
 
 function beforeTestSequence(sequence) {
   cy.visit("");
-  cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
   authoringPage.deleteSequence(sequence);
 }
 
-context("Test hide question number setting in activity", () => {
-  describe("Hide question number in activity", () => {
+context("Test hide question number setting in activity and sequence", () => {
+  describe("Hide question number in activity and sequence", () => {
     it("Verify hide question number settings in activity", () => {
       beforeTestActivity(name.activity);
       settingsPage.getCreateActivityButton().click();
@@ -42,13 +41,8 @@ context("Test hide question number setting in activity", () => {
       cy.wait(2000);
       settingsPage.getHideQuestionNumbersCheckbox().invoke("attr", "checked").should("exist");
     });
-  });
-});
-
-context("Test hide question number setting in sequence", () => {
-  describe("Hide question number in sequence", () => {
     it("Verify hide question number settings in sequence", () => {
-      beforeTestSequence(name.activity);
+      beforeTestSequence(name.sequence);
       settingsPage.getCreateSequenceButton().click();
       settingsPage.getSettingsPage().should("exist");
       settingsPage.getSeqTitle().type(name.sequence);

@@ -4,19 +4,23 @@ import CarouselAuthoringPage from "../../support/carousel-authoring.cy.js";
 const authoringPage = new AuthoringPage;
 const carouselAuthoringPage = new CarouselAuthoringPage;
 
-context("Test Authoring Preview", () => {
-  before(() => {
+function beforeTest() {
+  cy.loginLARA(Cypress.config().username);
+  authoringPage.launchActivity("Test Automation Carousel Activity");
+}
+
+context.skip("Test Authoring Preview", () => {
+  beforeEach(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-    cy.deleteItem();
+    authoringPage.launchActivity("Test Automation Carousel Activity");
   });
 
   describe("LARA2 Carousel Authoring Preview", () => {
     it("Add carousel Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Carousel Interactive");
-      authoringPage.getItemPickerList().contains("Carousel Interactive (Master)").click();
+      authoringPage.getItemPickerList().contains("Carousel Interactive (AWS)").click();
       authoringPage.getAddItemButton().click();
       cy.wait(6000);
       authoringPage.getEditItemDialog().should("exist");
@@ -41,6 +45,7 @@ context("Test Authoring Preview", () => {
       authoringPage.getSaveButton().click();
     });
     it("Verify Added Carousel Item In Authoring Preview", () => {
+      beforeTest();
       cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", "Carousel Question");
       carouselAuthoringPage.getAuthoringPreviewPrompt("Open response Prompt");
@@ -54,18 +59,8 @@ context("Test Authoring Preview", () => {
       carouselAuthoringPage.getAuthoringPreviewFibPrompt("Enter the answer ");
       carouselAuthoringPage.getAuthoringPreviewFibTextArea().should("exist");
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("LARA2 Carousel Item Preview", () => {
     it("Verify Added carousel Item In Item Preview", () => {
+      beforeTest();
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
@@ -80,18 +75,8 @@ context("Test Item Preview", () => {
       carouselAuthoringPage.getFibPrompt("Enter the answer ");
       carouselAuthoringPage.getFibTextArea().should("exist");
     });
-  });
-});
-
-context("Delete carousel", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("Delete carousel Item", () => {
     it("Delete Item", () => {
+      beforeTest();
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();
     });

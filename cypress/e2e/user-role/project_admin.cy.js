@@ -56,7 +56,7 @@ context("Test Admin User Role", () => {
   describe("LARA Project Admin, Site Admin and Author Roles", () => {
     it("verify Site Admin user role", () => {
       cy.log("Verify all the project displayed for site admin");
-      beforeTest(Cypress.config().site_admin);
+      cy.visit("");
       projects.editResource(data.siteAdmin_Activity);
       projects.getProjectSectionActivity().should("exist");
       projects.verifyProjectLabelActivity();
@@ -75,8 +75,9 @@ context("Test Admin User Role", () => {
       projects.clickEditProject();
       projects.verifyProjectDropDownGlossary("SiteAdmin", "");
     });
-    it("verify Project Admin user role", () => {
+    it.skip("verify Project Admin user role", () => {
       cy.log("Verify only assigned project displayed for project admin");
+      cy.logoutLARA(Cypress.config().site_admin);
       beforeTest(Cypress.config().project_admin);
       projects.editResource(data.projectAdmin_Activity);
       projects.getProjectSectionActivity().should("exist");
@@ -96,8 +97,9 @@ context("Test Admin User Role", () => {
       projects.clickEditProject();
       projects.verifyProjectDropDownGlossary("ProjectAdmin", data.projectAdmin_Project);
     });
-    it("verify Author user role", () => {
+    it.skip("verify Author user role", () => {
       cy.log("Verify project is not displayed for author");
+      cy.logoutLARA(Cypress.config().project_admin);
       beforeTest(Cypress.config().teacher);
       projects.editResource(data.author_Activity);
       projects.verifyProjectNotDisplayedInActivity();

@@ -10,35 +10,28 @@ const url = {
     imageUrl: "https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg"
 };
 
-context("Test Create Activity", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteNewActivity();
-  });
-
-  describe("Create Activity", () => {
-    it("Create Activity", () => {
-      settingsPage.getCreateActivityButton().click();
-      settingsPage.getNewActivityPage().should("exist");
-      settingsPage.getActivityName().type("Test Automation Create Activity");
-      settingsPage.getSaveButton().click();
-      settingsPage.getSettingsPage().should("exist");
-    });
-
-  });
-});
+function previewTest() {
+  cy.visit("");
+  authoringPage.previewActivity("Test Automation Activity Settings");
+}
 
 context("Test Activity Settings", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
+    authoringPage.deleteActivity("Test Automation Activity Settings");
   });
 
-  describe("Activity Settings", () => {
+  describe("Test Activity Settings", () => {
+    it("Create Activity", () => {
+      settingsPage.getCreateActivityButton().click();
+      settingsPage.getNewActivityPage().should("exist");
+      settingsPage.getActivityName().type("Test Automation Activity Settings");
+      settingsPage.getSaveButton().click();
+      cy.wait(2000);
+      settingsPage.getSettingsPage().should("exist");
+    });
     it("Activity Settings", () => {
-      authoringPage.searchActivitySequence("Test Automation Create Activity");
-      authoringPage.getActivityEditMenu().click();
       settingsPage.getGlossaryDropDown().should("be.enabled");
       settingsPage.getBackgroundImageUrl().type(url.imageUrl);
       settingsPage.getPreviewImageUrl().type(url.imageUrl);
@@ -52,29 +45,21 @@ context("Test Activity Settings", () => {
       settingsPage.getSettingsPageSave().click();
       cy.wait(2000);
     });
-  });
-});
-
-context("Test Activity Settings In Authoring Home Page & Activity Player Runtime Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Verify Activity Settings In Home Page", () => {
     it("Activity Settings In Authoring Home Page", () => {
-      authoringPage.searchActivitySequence("Test Automation Create Activity");
+      cy.visit("");
+      authoringPage.searchActivitySequence("Test Automation Activity Settings");
       authoringPage.getActivityDetails().should("contain", "This Is Home Page Text");
       authoringPage.getActivityDetailImage(url.imageUrl);
     });
     it("Verify Activity Preview In Activity Player Runtime", () => {
-      authoringPage.previewActivity("Test Automation Create Activity");
-      activityPreview.getActivityTitle().should("contain", "Test Automation Create Activity");
+      previewTest();
+      activityPreview.getActivityTitle().should("contain", "Test Automation Activity Settings");
       activityPreview.getReadAloudToggle().should("exist");
       activityPreview.getIntroText().should("contain", "This Is Home Page Text");
       activityPreview.getIntroTextImage(url.imageUrl);
       activityPreview.getActivityThumbnail(url.imageUrl);
       activityPreview.getPagesHeader().should("contain", "Pages in this Activity");
     });
+
   });
 });

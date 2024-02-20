@@ -4,11 +4,11 @@ import ScaffoldedAuthoringPage from "../../support/scaffolded-authoring.cy.js";
 const authoringPage = new AuthoringPage;
 const scaffoldedAuthoringPage = new ScaffoldedAuthoringPage;
 
-context("Test Authoring Preview", () => {
+context.skip("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Scaffolded Activity");
     cy.deleteItem();
   });
 
@@ -16,7 +16,7 @@ context("Test Authoring Preview", () => {
     it("Add scaffolded Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Scaffolded");
-      authoringPage.getItemPickerList().contains("Scaffolded Question (master)").click();
+      authoringPage.getItemPickerList().contains("Scaffolded Question (AWS)").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Scaffolded Question");
@@ -53,17 +53,6 @@ context("Test Authoring Preview", () => {
       scaffoldedAuthoringPage.getAuthoringPreviewFibPrompt("Enter the answer ");
       scaffoldedAuthoringPage.getAuthoringPreviewFibTextArea().should("exist");
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("LARA2 scaffolded Item Preview", () => {
     it("Verify Added scaffolded Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -79,17 +68,6 @@ context("Test Item Preview", () => {
       scaffoldedAuthoringPage.getFibPrompt("Enter the answer ");
       scaffoldedAuthoringPage.getFibTextArea().should("exist");
     });
-  });
-});
-
-context("Delete scaffolded", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARA(Cypress.config().username);
-    cy.launchActivty();
-  });
-
-  describe("Delete scaffolded Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

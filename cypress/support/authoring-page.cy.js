@@ -76,7 +76,7 @@ class AuthoringPage {
     .should("contain", "Text tool")
     .should("contain", "Stroke color")
     .should("contain", "Fill color")
-    .should("contain", "Stroke Width")
+    .should("contain", "Stroke width")
     .should("contain", "Clone tool")
     .should("contain", "Send selected objects to back")
     .should("contain", "Send selected objects to front");
@@ -385,9 +385,17 @@ class AuthoringPage {
   }
   getActivityPlayerPreview() {
     cy.get('#preview-links-select option').eq(1).invoke("attr", "value")
-    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json&page=page_1372");
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F414.json&page=page_1753");
   }
   getActivityPlayerTEPreview() {
+    cy.get('#preview-links-select option').eq(2).invoke("attr", "value")
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F414.json&page=page_1753&mode=teacher-edition");
+  }
+  getActivityPlayerRuntimePreview() {
+    cy.get('#preview-links-select option').eq(1).invoke("attr", "value")
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json&page=page_1372");
+  }
+  getActivityPlayerRuntimeTEPreview() {
     cy.get('#preview-links-select option').eq(2).invoke("attr", "value")
     .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json&page=page_1372&mode=teacher-edition");
   }
@@ -401,11 +409,11 @@ class AuthoringPage {
   }
   getActivityRunLinkPreview() {
     this.getActivityRunMenu().invoke("attr", "href")
-    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F215.json&preview");
+    .should("contain", "https://activity-player.concord.org/branch/master/?activity=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Factivities%2F212.json&preview");
   }
   getSequenceRunLinkPreview() {
     this.getSequenceRunMenu().invoke("attr", "href")
-    .should("contain", "https://activity-player.concord.org/branch/master/?sequence=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Fsequences%2F49.json&preview");
+    .should("contain", "https://activity-player.concord.org/branch/master/?sequence=https%3A%2F%2Fauthoring.lara.staging.concord.org%2Fapi%2Fv1%2Fsequences%2F158.json&preview");
   }
 
   clickActivityPageLink() {

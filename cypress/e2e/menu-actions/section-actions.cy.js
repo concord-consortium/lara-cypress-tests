@@ -8,7 +8,7 @@ context("Test Section Action Menus", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Section Menu Actions");
     cy.deleteItem();
     cy.deleteSection();
   });
@@ -43,17 +43,6 @@ context("Test Section Action Menus", () => {
       authoringPage.getCopySectionDelete(1).click();
       cy.wait(2000);
     });
-  });
-});
-
-context("Delete Item", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

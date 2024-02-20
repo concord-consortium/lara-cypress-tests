@@ -8,7 +8,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation FIB Question Activity");
     cy.deleteItem();
   });
 
@@ -37,17 +37,6 @@ context("Test Authoring Preview", () => {
       authoringPage.getAuthoringPreviewSubmitButton().click();
       authoringPage.getAuthoringPreviewLockedInfoHeader().should("contain", "Your answer has been submitted and is locked. ");
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA FIB Item Preview", () => {
     it("Verify Added FIB Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -62,17 +51,6 @@ context("Test Item Preview", () => {
       authoringPage.getLockedInfoHeader().should("contain", "Your answer has been submitted and is locked. ");
       authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete FIB", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete FIB Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

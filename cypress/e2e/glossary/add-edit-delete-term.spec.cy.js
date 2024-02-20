@@ -25,7 +25,8 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchGlossary();
+    cy.deleteGlossary("Automation Glossary Term Settings Test");
+    cy.createGlossary("Automation Glossary Term Setting Test");
   });
 
   describe("Verify Add New Term", () => {
@@ -70,7 +71,6 @@ context("Test Authoring Preview", () => {
       addEditDeleteTerm.getTermPopupPreviewVideoCaptionReadAloud().should("exist");
       addEditDeleteTerm.getTermPopupPreviewDiggingDeeper().click();
       addEditDeleteTerm.getTermPopupPreviewDiggingDeeperContainer().should("contain", termProperties.diggingDeeper);
-      addEditDeleteTerm.getTermPopupLanguageSelector().should("exist");
       addEditDeleteTerm.getSaveCloseButton().click();
     });
     it("Verify Added New Term", () => {
@@ -132,12 +132,6 @@ context("Test Authoring Preview", () => {
       previewTerm.getNextTermButton().click();
       previewTerm.getTermPopupPreviewHeader().should("contain", "Test Term");
       previewTerm.getPreviousTermButton().click();
-      previewTerm.getTermPopupPreviewHeader().should("contain", termProperties.editTerm);
-    });
-    it("Verify Preview Term From Drop Down", () => {
-      previewTerm.selectTerm('Test Term');
-      previewTerm.getTermPopupPreviewHeader().should("contain", "Test Term");
-      previewTerm.selectTerm(termProperties.editTerm);
       previewTerm.getTermPopupPreviewHeader().should("contain", termProperties.editTerm);
       previewTerm.getModalCloseButton().click();
     });

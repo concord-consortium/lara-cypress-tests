@@ -10,14 +10,19 @@ const url = {
     imageUrl: "https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg"
 };
 
-context("Test Create Sequence", () => {
+function previewTest() {
+  cy.visit("");
+  authoringPage.previewSequence("Test Automation Create Sequence Notebook Layout");
+}
+
+context("Test Sequence Setting Notebook Layout", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     cy.deleteNewSequence();
   });
 
-  describe("Create Sequence", () => {
+  describe("Test Sequence Setting Notebook Layout", () => {
     it("Create Sequence", () => {
       settingsPage.getCreateSequenceButton().click();
       settingsPage.getSettingsPage().should("exist");
@@ -25,19 +30,9 @@ context("Test Create Sequence", () => {
       settingsPage.getSettingsPageSave().click();
       cy.wait(2000);
     });
-  });
-});
-
-context("Test Sequence Settings", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Sequence Settings", () => {
     it("Sequence Settings", () => {
-      authoringPage.searchActivitySequence("Test Automation Create Sequence Notebook Layout");
-      authoringPage.getSequenceEditMenu().click();
+      // authoringPage.searchActivitySequence("Test Automation Create Sequence Notebook Layout");
+      // authoringPage.getSequenceEditMenu().click();
       settingsPage.selectActivityLayoutOverride("Notebook");
       settingsPage.getSeqPreviewImageUrl().type(url.imageUrl);
       settingsPage.getSeqIndexPageText().type("This Is Home Page Text");
@@ -46,18 +41,8 @@ context("Test Sequence Settings", () => {
       settingsPage.addActivity();
       settingsPage.clickAddButton();
     });
-  });
-});
-
-context("Preview In Activity Player Runtime", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    authoringPage.previewSequence("Test Automation Create Sequence Notebook Layout");
-  });
-
-  describe("Preview activity in notebook layout", () => {
     it("Verify activity is previewed in notebook layout", () => {
+      previewTest();
       notebookLayout.getSequenceTitle().should("contain", "Test Automation Create Sequence Notebook Layout");
       notebookLayout.getNotebookHeader().should("exist");
       notebookLayout.clickSequenceThumb(1);

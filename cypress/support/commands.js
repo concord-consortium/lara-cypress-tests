@@ -33,16 +33,16 @@ Cypress.Commands.add("launchActivty", () => {
   cy.wait(2000);
 })
 
-Cypress.Commands.add("searchActivty", () => {
+Cypress.Commands.add("searchActivity", (activity) => {
   cy.log("Launch Test Activity : ");
-  cy.get("#search input").eq(0).type("Test Automation Activity");
+  cy.get("#search input").eq(0).type(activity);
   cy.get("#search input").eq(1).click();
   cy.wait(1000);
 })
 
-Cypress.Commands.add("searchSequence", () => {
+Cypress.Commands.add("searchSequence", (sequence) => {
   cy.log("Launch Test Activity : ");
-  cy.get("#search input").eq(0).type("Test Automation Sequence");
+  cy.get("#search input").eq(0).type(sequence);
   cy.get("#search input").eq(1).click();
   cy.wait(1000);
 })
@@ -59,29 +59,29 @@ Cypress.Commands.add("deleteItem", () => {
   });
 })
 
-Cypress.Commands.add("createGlossary", () => {
+Cypress.Commands.add("createGlossary", (glossary) => {
   cy.log("Create Test Glossary : ");
   cy.get("#sticky-header .buttons-menu a").eq(2).click();
   cy.wait(500);
   cy.get("#new_glossary").should("exist");
-  cy.get("#glossary_name").type("Test Automation Glossary Settings");
+  cy.get("#glossary_name").type(glossary);
   cy.wait(500);
   cy.get("#save-top").click();
   cy.wait(2000);
 })
 
-Cypress.Commands.add("launchGlossary", () => {
+Cypress.Commands.add("launchGlossary", (glossary) => {
   cy.log("Launch Test Glossary : ");
-  cy.get("#search input").eq(0).type("Automation Glossary");
+  cy.get("#search input").eq(0).type(glossary);
   cy.get("#search input").eq(1).click();
   cy.wait(500);
   cy.get("#item_glossary_20 .action_menu_header_right .edit a").click();
   cy.wait(2000);
 })
 
-Cypress.Commands.add("deleteGlossary", () => {
+Cypress.Commands.add("deleteGlossary", (glossary) => {
   cy.log("Launch Test Glossary : ");
-  cy.get("#search input").eq(0).type("Test Automation Glossary Settings");
+  cy.get("#search input").eq(0).type(glossary);
   cy.get("#search input").eq(1).click();
   cy.wait(500);
   cy.get("body").then($body => {
@@ -136,8 +136,8 @@ Cypress.Commands.add("sectionDelete", () => {
   });
 })
 
-Cypress.Commands.add("deleteCopyActivity", () => {
-  cy.get("#search input").eq(0).type("Copy of Test Automation");
+Cypress.Commands.add("deleteCopyActivity", (activity) => {
+  cy.get("#search input").eq(0).type(activity);
   cy.get("#search input").eq(1).click();
   cy.wait(500);
   cy.get("body").then($body => {
@@ -221,8 +221,8 @@ Cypress.Commands.add("deleteImportSequence", () => {
   });
 })
 
-Cypress.Commands.add("deleteCopySequence", () => {
-  cy.get("#search input").eq(0).type("Copy of Test Automation Sequence");
+Cypress.Commands.add("deleteCopySequence", (sequence) => {
+  cy.get("#search input").eq(0).type(sequence);
   cy.get("#search input").eq(1).click();
   cy.wait(500);
   cy.get("body").then($body => {
@@ -272,5 +272,13 @@ Cypress.Commands.add("previewNotebookActivty", () => {
   cy.get("#search input").eq(1).click();
   cy.wait(1000);
   cy.get("#item_lightweight_activity_199 .action_menu_header_left a").click();
+  cy.wait(2000);
+})
+
+Cypress.Commands.add("logoutLARA", (username) => {
+  cy.log("Logout user : " + username);
+  cy.get("[data-cy=header-menu] .icon").click();
+  cy.wait(2000);
+  cy.get("[data-cy=header-menu] .header-menu-links.show a").last().click();
   cy.wait(2000);
 })

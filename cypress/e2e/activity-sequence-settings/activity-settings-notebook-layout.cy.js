@@ -10,14 +10,19 @@ const url = {
     imageUrl: "https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg"
 };
 
-context("Test Create Activity", () => {
+function previewTest() {
+  cy.visit("");
+  authoringPage.previewActivity("Test Automation Create Activity Notebook Layout");
+}
+
+context("Test Activity Setting Notebook Layout", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteNewActivity();
+    authoringPage.deleteActivity("Test Automation Create Activity Notebook Layout");
   });
 
-  describe("Create Activity", () => {
+  describe("Test Activity Setting Notebook Layout", () => {
     it("Create Activity", () => {
       settingsPage.getCreateActivityButton().click();
       settingsPage.getNewActivityPage().should("exist");
@@ -25,38 +30,15 @@ context("Test Create Activity", () => {
       settingsPage.getSaveButton().click();
       settingsPage.getSettingsPage().should("exist");
     });
-
-  });
-});
-
-context("Test Activity Settings", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-  });
-
-  describe("Activity Settings", () => {
     it("Set activity layout to notebook", () => {
-      authoringPage.searchActivitySequence("Test Automation Create Activity Notebook Layout");
-      authoringPage.getActivityEditMenu().click();
       settingsPage.selectActivityLayout("Notebook");
       settingsPage.getPreviewImageUrl().type(url.imageUrl);
       settingsPage.getIndexPageText().type("This Is Home Page Text");
       settingsPage.getSettingsPageSave().click();
       cy.wait(4000);
     });
-  });
-});
-
-context("Preview In Activity Player Runtime", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    authoringPage.previewActivity("Test Automation Create Activity Notebook Layout");
-  });
-
-  describe("Preview activity in notebook layout", () => {
     it("Verify activity is previewed in notebook layout", () => {
+      previewTest();
       notebookLayout.getPreviousPageButton().should("not.exist");
       notebookLayout.getNextPageButton().should("not.exist");
       notebookLayout.getActivityNavHeader(0).should("exist");
@@ -64,6 +46,6 @@ context("Preview In Activity Player Runtime", () => {
       notebookLayout.getHomeButton().should("contain", "Home");
       notebookLayout.verifyNotebookHeaderNotDisplayed();   
     });
+
   });
 });
-

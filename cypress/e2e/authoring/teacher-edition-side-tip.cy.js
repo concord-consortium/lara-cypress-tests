@@ -8,7 +8,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation TESideTip Activity");
     cy.deleteItem();
   });
 
@@ -27,22 +27,11 @@ context("Test Authoring Preview", () => {
       teSideTipAuthoringPage.clickSaveButton();
     });
     it("Verify TE Question Wrapper In Authoring Preview", () => {
-      cy.wait(6000);
+      cy.wait(4000);
       teSideTipAuthoringPage.getAuthoringPreview();
     });
-  });
-});
-
-context("Delete Item", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete TE Side Tip", () => {
     it("Delete TE Side Tip", () => {
-      cy.wait(6000);
+      cy.wait(4000);
       teSideTipAuthoringPage.getSectionMenuDelete().click();
     });
   });

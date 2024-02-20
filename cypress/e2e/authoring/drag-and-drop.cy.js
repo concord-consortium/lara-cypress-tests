@@ -15,7 +15,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation DragAndDrop Activity");
     cy.deleteItem();
   });
 
@@ -52,17 +52,6 @@ context("Test Authoring Preview", () => {
       dragAndDropAuthoringPage.getDraggableItem(2, image.imageUrl3);
       dragAndDropAuthoringPage.getDraggableItem(3, image.imageUrl4);
     });
-  });
-});
-
-context("Test Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA Drag And Drop Item Preview", () => {
     it("Verify Added Drag And Drop Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -72,18 +61,8 @@ context("Test Item Preview", () => {
       dragAndDropAuthoringPage.getItemPreviewDraggableItem(1, image.imageUrl2);
       dragAndDropAuthoringPage.getItemPreviewDraggableItem(2, image.imageUrl3);
       dragAndDropAuthoringPage.getItemPreviewDraggableItem(3, image.imageUrl4);
+      authoringPage.getCancelButton().click();
     });
-  });
-});
-
-context("Delete Drag And Drop", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete Drag And Drop Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

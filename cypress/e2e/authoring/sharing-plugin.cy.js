@@ -8,7 +8,7 @@ context("Test Sharing Interactive Plugin", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Sharing Plugin Activity");
     cy.deleteItem();
   });
 
@@ -38,17 +38,6 @@ context("Test Sharing Interactive Plugin", () => {
       cy.wait(2000);
       authoringPage.getPluginDelete().click();
     });
-  });
-});
-
-context("Delete MCQ", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete MCQ Item", () => {
     it("Delete Item", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();

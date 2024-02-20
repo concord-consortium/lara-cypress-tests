@@ -6,11 +6,16 @@ const authoringPage = new AuthoringPage;
 const labbookAuthoringPage = new LabbookAuthoringPage;
 const activityPlayerPreview = new ActivityPlayerPreview;
 
+function beforeTest() {
+  cy.visit("");
+  authoringPage.previewActivity("Test Automation Labbook Activity");
+}
+
 context("Test Background Source As URL", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation Labbook Activity");
     cy.deleteItem();
   });
 
@@ -28,7 +33,7 @@ context("Test Background Source As URL", () => {
       labbookAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
       labbookAuthoringPage.getHideToolbarButtonsField().should("exist");
       labbookAuthoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
-      labbookAuthoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar:");
+      labbookAuthoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar.");
       labbookAuthoringPage.verifyHideToolbarButtons();
       labbookAuthoringPage.selectHideToolbarButtons(2);
       authoringPage.verifyExportToMediaLibraryLabel();
@@ -43,17 +48,6 @@ context("Test Background Source As URL", () => {
       authoringPage.getSaveButton().click();
       cy.wait(6000);
     });
-  });
-});
-
-context("Test In Authoring Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA Authoring Preview", () => {
     it("Verify Added Labbook Item In Authoring Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", "Labbook Question");
@@ -63,17 +57,6 @@ context("Test In Authoring Preview", () => {
       labbookAuthoringPage.getAuthoringPreviewCommentField().should("exist");
       labbookAuthoringPage.getAuthoringPreviewThumbnailChooser().should("exist");
     });
-  });
-});
-
-context("Test In Item Preview", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("LARA Item Preview", () => {
     it("Verify Added Labbook Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
@@ -87,37 +70,18 @@ context("Test In Item Preview", () => {
       authoringPage.verifyExportToMediaLibraryCheckboxChecked();
       authoringPage.verifyUploadFromMediaLibraryCheckboxChecked();
     });
-  });
-});
-
-context("Labbook Preview In Activity Player Runtime", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    authoringPage.previewActivity("Automation Question Interactives Activity");
-  });
-
-  describe("Preview activity in Activity Player Runtime", () => {
     it("Verify hidden draw tool is not displayed", () => {
-      activityPlayerPreview.getActivityTitle().should("contain", "Automation Question Interactives Activity");
+      beforeTest();
+      activityPlayerPreview.getActivityTitle().should("contain", "Test Automation Labbook Activity");
       activityPlayerPreview.clickPageItem(0);
       cy.wait(10000);
       labbookAuthoringPage.verifyDrawToolDisplayed("Free hand drawing tool");
       labbookAuthoringPage.verifyDrawToolDisplayed("Basic shape tool");
       labbookAuthoringPage.verifyDrawToolNotDisplayed("Annotation tool");
     });
-  });
-});
-
-context("Delete Image", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete Labbook Item", () => {
     it("Delete Item", () => {
+      cy.visit("");
+      authoringPage.launchActivity("Test Automation Labbook Activity");
       cy.wait(6000);
       authoringPage.getSectionMenuDelete().click();
     });

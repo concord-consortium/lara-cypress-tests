@@ -27,7 +27,7 @@ context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
+    authoringPage.launchActivity("Test Automation TEWindowShade Activity");
     cy.deleteItem();
   });
 
@@ -78,24 +78,13 @@ context("Test Authoring Preview", () => {
       teWindowShadeAuthoringPage.clickSaveButton();
     });
     it("Verify TE Question Wrapper In Authoring Preview", () => {
-      cy.wait(6000);
+      cy.wait(4000);
       teWindowShadeAuthoringPage.getAuthoringPreviewButtonTitle(tip.tip8);
       teWindowShadeAuthoringPage.verifyAuthoringPreviewWindowShadeContent(tip.tip8Content);
       teWindowShadeAuthoringPage.verifyAuthoringPreviewImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
     });
-  });
-});
-
-context("Delete Item", () => {
-  before(() => {
-    cy.visit("");
-    cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.launchActivty();
-  });
-
-  describe("Delete TE Window Shade", () => {
     it("Delete TE Window Shade", () => {
-      cy.wait(6000);
+      cy.wait(4000);
       authoringPage.getSectionMenuDelete().click();
     });
   });
