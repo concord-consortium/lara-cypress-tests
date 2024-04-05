@@ -25,6 +25,7 @@ context("Test Authoring Preview", () => {
       authoringPage.selectRequiredCheckBox();
       authoringPage.enterPostSubmissionFeedback(" Answer Submitted");
       orAuthoringPage.selectRecordAudioResponseCheckBox();
+      orAuthoringPage.selectVoiceTypingResponseCheckBox();
       authoringPage.getSaveButton().click();
       cy.wait(6000);
     });
@@ -32,8 +33,9 @@ context("Test Authoring Preview", () => {
       cy.wait(2000);
       authoringPage.getSectionItemHeader().should("contain", "Open Response Question");
       authoringPage.getAuthoringPreviewPrompt("Open Response Prompt");
-      orAuthoringPage.getAuthoringPreviewResponseTextArea().invoke("attr", "placeholder").should("contain", "Please type your answer here, or record your answer using the microphone.");
+      orAuthoringPage.getAuthoringPreviewResponseTextArea().invoke("attr", "placeholder").should("contain", "Please type or voice type your answer here, or record your answer using the microphone.");
       orAuthoringPage.getAuthoringPreviewAudioControls().should("exist");
+      orAuthoringPage.getAuthoringPreviewVoiceTypingControls().should("exist");
     });
     it("Verify Required Answer In Authoring Preview", () => {
       authoringPage.getAuthoringPreviewSubmitButton().should("be.disabled");
@@ -43,14 +45,16 @@ context("Test Authoring Preview", () => {
       authoringPage.getAuthoringPreviewLockedInfoHeader().should("contain", "Your answer has been submitted and is locked. ");
       authoringPage.getAuthoringPreviewLockedInfoFeedback().should("contain", "Answer Submitted");
       orAuthoringPage.getAuthoringPreviewAudioControls().should("not.exist");
+      orAuthoringPage.getAuthoringPreviewVoiceTypingControls().should("not.exist");
     });
     it("Verify Added OR Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
       authoringPage.getPrompt("Open Response Prompt");
-      orAuthoringPage.getResponseTextArea().invoke("attr", "placeholder").should("contain", "Please type your answer here, or record your answer using the microphone.");
+      orAuthoringPage.getResponseTextArea().invoke("attr", "placeholder").should("contain", "Please type or voice type your answer here, or record your answer using the microphone.");
       orAuthoringPage.getAudioControls().should("exist");
+      orAuthoringPage.getVoiceTypingControls().should("exist");
     });
     it("Verify Default Answer In Item Preview", () => {
       orAuthoringPage.enterDeafultAnswer("Default OR Answer")
@@ -66,6 +70,7 @@ context("Test Authoring Preview", () => {
       authoringPage.getLockedInfoHeader().should("contain", "Your answer has been submitted and is locked. ");
       authoringPage.getLockedInfoFeedback().should("contain", "Answer Submitted");
       orAuthoringPage.getAudioControls().should("not.exist");
+      orAuthoringPage.getVoiceTypingControls().should("not.exist");
       authoringPage.getCancelButton().click();
     });
     it("Delete Item", () => {

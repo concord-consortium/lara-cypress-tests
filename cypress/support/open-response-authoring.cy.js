@@ -24,15 +24,28 @@ class OpenResponseAuthoringPage {
   getAudioControls() {
   return  this.getEditItemPreview().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('.runtime--controls--question-int');
+            cy.wrap($body).find('[data-testid=audio-record-button]');
     });
   }
+  getVoiceTypingControls() {
+    return  this.getEditItemPreview().find('iframe').then($iframe => {
+        const $body = $iframe.contents().find('#app')
+              cy.wrap($body).find('[data-testid=voice-typing-button]');
+      });
+    }
 //***************************************************************************************************************
 
   selectRecordAudioResponseCheckBox() {
     this.getEditItemForm().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
             cy.wrap($body).find('#root_audioEnabled').click();
+    });
+    cy.wait(4000);
+  }
+  selectVoiceTypingResponseCheckBox() {
+    this.getEditItemForm().find('iframe').then($iframe => {
+      const $body = $iframe.contents().find('#app')
+            cy.wrap($body).find('#root_voiceTypingEnabled').click();
     });
     cy.wait(4000);
   }
@@ -56,9 +69,15 @@ class OpenResponseAuthoringPage {
   getAuthoringPreviewAudioControls() {
   return  this.getInteractive().find('iframe').then($iframe => {
       const $body = $iframe.contents().find('#app')
-            cy.wrap($body).find('.runtime--controls--question-int');
+            cy.wrap($body).find('[data-testid=audio-record-button]');
     });
   }
+  getAuthoringPreviewVoiceTypingControls() {
+    return  this.getInteractive().find('iframe').then($iframe => {
+        const $body = $iframe.contents().find('#app')
+              cy.wrap($body).find('[data-testid=voice-typing-button]');
+      });
+    }
 
 }
 export default OpenResponseAuthoringPage;
