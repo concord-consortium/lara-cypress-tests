@@ -11,12 +11,20 @@ class ActivitySequenceSettingsPage {
   getSaveButton() {
     return this.getNewActivityPage().find('[type=submit]');
   }
-
   getSettingsPage() {
     return cy.get('#leftcol .sequence_form');
   }
   getSettingsPageSave() {
     return this.getSettingsPage().find('#save-top');
+  }
+  getPublishToOtherPortalsButton() {
+    return cy.get('a.btn.btn-primary[data-remote="true"]').contains('Publish to Other Portals');
+  }
+  getPublishToOtherPortalsModalTitle() {
+    return cy.get('span.title').contains('Publish Test Automation Sequence Settings to portals:');
+  }
+  getPublishToOtherPortalsCloseButton() {
+    return cy.get('span.close.close_link').contains('close');
   }
   getGlossaryDropDown() {
     return this.getSettingsPage().find('#lightweight_activity_glossary_id');

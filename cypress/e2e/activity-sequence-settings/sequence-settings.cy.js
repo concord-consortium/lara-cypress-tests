@@ -31,6 +31,10 @@ context("Test Sequence Settings", () => {
       cy.wait(2000);
     });
     it("Sequence Settings", () => {
+      settingsPage.getPublishToOtherPortalsButton().should("exist").click();
+      settingsPage.getPublishToOtherPortalsModalTitle().should('be.visible');
+      settingsPage.getPublishToOtherPortalsCloseButton().click();
+      settingsPage.getPublishToOtherPortalsModalTitle().should('not.be.visible');
       settingsPage.getGlossaryDropDown().should("not.exist");
       settingsPage.getSeqBackgroundImageUrl().type(url.imageUrl);
       settingsPage.getSeqPreviewImageUrl().type(url.imageUrl);
