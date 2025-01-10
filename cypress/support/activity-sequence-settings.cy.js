@@ -21,7 +21,7 @@ class ActivitySequenceSettingsPage {
     return cy.get('a.btn.btn-primary[data-remote="true"]').contains('Publish to Other Portals');
   }
   getPublishToOtherPortalsModalTitle() {
-    return cy.get('span.title').contains('Publish Test Automation Sequence Settings to portals:');
+    return cy.get('.modal .publication .header span.title').contains('Publish Test Automation Sequence Settings to portals:');
   }
   getPublishToOtherPortalsCloseButton() {
     return cy.get('span.close.close_link').contains('close');
