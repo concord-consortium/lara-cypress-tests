@@ -18,12 +18,16 @@ class ActivitySequenceSettingsPage {
     return this.getSettingsPage().find('#save-top');
   }
   getPublishToOtherPortalsButton() {
+    // TO-DO: add the data-testid='publish-title-to-portals' attribute once PR 1204 is on staging
+    // https://github.com/concord-consortium/lara/pull/1204
     return cy.get('a.btn.btn-primary[data-remote="true"]').contains('Publish to Other Portals');
   }
   getPublishToOtherPortalsModalTitle() {
     return cy.get('.modal .publication .header span.title').contains('Publish Test Automation Sequence Settings to portals:');
   }
   getPublishToOtherPortalsCloseButton() {
+    // TO-DO: add the data-testid='close-publish-modal-btn' attribute once PR 1204 is on staging
+    // https://github.com/concord-consortium/lara/pull/1204
     return cy.get('span.close.close_link').contains('close');
   }
   getGlossaryDropDown() {
