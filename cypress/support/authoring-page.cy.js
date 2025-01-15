@@ -497,6 +497,7 @@ class AuthoringPage {
   //***************************************************************************************************************
   previewActivity(name) {
     cy.log("Launch Test Activity : ");
+    // to-do: add data-test ID once on staging PT-#188775242
     cy.get("#search input").eq(0).type(name);
     cy.get("#search input").eq(1).click();
     cy.wait(1000);
@@ -505,6 +506,7 @@ class AuthoringPage {
   }
   previewSequence(name) {
     cy.log("Launch Test Sequence : ");
+    // to-do: add data-test ID once on staging PT-#188775242
     cy.get("#search input").eq(0).type(name);
     cy.get("#search input").eq(1).click();
     cy.wait(1000);
@@ -513,6 +515,7 @@ class AuthoringPage {
   }
   launchActivity(name) {
     cy.log("Launch Test Activity : ");
+    // to-do: add data-test ID once on staging PT-#188775242
     cy.get("#search input").eq(0).type(name);
     cy.get("#search input").eq(1).click();
     cy.wait(500);
@@ -523,6 +526,7 @@ class AuthoringPage {
   }
   deleteActivity(name) {
     cy.log("Delete Test Activity : ");
+    // to-do: add data-test ID once on staging PT-#188775242
     cy.get("#search input").eq(0).type(name);
     cy.get("#search input").eq(1).click();
     cy.wait(1000);
@@ -540,6 +544,7 @@ class AuthoringPage {
   }
   deleteSequence(name) {
     cy.log("Delete Test Sequence : ");
+    // to-do: add data-test ID once on staging PT-#188775242
     cy.get("#search input").eq(0).type(name);
     cy.get("#search input").eq(1).click();
     cy.wait(1000);
