@@ -516,13 +516,25 @@ class AuthoringPage {
   launchActivity(name) {
     cy.log("Launch Test Activity : ");
     // to-do: add data-test ID once on staging PT-#188775242
-    cy.get("#search input").eq(0).type(name);
-    cy.get("#search input").eq(1).click();
+    cy.get("#search input").eq(0).type(name); // Type the activity name in the search bar
+    cy.get("#search input").eq(1).click(); // Click the search button
     cy.wait(500);
-    cy.get(".action_menu_header_right .edit a").click();
+    cy.get(".action_menu_header_right .edit a").click(); // Click "Edit" link in the action menu
     cy.wait(500);
-    cy.get('#rightcol #pages [id^=item_interactive_page] .edit').click();
+    cy.get('#rightcol #pages [id^=item_interactive_page] .edit').click(); // Open the interactive page for editing
     cy.wait(2000);
+  
+    // Assert that the activity title exists and matches the provided name
+    cy.get('.activity-title') 
+      .should('exist') // Ensure the title exists
+      .and('be.visible') // Ensure the title is visible
+      .and('have.text', name); // Check that the title text matches the activity name passed in
+  
+    // Additional assertion example for finding text directly using the variable
+    cy.contains('div', name) 
+      .should('be.visible'); // Ensures the div containing the text is visible
+  
+    // to-do: replace selectors with `data-testid` once available in staging
   }
   deleteActivity(name) {
     cy.log("Delete Test Activity : ");
