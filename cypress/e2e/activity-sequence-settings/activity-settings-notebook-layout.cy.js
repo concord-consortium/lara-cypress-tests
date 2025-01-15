@@ -13,6 +13,9 @@ const url = {
 function previewTest() {
   cy.visit("");
   authoringPage.previewActivity("Test Automation Create Activity Notebook Layout");
+  // to-do: add the data-testid='activity-title' attribute once on staging
+  cy.contains('div', 'Test Automation Create Activity Notebook Layout') // Finds a div containing the exact text
+      .should('be.visible'); // Ensures the element is visible
 }
 
 context("Test Activity Setting Notebook Layout", () => {
