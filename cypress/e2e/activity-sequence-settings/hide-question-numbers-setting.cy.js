@@ -32,6 +32,8 @@ context("Test hide question number setting in activity and sequence", () => {
       settingsPage.getActivityName().type(name.activity);
       settingsPage.getSaveButton().click();
       settingsPage.getSettingsPage().should("exist");
+      // to-do: add more thorough check with data-testid tags (PT-#188775242)
+      cy.get('h1').contains('Test Hide Question Numbers Activity').should('exist');
       settingsPage.getHideQuestionNumbersCheckbox().should("exist");
       settingsPage.verifyHideQuestionNumbersLabel(name.label);
       settingsPage.verifyHideQuestionNumbersHint(name.activityHint);
@@ -45,6 +47,8 @@ context("Test hide question number setting in activity and sequence", () => {
       beforeTestSequence(name.sequence);
       settingsPage.getCreateSequenceButton().click();
       settingsPage.getSettingsPage().should("exist");
+      // to-do: add more thorough check with data-testid tags (PT-#188775242)
+      cy.get('span.title').contains('Edit sequence').should('exist');
       settingsPage.getSeqTitle().type(name.sequence);
       settingsPage.getSequenceHideQuestionNumbersCheckbox().should("exist");
       settingsPage.verifySequenceHideQuestionNumbersLabel(name.label);
