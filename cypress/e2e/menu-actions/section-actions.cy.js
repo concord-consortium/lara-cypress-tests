@@ -14,6 +14,35 @@ context("Test Section Action Menus", () => {
   });
 
   describe("LARA Item Action Menus", () => {
+    it("Verifies the Page Title and saves changes", () => {
+      // Verify the page title is as expected
+      authoringPage.checkPageTitle('Test Automation Section Menu Actions');
+    
+      // Click the Page Settings button
+      authoringPage.getPageSettingsButton().should('be.visible').click();
+    
+      // Change the title to "Test Automation Section Menu Actions Edit" and save
+      authoringPage.enterPageTitle('Test Automation Section Menu Actions Edit');
+      authoringPage.clickSaveAndClose();
+    
+      // Verify the page title was updated
+      cy.wait(500);
+      authoringPage.checkPageTitle('Test Automation Section Menu Actions Edit');
+    
+      // Revert the title back to "Test Automation Section Menu Actions" only if needed
+      cy.get('header.editPageHeader h2').invoke('text').then((currentTitle) => {
+        const expectedDefault = 'Page: Test Automation Section Menu Actions';
+        if (currentTitle.trim() !== expectedDefault) {
+          authoringPage.getPageSettingsButton().should('be.visible').click();
+          authoringPage.enterPageTitle('Test Automation Section Menu Actions');
+          authoringPage.clickSaveAndClose();
+    
+          // Verify the title is reverted back
+          cy.wait(500);
+          authoringPage.checkPageTitle('Test Automation Section Menu Actions');
+        }
+      });
+    });
     it("Add MCQ Item", () => {
       cy.log("Add a Multiple Choice Question item");
       authoringPage.getAddItem().click();
@@ -39,21 +68,17 @@ context("Test Section Action Menus", () => {
       // Check if "Multiple Choice" exists anywhere on the page 
       cy.contains("Multiple Choice").should("exist");
     });
-    it("Verify Section Level Actions", () => {
+    it("Verify Section Level and Page Level Actions", () => {
       cy.wait(6000);
-    
-      // Verify and update section title to "Section Name Edit" if it's "Section 1"
-      authoringPage.checkAndReturnSectionName(0).then((sectionName) => {
-        if (sectionName === "Section 1") {
-          authoringPage.verifyButton(0, 0, "Edit");
-          authoringPage.clickButton(0, 0);
-          authoringPage.getSectionNameTextBox(0).should("exist");
-          authoringPage.getSectionNameTextBox(0).clear().type("Section Name Edit");
-          authoringPage.clickButton(0, 0);
-          cy.wait(4000);
-          authoringPage.verifySectionName(0, "Section Name Edit");
-        }
-      });
+      cy.log("Verify the section level actions");
+      // Verify and update section title to "Section Name Edit"
+      authoringPage.verifyButton(0, 0, "Edit");
+      authoringPage.clickButton(0, 0);
+      authoringPage.getSectionNameTextBox(0).should("exist");
+      authoringPage.getSectionNameTextBox(0).clear().type("Section Name Edit");
+      authoringPage.clickButton(0, 0);
+      cy.wait(4000);
+      authoringPage.verifySectionName(0, "Section Name Edit");
     
       // Rename the section back to "Section 1" only if necessary
       authoringPage.checkAndReturnSectionName(0).then((sectionName) => {
@@ -69,6 +94,7 @@ context("Test Section Action Menus", () => {
       });
     
       // Verify the move section modal can be opened and closed
+      cy.log("Verify the move section modal can be opened and closed");
       authoringPage.getSectionMove().click();
       authoringPage.getMoveModel().should("exist");
       authoringPage.getMoveModelHeader("Move Section 1 to...");

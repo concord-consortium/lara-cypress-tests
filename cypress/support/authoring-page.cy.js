@@ -14,7 +14,34 @@ class AuthoringPage {
   clickAddItem(index) {
     return cy.get(".editPageContainer .edit-items-container.full-row .lineAdjust").eq(index).click();
   }
-
+//*******************************************************************************************
+  // NOTE: for the next two helper functions, we will need to add data-testids once the 
+  // tags are on staging. For now we will use the HTML in the DOM.
+  getPageSettingsButton() {
+    return cy.get('header.editPageHeader button').contains('Page Settings');
+  }
+  checkPageTitle(expectedTitle) {
+    return cy.get('header.editPageHeader h2')
+      .invoke('text')
+      .then((text) => {
+        expect(text.trim()).to.eq(`Page: ${expectedTitle}`);
+      });
+  }
+  enterPageTitle(title) {
+    return cy.get('.pageSettingsDialog input#pageTitle') // Select the Page Title input
+      .clear() // Clear any existing text
+      .type(title); // Enter the new title
+  }
+  clickSaveAndClose() {
+    return cy.get('.pageSettingsDialog button.copy') // Select the Save & Close button
+      .should('be.visible') // Ensure it's visible
+      .click(); // Click the button
+  }
+  clickCancel() {
+    return cy.get('.pageSettingsDialog button.cancel') // Select the Cancel button
+      .should('be.visible') // Ensure it's visible
+      .click(); // Click the button
+  }
 //*******************************************************************************************
 
   getEditItemDialog() {
