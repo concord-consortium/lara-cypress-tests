@@ -28,7 +28,6 @@ class AuthoringPage {
   }
   getSaveButton() {
     return this.getEditItemForm().find(".actionButtons .save .lineAdjust");
-    cy.wait(6000);
   }
   getCancelButton() {
     return this.getEditItemForm().find(".actionButtons .cancel");
@@ -224,6 +223,12 @@ class AuthoringPage {
   }
   verifySectionName(index, name) {
     this.getSectionName(index).find('h3').should("contain", name);
+  }
+  checkAndReturnSectionName(index) {
+    return this.getSectionName(index)
+      .find('h3')
+      .invoke('text')
+      .then((text) => text.trim()); // Retrieve and return the trimmed text
   }
   clickButton(sectionIndex, buttonIndex) {
     this.getSectionName(sectionIndex).find('button').eq(buttonIndex).click();

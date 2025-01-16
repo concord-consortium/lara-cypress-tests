@@ -15,31 +15,75 @@ context("Test Section Action Menus", () => {
 
   describe("LARA Item Action Menus", () => {
     it("Add MCQ Item", () => {
+      cy.log("Add a Multiple Choice Question item");
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Multiple Choice");
       authoringPage.getItemPickerList().contains("Multiple Choice AWS S3").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
-      authoringPage.getNameField().type("Multiple Choice Question");
+      cy.log('Fill in the item fields within the iFrame');
       authoringPage.getPromptField(" Multiple Choice Prompt");
       authoringPage.getHintField(" Multiple Choice Hint");
       mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
+      // TODO: Replace this selector with a data-testid once it is available in staging
+      // checks that the default item title is Untitled
+      cy.contains("Untitled").should("exist");
+
+      cy.log('Checks that title of the item was changed');
+      authoringPage.getSectionMenuEdit().click();
+      authoringPage.getEditItemDialog().should("exist");
+      authoringPage.getNameField().type("Multiple Choice Question");
+      authoringPage.getSaveButton().click();
+      // TODO: Replace this selector with a data-testid once it is available in staging
+      // Check if "Multiple Choice" exists anywhere on the page 
+      cy.contains("Multiple Choice").should("exist");
     });
     it("Verify Section Level Actions", () => {
       cy.wait(6000);
+    
+      // Verify and update section title to "Section Name Edit" if it's "Section 1"
+      authoringPage.checkAndReturnSectionName(0).then((sectionName) => {
+        if (sectionName === "Section 1") {
+          authoringPage.verifyButton(0, 0, "Edit");
+          authoringPage.clickButton(0, 0);
+          authoringPage.getSectionNameTextBox(0).should("exist");
+          authoringPage.getSectionNameTextBox(0).clear().type("Section Name Edit");
+          authoringPage.clickButton(0, 0);
+          cy.wait(4000);
+          authoringPage.verifySectionName(0, "Section Name Edit");
+        }
+      });
+    
+      // Rename the section back to "Section 1" only if necessary
+      authoringPage.checkAndReturnSectionName(0).then((sectionName) => {
+        if (sectionName !== "Section 1") {
+          authoringPage.verifyButton(0, 0, "Edit");
+          authoringPage.clickButton(0, 0);
+          authoringPage.getSectionNameTextBox(0).should("exist");
+          authoringPage.getSectionNameTextBox(0).clear().type("Section 1");
+          authoringPage.clickButton(0, 0);
+          cy.wait(4000);
+          authoringPage.verifySectionName(0, "Section 1");
+        }
+      });
+    
+      // Verify the move section modal can be opened and closed
       authoringPage.getSectionMove().click();
       authoringPage.getMoveModel().should("exist");
-      authoringPage.getMoveModel().click();
-      authoringPage.getMoveModelHeader("Move section 1 to...");
+      authoringPage.getMoveModelHeader("Move Section 1 to...");
       authoringPage.getMoveModelClose().click();
+    
+      // Verify hiding and showing a section
       authoringPage.getSectionHide().click();
       authoringPage.verfiySectionHidden();
       authoringPage.getSectionHide().click();
       authoringPage.verfiySectionShow();
+    
+      // Verify copying a section
       authoringPage.getSectionCopy().click();
       cy.wait(2000);
-      authoringPage.getCopySectionHeader(1).should("contain", "Section 2");
+      authoringPage.getCopySectionHeader(1).should("contain", "Section 1");
       authoringPage.getCopySectionDelete(1).click();
       cy.wait(2000);
     });
