@@ -1,4 +1,5 @@
 class ActivitySequenceSettingsPage {
+  // to-do: add data-testid tags to the elements (PT-#188775242)
   getCreateActivityButton() {
     return cy.get('#content .top-header .buttons-menu a').eq(0);
   }

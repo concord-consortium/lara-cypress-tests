@@ -30,8 +30,11 @@ context("Test Activity Settings", () => {
       settingsPage.getSaveButton().click();
       cy.wait(2000);
       settingsPage.getSettingsPage().should("exist");
+      //to-do: add more thorough check with data-testid tags (PT-#188775242)
+      cy.get('h1').contains('Edit Activity: Test Automation Activity Settings').should('exist');
     });
     it("Activity Settings", () => {
+      cy.get('h1').contains('Edit Activity: Test Automation Activity Settings').should('exist');
       settingsPage.getGlossaryDropDown().should("be.enabled");
       settingsPage.getBackgroundImageUrl().type(url.imageUrl);
       settingsPage.getPreviewImageUrl().type(url.imageUrl);
