@@ -55,7 +55,7 @@ context("Test Section Action Menus", () => {
       authoringPage.getHintField(" Multiple Choice Hint");
       mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
-      // TODO: Replace this selector with a data-testid once it is available in staging
+      // TODO: Add a data-testid to the item title
       // checks that the default item title is Untitled
       cy.contains("Untitled").should("exist");
 
@@ -64,7 +64,7 @@ context("Test Section Action Menus", () => {
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Multiple Choice Question");
       authoringPage.getSaveButton().click();
-      // TODO: Replace this selector with a data-testid once it is available in staging
+      // TODO: Add a data-testid to the item title
       // Check if "Multiple Choice" exists anywhere on the page 
       cy.contains("Multiple Choice").should("exist");
     });
