@@ -1,6 +1,6 @@
 # LARA Cypress tests
 ### ⚠️ WARNING
-This repository is being deprecated as the LARA Cypress tests are being moved to the LARA repository. You can find more details in ((PR-121)[https://github.com/concord-consortium/lara/pull/1211]). 
+This repository is being deprecated as the LARA Cypress tests are being moved to the LARA repository. You can find more details in ([PR-121](https://github.com/concord-consortium/lara/pull/1211)). 
 
 To save your work or add a new Cypress test, please contribute directly to the /cypress/ directory in the LARA repository.
 
