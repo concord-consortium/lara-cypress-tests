@@ -1,5 +1,8 @@
 # LARA Cypress tests
 
+## WARNING
+This repository is moving to `/lara/` (PR https://github.com/concord-consortium/lara/pull/1211). Please visit the LARA Repository for the latest.
+
 ## Setup and configuration
 
 First, install NPM packages and Cypress:
