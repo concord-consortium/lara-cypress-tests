@@ -207,6 +207,19 @@ class AuthoringPage {
   }
 
   //***************************************************************************************************************
+  getAdvancedOptions(){
+    //to-do: replace selector with `data-testid` once available in staging
+    return cy.get('li.react-tabs__tab[role="tab"][data-rttab="true"]').contains('Advanced Options')
+  }
+  selectHideQuestionNumber = () => {
+    cy.get('input[type="radio"][id="inherit-hide-question-number"]').first().check();
+  };
+  
+  selectCustomizeHideQuestionNumber = () => {
+    cy.get('input[type="radio"][id="inherit-hide-question-number"]').last().check();
+  };
+  //***************************************************************************************************************
+
 
   addSection() {
   cy.get('.bigButton .lineAdjust').click();
