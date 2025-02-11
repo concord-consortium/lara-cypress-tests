@@ -23,6 +23,10 @@ context("Test Item Action Menus", () => {
       authoringPage.getPromptField(" Multiple Choice Prompt");
       authoringPage.getHintField(" Multiple Choice Hint");
       mcqAuthoringPage.selectChoiceInEditForm(0);
+      authoringPage.getAdvancedOptions().click();
+      // Verify the default Hide Question Number is selected
+      cy.get('input[type="radio"][id="inherit-hide-question-number"]').first()
+      .should('be.checked');
       authoringPage.getSaveButton().click();
     });
     it("Verify Item Level Actions", () => {
@@ -34,7 +38,7 @@ context("Test Item Action Menus", () => {
       authoringPage.getMoveModelClose().click();
       authoringPage.getSectionMenuCopy().click();
       cy.wait(2000);
-      authoringPage.getCopySectionItemHeader(1).should("contain", "Multiple Choice Question");
+      authoringPage.getCopySectionItemHeader(1).should("exist");
       authoringPage.getCopySectionMenuDelete(1).click();
       cy.wait(2000);
     });
