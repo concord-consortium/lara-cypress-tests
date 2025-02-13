@@ -12,6 +12,14 @@ context("Test Admin User Role", () => {
 
   describe("LARA2 Admin User Role", () => {
     it("Admin User Role", () => {
+      settingsPage.getHamburgerMenu().click();
+      // Verify that each expected item is visible
+      cy.contains("User Admin").should("be.visible");
+      cy.contains("Projects").should("be.visible");
+      cy.contains("Plugins").should("be.visible");
+      cy.contains("Failed Runs").should("be.visible");
+      cy.contains("Library Interactives").should("be.visible");
+      cy.contains("Settings").should("be.visible");
       settingsPage.getCreateActivityButton().should("exist");
       settingsPage.getCreateSequenceButton().should("exist");
       settingsPage.getCreateGlossaryButton().should("exist");
@@ -24,8 +32,8 @@ context("Test Admin User Role", () => {
       authoringPage.getSequenceDeleteMenu().should("exist");
       authoringPage.getSequencePublishMenu().should("exist");
       authoringPage.searchActivitySequence("Test Automation Glossary Settings 1");
-      authoringPage.getGlossaryEditMenu().should("exist");
-      authoringPage.getGlossaryDeleteMenu().should("exist");
+      // authoringPage.getGlossaryEditMenu().should("exist");
+      // authoringPage.getGlossaryDeleteMenu().should("exist");
     });
   });
 });

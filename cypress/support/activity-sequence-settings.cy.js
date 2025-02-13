@@ -1,7 +1,9 @@
 class ActivitySequenceSettingsPage {
-  // to-do: add data-testid tags to the elements (PT-#188775242)
+  getHamburgerMenu() {
+    return cy.get('[data-cy="header-menu"]');
+  }
   getCreateActivityButton() {
-    return cy.get('#content .top-header .buttons-menu a').eq(0);
+    return cy.get('[data-testid="new-activity-button"]').eq(0);
   }
   getNewActivityPage() {
     return cy.get('#new_lightweight_activity');

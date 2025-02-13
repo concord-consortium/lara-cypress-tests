@@ -14,6 +14,13 @@ context("Test Student User Role", () => {
 
   describe("LARA2 Student User Role", () => {
     it("Student User Role", () => {
+      settingsPage.getHamburgerMenu().click();
+      // Verify that each expected item is NOT visible for students
+      cy.contains("User Admin").should("not.exist");
+      cy.contains("Projects").should("not.exist");
+      cy.contains("Plugins").should("not.exist");
+      cy.contains("Failed Runs").should("not.exist");
+      cy.contains("Library Interactives").should("not.exist");
       settingsPage.getCreateButton().should("not.exist");
       authoringPage.searchActivitySequence("Teacher 2 Activity");
       authoringPage.getActivityEditMenu().should("not.exist");
