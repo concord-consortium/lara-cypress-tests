@@ -30,6 +30,8 @@ context("Test Authoring Preview", () => {
       cy.wait(4000);
       teSideTipAuthoringPage.getAuthoringPreview();
     });
+    // TODO: Add a test to verify that the TE side tip saves once
+    // text is added to the form section ([LARA-154])
     it("Delete TE Side Tip", () => {
       cy.wait(4000);
       teSideTipAuthoringPage.getSectionMenuDelete().click();

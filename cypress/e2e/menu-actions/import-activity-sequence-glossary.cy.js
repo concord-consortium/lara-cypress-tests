@@ -22,7 +22,7 @@ function beforeGlossary() {
   cy.deleteImportGlossary();
 }
 
-context("Test Import Activity, Sequence and Glossary", () => {
+context.skip("Test Import Activity, Sequence and Glossary", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));

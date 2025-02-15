@@ -36,6 +36,8 @@ context("Test Authoring Preview", () => {
       teQuestionWrapperAuthoringPage.getFormSection("Teacher Tip");
       teQuestionWrapperAuthoringPage.getFormSection("Exemplar");
     });
+    // TODO: Add a test to verify that the TE Question Wrapper saves once
+    // text is added to the form section ([LARA-153])
     it("Verify TE Question Wrapper", () => {
       cy.wait(4000);
       teQuestionWrapperAuthoringPage.clickHeader("correct");
