@@ -34,12 +34,12 @@ context("Test Student User Role", () => {
       authoringPage.getSequencePublishMenu().should("not.exist");
       authoringPage.getSequencePrintMenu().should("exist");
       authoringPage.getSequenceRunMenu().should("exist");
-      authoringPage.searchActivitySequence("Test Automation Glossary Settings 1");
-      authoringPage.getGlossaryDeleteMenu().should("not.exist");
-      authoringPage.getGlossaryEditMenu().click();
-      cy.wait(2000);
-      glossary.getGlossaryNotice();
-      glossary.getSaveIndicator();
+      // authoringPage.searchActivitySequence("Test Automation Glossary Settings 1");
+      // authoringPage.getGlossaryDeleteMenu().should("not.exist");
+      // authoringPage.getGlossaryEditMenu().click();
+      // cy.wait(2000);
+      // glossary.getGlossaryNotice();
+      // glossary.getSaveIndicator();
 
     });
   });

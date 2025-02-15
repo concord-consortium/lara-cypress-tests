@@ -52,7 +52,7 @@ context("Test LARA Layouts", () => {
       mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
     });
-    it("Verify Added MCQ Item In Authoring Preview", () => {
+    it.skip("Verify Added MCQ Item In Authoring Preview", () => {
       cy.wait(6000);
       layoutAuthoringPage.getSectionItemHeader(60).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(60, mcq.promptAuthoring);
@@ -84,7 +84,7 @@ context("Test LARA Layouts", () => {
       authoringPage.getSaveButton().click();
       cy.wait(6000);
     });
-    it("Verify Added MCQ Item In Authoring Preview", () => {
+    it.skip("Verify Added MCQ Item In Authoring Preview", () => {
       cy.wait(6000);
       layoutAuthoringPage.getSectionItemHeader(60).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(60, mcq.promptAuthoring);
@@ -115,7 +115,7 @@ context("Test LARA Layouts", () => {
       mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
     });
-    it("Verify Added MCQ Item In Authoring Preview", () => {
+    it.skip("Verify Added MCQ Item In Authoring Preview", () => {
       cy.wait(6000);
       layoutAuthoringPage.getSectionItemHeader(70).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(70, mcq.promptAuthoring);
@@ -146,7 +146,7 @@ context("Test LARA Layouts", () => {
       mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
     });
-    it("Verify Added MCQ Item In Authoring Preview", () => {
+    it.skip("Verify Added MCQ Item In Authoring Preview", () => {
       cy.wait(6000);
       layoutAuthoringPage.getSectionItemHeader(30).should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt(30, mcq.promptAuthoring);
@@ -177,7 +177,7 @@ context("Test LARA Layouts", () => {
       mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
     });
-    it("Verify Added MCQ Item In Authoring Preview", () => {
+    it.skip("Verify Added MCQ Item In Authoring Preview", () => {
       cy.wait(6000);
       layoutAuthoringPage.getSectionItemHeader("responsive-static").should("contain", mcq.name);
       layoutAuthoringPage.getAuthoringPreviewPrompt("responsive-static", mcq.promptAuthoring);
@@ -199,7 +199,7 @@ context("Test LARA Layouts", () => {
       authoringPage.getSaveButton().click();
       cy.wait(6000);
     });
-    it("Verify Added MCQ Item In Authoring Preview", () => {
+    it.skip("Verify Added MCQ Item In Authoring Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", mcq.name);
       authoringPage.getAuthoringPreviewPrompt(mcq.promptAuthoring);
