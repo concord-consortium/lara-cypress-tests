@@ -65,6 +65,9 @@ class ActivitySequenceSettingsPage {
   selectActivityLayout(value) {
     cy.get('#lightweight_activity_layout').select(value);
   }
+  selectFixedWidth(value) {
+    cy.get('#lightweight_activity_fixed_width_layout').select(value);
+  }
   getHideQuestionNumbersCheckbox() {
     return cy.get('#lightweight_activity_hide_question_numbers');
   }

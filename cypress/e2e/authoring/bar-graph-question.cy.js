@@ -13,16 +13,19 @@ context("Test Authoring Preview", () => {
   });
 
   describe("LARA Bar Graph Authoring Preview", () => {
-    it("Add Bar Graph Item", () => {
+    it.only("Add Bar Graph Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Bar Graph");
       authoringPage.getItemPickerList().contains(/^Bar Graph/).first().click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Bar Graph Question");
-      // this is broken in its current state. Commenting out for now
-      // authoringPage.getPromptField(" Bar Graphe Prompt");
+      // // this is broken in its current state. Commenting out for now
+      // cy.log("Add a bar graph prompt.");
+      // authoringPage.getPromptField(" Bar Graph Prompt");
+      // cy.log("Add a bar graph hint.");
       // authoringPage.getHintField(" Bar Graph Hint");
+      // cy.log("Add a bar graph title.");
       // barGraphAuthoringPage.getGraphTitleField("Graph Title");
       // barGraphAuthoringPage.getXAxisLabelField("X axis label");
       // barGraphAuthoringPage.getYAxisLabelField("Y axis label");
@@ -33,7 +36,7 @@ context("Test Authoring Preview", () => {
       // barGraphAuthoringPage.getBarsAddButton().click();
       // barGraphAuthoringPage.getBarLabel(1, "Bar 2");
       // barGraphAuthoringPage.getBarValue(1, "20");
-      // cy.wait(2000);
+      cy.wait(2000);
       authoringPage.getSaveButton().click();
     });
     it("Verify Added Bar Graph Item In Authoring Preview", () => {
