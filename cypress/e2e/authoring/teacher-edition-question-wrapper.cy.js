@@ -17,8 +17,8 @@ context("Test Authoring Preview", () => {
   describe("LARA TE Question Wrapper", () => {
     it("Add MCQ Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Multiple Choice");
-      authoringPage.getItemPickerList().contains("Multiple Choice AWS S3").click();
+      authoringPage.getItemPickerSearch().type("Multiple Choice Cypress");
+      authoringPage.getItemPickerList().contains("Multiple Choice Cypress").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Multiple Choice Question");

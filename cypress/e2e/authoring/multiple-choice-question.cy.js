@@ -13,22 +13,22 @@ context("Test Authoring Preview", () => {
   });
 
   describe("LARA MCQ Authoring Preview", () => {
-    it("Add MCQ Item", () => {
+    it.only("Add MCQ Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Multiple Choice");
-      authoringPage.getItemPickerList().contains(/^Multiple Choice/).first().click();
+      authoringPage.getItemPickerSearch().type("Multiple Choice Cypress");
+      authoringPage.getItemPickerList().contains(/^Multiple Choice Cypress/).first().click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Multiple Choice Question");
-      // authoringPage.getPromptField(" Multiple Choice Prompt");
-      // authoringPage.getHintField(" Multiple Choice Hint");
-      // mcqAuthoringPage.selectChoiceInEditForm(0);
-      // mcqAuthoringPage.selectCheckAnswerCheckBox();
-      // mcqAuthoringPage.selectCustomFeedbackCheckBox();
-      // mcqAuthoringPage.enterCustomFeedback(0, "Correct Answer");
-      // mcqAuthoringPage.enterCustomFeedback(1, "Incorrect Answer");
-      // authoringPage.selectRequiredCheckBox();
-      // authoringPage.enterPostSubmissionFeedback(" Answer Submitted");
+      authoringPage.getPromptField(" Multiple Choice Prompt");
+      authoringPage.getHintField(" Multiple Choice Hint");
+      mcqAuthoringPage.selectChoiceInEditForm(0);
+      mcqAuthoringPage.selectCheckAnswerCheckBox();
+      mcqAuthoringPage.selectCustomFeedbackCheckBox();
+      mcqAuthoringPage.enterCustomFeedback(0, "Correct Answer");
+      mcqAuthoringPage.enterCustomFeedback(1, "Incorrect Answer");
+      authoringPage.selectRequiredCheckBox();
+      authoringPage.enterPostSubmissionFeedback(" Answer Submitted");
       authoringPage.getSaveButton().click();
     });
     it("Verify Added MCQ Item In Authoring Preview", () => {

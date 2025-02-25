@@ -64,16 +64,9 @@ class AuthoringPage {
   }
   getPromptField(prompt) {
     cy.wait(6000);
-    this.getEditItemForm()
-      .find('iframe')
-      .should('exist')
-      .then($iframe => {
-        const $body = $iframe.contents().find('#app');
-          cy.wrap($body)
-          .find('[data-testid="ccrte-editor"]')
-          .should('be.visible')
-          .click()
-          .type(prompt);
+    this.getEditItemForm().find('iframe').then($iframe => {
+      const $body = $iframe.contents().find('#app')
+            cy.wrap($body).find('#root_prompt').type(prompt);
     });
   }
   getHintField(hint) {

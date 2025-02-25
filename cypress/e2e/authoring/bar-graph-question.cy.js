@@ -15,8 +15,8 @@ context("Test Authoring Preview", () => {
   describe("LARA Bar Graph Authoring Preview", () => {
     it.only("Add Bar Graph Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Bar Graph");
-      authoringPage.getItemPickerList().contains(/^Bar Graph/).first().click();
+      authoringPage.getItemPickerSearch().type("Bar Graph Cypress");
+      authoringPage.getItemPickerList().contains(/^Bar Graph (Cypress)/).first().click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Bar Graph Question");
