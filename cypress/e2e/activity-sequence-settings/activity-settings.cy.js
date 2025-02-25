@@ -35,6 +35,8 @@ context("Test Activity Settings", () => {
     });
     it("Activity Settings", () => {
       cy.get('h1').contains('Edit Activity: Test Automation Activity Settings').should('exist');
+      cy.log("switch to iPad Friendly");
+      settingsPage.selectFixedWidth("iPad Friendly (960px)");
       settingsPage.getGlossaryDropDown().should("be.enabled");
       settingsPage.getBackgroundImageUrl().type(url.imageUrl);
       settingsPage.getPreviewImageUrl().type(url.imageUrl);
@@ -47,6 +49,9 @@ context("Test Activity Settings", () => {
       settingsPage.getInsertImageOkButton().click();
       settingsPage.getSettingsPageSave().click();
       cy.wait(2000);
+      // Verify that iPad Friendly is still selected after saving
+        cy.get('#lightweight_activity_fixed_width_layout')
+        .should('have.value', 'ipad_friendly');
     });
     it("Activity Settings In Authoring Home Page", () => {
       cy.visit("");

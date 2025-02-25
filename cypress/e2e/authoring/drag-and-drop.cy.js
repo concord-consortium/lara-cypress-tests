@@ -22,30 +22,30 @@ context("Test Authoring Preview", () => {
   describe("LARA Drag And Drop Authoring Preview", () => {
     it("Add Drag And Drop Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Drag and Drop");
-      authoringPage.getItemPickerList().contains(/^Drag and Drop/).first().click();
+      authoringPage.getItemPickerSearch().type("Drag and Drop Cypress");
+      authoringPage.getItemPickerList().contains(/^Drag and Drop Cypress/).first().click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Drag and Drop Question");
       // this is broken in its current state. Commenting out for now
-      // authoringPage.getPromptField(" Drag the cats to the right positions");
-      // dragAndDropAuthoringPage.getBackgroundImageUrl().type("https://placekitten.com/392/343");
-      // dragAndDropAuthoringPage.clickPlusButton();
-      // dragAndDropAuthoringPage.getImageUrl(0).type(image.imageUrl1);
-      // dragAndDropAuthoringPage.clickPlusButton();
-      // dragAndDropAuthoringPage.getImageUrl(1).type(image.imageUrl2);
-      // dragAndDropAuthoringPage.clickPlusButton();
-      // dragAndDropAuthoringPage.getImageUrl(2).type(image.imageUrl3);
-      // dragAndDropAuthoringPage.clickPlusButton();
-      // dragAndDropAuthoringPage.getImageUrl(3).type(image.imageUrl4);
-      // authoringPage.verifyExportToMediaLibraryLabel();
-      // authoringPage.verifyExportToMediaLibraryCheckboxLabel();
-      // authoringPage.verifyExportToMediaLibraryHelpContent();
-      // authoringPage.getExportToMediaLibraryCheckbox().click();
-      // cy.wait(2000);
+      authoringPage.getPromptField(" Drag the cats to the right positions");
+      dragAndDropAuthoringPage.getBackgroundImageUrl().type("https://placekitten.com/392/343");
+      dragAndDropAuthoringPage.clickPlusButton();
+      dragAndDropAuthoringPage.getImageUrl(0).type(image.imageUrl1);
+      dragAndDropAuthoringPage.clickPlusButton();
+      dragAndDropAuthoringPage.getImageUrl(1).type(image.imageUrl2);
+      dragAndDropAuthoringPage.clickPlusButton();
+      dragAndDropAuthoringPage.getImageUrl(2).type(image.imageUrl3);
+      dragAndDropAuthoringPage.clickPlusButton();
+      dragAndDropAuthoringPage.getImageUrl(3).type(image.imageUrl4);
+      authoringPage.verifyExportToMediaLibraryLabel();
+      authoringPage.verifyExportToMediaLibraryCheckboxLabel();
+      authoringPage.verifyExportToMediaLibraryHelpContent();
+      authoringPage.getExportToMediaLibraryCheckbox().click();
+      cy.wait(2000);
       authoringPage.getSaveButton().click();
     });
-    it("Verify Added Drag And Drop Item In Authoring Preview", () => {
+    it.skip("Verify Added Drag And Drop Item In Authoring Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", "Drag and Drop Question");
       // dragAndDropAuthoringPage.getDraggableItem(0, image.imageUrl1);

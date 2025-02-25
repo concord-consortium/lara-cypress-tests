@@ -4,7 +4,7 @@ import FillInTheBlankAuthoringPage from "../../support/fill-in-the-blank-authori
 const authoringPage = new AuthoringPage;
 const fibAuthoringPage = new FillInTheBlankAuthoringPage;
 
-context.skip("Test Authoring Preview", () => {
+context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
@@ -15,14 +15,14 @@ context.skip("Test Authoring Preview", () => {
   describe("LARA FIB Authoring Preview", () => {
     it("Add FIB Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Fill in the Blank");
-      authoringPage.getItemPickerList().contains(/^Fill In The Blank/).first().click();
-      // authoringPage.getAddItemButton().click();
-      // authoringPage.getEditItemDialog().should("exist");
-      // authoringPage.getNameField().type("Fill in the Blank Question");
-      // authoringPage.getPromptField(" Enter the answer [blank-1]");
-      // authoringPage.getHintField(" Fill in the Blank Hint");
-      // authoringPage.selectRequiredCheckBox();
+      authoringPage.getItemPickerSearch().type("Fill in the Blank Cypress");
+      authoringPage.getItemPickerList().contains(/^Fill In The Blank Cypress/).first().click();
+      authoringPage.getAddItemButton().click();
+      authoringPage.getEditItemDialog().should("exist");
+      authoringPage.getNameField().type("Fill in the Blank Question");
+      authoringPage.getPromptField(" Enter the answer [blank-1]");
+      authoringPage.getHintField(" Fill in the Blank Hint");
+      authoringPage.selectRequiredCheckBox();
       authoringPage.getSaveButton().click();
     });
     it.skip("Verify Added FIB Item In Authoring Preview", () => {

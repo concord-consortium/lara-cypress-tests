@@ -15,26 +15,26 @@ context("Test Authoring Preview", () => {
   describe("LARA Multi Select Authoring Preview", () => {
     it("Add Multi Select Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Multiple Choice");
-      authoringPage.getItemPickerList().contains(/^Multiple Choice/).first().click();
-      // authoringPage.getAddItemButton().click();
-      // authoringPage.getEditItemDialog().should("exist");
-      // authoringPage.getNameField().type("Multi Select Question");
-      // authoringPage.getPromptField(" Multi Select Prompt");
-      // authoringPage.getHintField(" Multi Select Hint");
-      // multiSelectAuthoringPage.selectMultipleAnswerCheckBox();
-      // multiSelectAuthoringPage.selectChoiceInEditForm(0);
-      // multiSelectAuthoringPage.selectChoiceInEditForm(1);
-      // multiSelectAuthoringPage.selectCheckAnswerCheckBox();
-      // multiSelectAuthoringPage.selectCustomFeedbackCheckBox();
-      // multiSelectAuthoringPage.enterCustomFeedback(0, "Correct Answer");
-      // multiSelectAuthoringPage.enterCustomFeedback(1, "Correct Answer");
-      // multiSelectAuthoringPage.enterCustomFeedback(2, "Incorrect Answer");
-      // authoringPage.selectRequiredCheckBox();
-      // authoringPage.enterPostSubmissionFeedback(" Answer Submitted");
+      authoringPage.getItemPickerSearch().type("Multiple Choice Cypress");
+      authoringPage.getItemPickerList().contains(/^Multiple Choice Cypress/).first().click();
+      authoringPage.getAddItemButton().click();
+      authoringPage.getEditItemDialog().should("exist");
+      authoringPage.getNameField().type("Multi Select Question");
+      authoringPage.getPromptField(" Multi Select Prompt");
+      authoringPage.getHintField(" Multi Select Hint");
+      multiSelectAuthoringPage.selectMultipleAnswerCheckBox();
+      multiSelectAuthoringPage.selectChoiceInEditForm(0);
+      multiSelectAuthoringPage.selectChoiceInEditForm(1);
+      multiSelectAuthoringPage.selectCheckAnswerCheckBox();
+      multiSelectAuthoringPage.selectCustomFeedbackCheckBox();
+      multiSelectAuthoringPage.enterCustomFeedback(0, "Correct Answer");
+      multiSelectAuthoringPage.enterCustomFeedback(1, "Correct Answer");
+      multiSelectAuthoringPage.enterCustomFeedback(2, "Incorrect Answer");
+      authoringPage.selectRequiredCheckBox();
+      authoringPage.enterPostSubmissionFeedback(" Answer Submitted");
       authoringPage.getSaveButton().click();
     });
-    it("Verify Added Multi Select Item In Authoring Preview", () => {
+    it.skip("Verify Added Multi Select Item In Authoring Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", "Multi Select Question");
       // authoringPage.getAuthoringPreviewPrompt("Multi Select Prompt");

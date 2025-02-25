@@ -11,7 +11,7 @@ function beforeTest() {
   authoringPage.previewActivity("Test Automation Labbook Wide Activity");
 }
 
-context.skip("Test Background Source As URL", () => {
+context("Test Background Source As URL", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
@@ -22,33 +22,33 @@ context.skip("Test Background Source As URL", () => {
   describe("LARA Labbook Wide With Background Source As URL", () => {
     it("Add Labbook Wide Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Lab Book wide");
-      authoringPage.getItemPickerList().contains(/^Lab Book Wide/).first().click();
-      // authoringPage.getAddItemButton().click();
-      // authoringPage.getEditItemDialog().should("exist");
-      // authoringPage.getNameField().type("Labbook Wide Question");
-      // authoringPage.getPromptField(" Labbook Wide Question Prompt");
-      // authoringPage.getHintField(" Labbook Wide Question Hint");
-      // // labbookAuthoringPage.selectBackgroundSource("URL");
-      // // labbookAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
-      // // labbookAuthoringPage.getHideToolbarButtonsField().should("exist");
-      // // labbookAuthoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
-      // // labbookAuthoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar.");
-      // // labbookAuthoringPage.verifyHideToolbarButtons();
-      // // labbookAuthoringPage.selectHideToolbarButtons(2);
-      // authoringPage.verifyExportToMediaLibraryLabel();
-      // authoringPage.verifyExportToMediaLibraryCheckboxLabel();
-      // authoringPage.verifyExportToMediaLibraryHelpContent();
-      // authoringPage.getExportToMediaLibraryCheckbox().click();
-      // authoringPage.verifyUploadFromLibraryLabel();
-      // authoringPage.verifyUploadFromMediaLibraryCheckboxLabel();
-      // authoringPage.verifyUploadFromMediaLibraryHelpContent();
-      // authoringPage.getUploadFromMediaLibraryCheckbox().click();
-      // cy.wait(2000);
+      authoringPage.getItemPickerSearch().type("Lab Book Wide Cypress");
+      authoringPage.getItemPickerList().contains(/^Lab Book Wide Cypress/).first().click();
+      authoringPage.getAddItemButton().click();
+      authoringPage.getEditItemDialog().should("exist");
+      authoringPage.getNameField().type("Labbook Wide Question");
+      authoringPage.getPromptField(" Labbook Wide Question Prompt");
+      authoringPage.getHintField(" Labbook Wide Question Hint");
+      labbookAuthoringPage.selectBackgroundSource("URL");
+      labbookAuthoringPage.enterBackgroundImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
+      labbookAuthoringPage.getHideToolbarButtonsField().should("exist");
+      labbookAuthoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
+      labbookAuthoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar.");
+      labbookAuthoringPage.verifyHideToolbarButtons();
+      labbookAuthoringPage.selectHideToolbarButtons(2);
+      authoringPage.verifyExportToMediaLibraryLabel();
+      authoringPage.verifyExportToMediaLibraryCheckboxLabel();
+      authoringPage.verifyExportToMediaLibraryHelpContent();
+      authoringPage.getExportToMediaLibraryCheckbox().click();
+      authoringPage.verifyUploadFromLibraryLabel();
+      authoringPage.verifyUploadFromMediaLibraryCheckboxLabel();
+      authoringPage.verifyUploadFromMediaLibraryHelpContent();
+      authoringPage.getUploadFromMediaLibraryCheckbox().click();
+      cy.wait(2000);
       authoringPage.getSaveButton().click();
       cy.wait(6000);
     });
-    it("Verify Added Labbook Wide Item In Authoring Preview", () => {
+    it.skip("Verify Added Labbook Wide Item In Authoring Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", "Labbook Wide Question");
       labbookAuthoringPage.getAuthoringPreviewPrompt("Labbook Wide Question Prompt");
@@ -57,7 +57,7 @@ context.skip("Test Background Source As URL", () => {
       labbookAuthoringPage.getAuthoringPreviewCommentField().should("exist");
       labbookAuthoringPage.getAuthoringPreviewThumbnailChooser().should("exist");
     });
-    it("Verify Added Labbook Wide Item In Item Preview", () => {
+    it.skip("Verify Added Labbook Wide Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
@@ -70,7 +70,7 @@ context.skip("Test Background Source As URL", () => {
       authoringPage.verifyExportToMediaLibraryCheckboxChecked();
       authoringPage.verifyUploadFromMediaLibraryCheckboxChecked();
     });
-    it("Verify hidden draw tool is not displayed", () => {
+    it.skip("Verify hidden draw tool is not displayed", () => {
       beforeTest();
       activityPlayerPreview.getActivityTitle().should("contain", "Test Automation Labbook Wide Activity");
       activityPlayerPreview.clickPageItem(0);

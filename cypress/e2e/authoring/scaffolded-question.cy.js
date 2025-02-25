@@ -4,7 +4,7 @@ import ScaffoldedAuthoringPage from "../../support/scaffolded-authoring.cy.js";
 const authoringPage = new AuthoringPage;
 const scaffoldedAuthoringPage = new ScaffoldedAuthoringPage;
 
-context.skip("Test Authoring Preview", () => {
+context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
@@ -15,13 +15,13 @@ context.skip("Test Authoring Preview", () => {
   describe("LARA2 scaffolded Authoring Preview", () => {
     it("Add scaffolded Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Scaffolded");
-      authoringPage.getItemPickerList().contains(/^Scaffolded/).first().click();
-      // authoringPage.getAddItemButton().click();
-      // authoringPage.getEditItemDialog().should("exist");
-      // authoringPage.getNameField().type("Scaffolded Question");
-      // authoringPage.getPromptField(" Scaffolded Prompt");
-      // scaffoldedAuthoringPage.clickPlusButton();
+      authoringPage.getItemPickerSearch().type("Scaffolded Question Cypress");
+      authoringPage.getItemPickerList().contains(/^Scaffolded Question Cypress/).first().click();
+      authoringPage.getAddItemButton().click();
+      authoringPage.getEditItemDialog().should("exist");
+      authoringPage.getNameField().type("Scaffolded Question");
+      authoringPage.getPromptField(" Scaffolded Prompt");
+      scaffoldedAuthoringPage.clickPlusButton();
       // scaffoldedAuthoringPage.selectInteractive("Open response", 0);
       // scaffoldedAuthoringPage.selectAuthoring(0);
       // cy.wait(6000);
@@ -39,7 +39,7 @@ context.skip("Test Authoring Preview", () => {
       // scaffoldedAuthoringPage.getPrompt(" Enter the answer [blank-1]", 2);
       authoringPage.getSaveButton().click();
     });
-    it("Verify Added scaffolded Item In Authoring Preview", () => {
+    it.skip("Verify Added scaffolded Item In Authoring Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionItemHeader().should("contain", "Scaffolded Question");
       // scaffoldedAuthoringPage.getAuthoringPreviewPrompt("Open response Prompt");
@@ -53,7 +53,7 @@ context.skip("Test Authoring Preview", () => {
       // scaffoldedAuthoringPage.getAuthoringPreviewFibPrompt("Enter the answer ");
       // scaffoldedAuthoringPage.getAuthoringPreviewFibTextArea().should("exist");
     });
-    it("Verify Added scaffolded Item In Item Preview", () => {
+    it.skip("Verify Added scaffolded Item In Item Preview", () => {
       cy.wait(6000);
       authoringPage.getSectionMenuEdit().click();
       // cy.wait(6000);

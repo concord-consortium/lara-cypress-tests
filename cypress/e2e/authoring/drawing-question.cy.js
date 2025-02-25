@@ -22,21 +22,21 @@ context("Test Background Source As URL", () => {
   describe("LARA Drawing Tool Question", () => {
     it("Add Drawing Tool Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Drawing Tool");
-      authoringPage.getItemPickerList().contains(/^Drawing Tool/).first().click();
+      authoringPage.getItemPickerSearch().type("Drawing Tool Cypress");
+      authoringPage.getItemPickerList().contains(/^Drawing Tool Cypress/).first().click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Drawing Question");
-      // authoringPage.getPromptField(" Drawing Question Prompt");
-      // authoringPage.getHintField(" Drawing Question Hint");
-      // authoringPage.getHideToolbarButtonsField().should("exist");
-      // authoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
-      // authoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar");
-      // authoringPage.verifyHideToolbarButtons();
-      // authoringPage.selectHideToolbarButtons(0);
-      // authoringPage.selectHideToolbarButtons(1);
-      // authoringPage.selectHideToolbarButtons(2);
-      // cy.wait(5000);
+      authoringPage.getPromptField(" Drawing Question Prompt");
+      authoringPage.getHintField(" Drawing Question Hint");
+      authoringPage.getHideToolbarButtonsField().should("exist");
+      authoringPage.getHideToolbarButtonsField().parent().find('label').should("contain", "Hide Toolbar Buttons");
+      authoringPage.getHideToolbarButtonsField().should("contain", "Check the boxes below to hide draw tool buttons from the toolbar");
+      authoringPage.verifyHideToolbarButtons();
+      authoringPage.selectHideToolbarButtons(0);
+      authoringPage.selectHideToolbarButtons(1);
+      authoringPage.selectHideToolbarButtons(2);
+      cy.wait(5000);
       authoringPage.getSaveButton().click();
       cy.wait(5000);
     });

@@ -15,14 +15,14 @@ context.skip("Test Sharing Interactive Plugin", () => {
   describe("LARA MCQ Authoring Preview", () => {
     it("Add MCQ Item", () => {
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Multiple Choice");
-      authoringPage.getItemPickerList().contains(/^Multiple Choice/).first().click();
+      authoringPage.getItemPickerSearch().type("Multiple Choice Cypress");
+      authoringPage.getItemPickerList().contains(/^Multiple Choice Cypress/).first().click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       authoringPage.getNameField().type("Multiple Choice Question");
-      // authoringPage.getPromptField(" Multiple Choice Prompt");
-      // authoringPage.getHintField(" Multiple Choice Hint");
-      // mcqAuthoringPage.selectChoiceInEditForm(0);
+      authoringPage.getPromptField(" Multiple Choice Prompt");
+      authoringPage.getHintField(" Multiple Choice Hint");
+      mcqAuthoringPage.selectChoiceInEditForm(0);
       authoringPage.getSaveButton().click();
     });
     it("Verify Sharing Interactive Plugin", () => {
