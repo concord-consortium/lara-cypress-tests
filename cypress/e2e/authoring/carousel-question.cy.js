@@ -15,7 +15,8 @@ context.skip("Test Authoring Preview", () => {
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
     authoringPage.launchActivity("Test Automation Carousel Activity");
   });
-
+  // NOTE: The carousel interactive is broken [QI-1]. We will fix this 
+  // and then uncomment the tests below.
   describe("LARA2 Carousel Authoring Preview", () => {
     it("Add carousel Item", () => {
       authoringPage.getAddItem().click();
