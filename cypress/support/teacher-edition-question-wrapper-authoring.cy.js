@@ -36,6 +36,10 @@ class TEQuestionWrapperAuthoringPage {
     this.getInteractive().find('.availablePlugins button').click();
     cy.wait(6000);
   }
+  // to-do: add data-testid tags to the plugin buttons once it is in LARA repo
+  clickEditButton() {
+    this.getInteractive().find('.pluginName').siblings('button').contains('Edit').click();
+  }
 
   selectChoiceInEditForm(choice) {
     this.getEditItemForm().find('iframe').then($iframe => {
