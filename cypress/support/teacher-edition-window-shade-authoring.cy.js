@@ -24,7 +24,10 @@ class TEWindowShadeAuthoringPage {
   }
 
   clickSaveButton() {
-    this.getEditItemForm().find('.submit-container .authoring-app--lineAdjust--TETipsPluginV1').eq(1).click();
+    this.getEditItemForm()
+    .find('button')
+    .contains('Save')
+    .click();
     cy.wait(6000);
   }
 

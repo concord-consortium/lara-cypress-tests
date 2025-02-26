@@ -23,7 +23,7 @@ const tip = {
     tip8Content: "Offline Activity Content"
 };
 
-context.skip("Test Authoring Preview", () => {
+context("Test Authoring Preview", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
@@ -37,8 +37,6 @@ context.skip("Test Authoring Preview", () => {
       authoringPage.getItemPickerSearch().type("Teacher Edition");
       authoringPage.getItemPickerList().contains("Teacher Edition: Window Shade").click();
       authoringPage.getAddItemButton().click();
-      cy.wait(6000);
-      authoringPage.getSectionMenuEdit().click();
       cy.wait(6000);
       authoringPage.getEditItemDialog().should("exist");
       teWindowShadeAuthoringPage.selectTipType(tip.tip1);
@@ -83,8 +81,6 @@ context.skip("Test Authoring Preview", () => {
       teWindowShadeAuthoringPage.verifyAuthoringPreviewWindowShadeContent(tip.tip8Content);
       teWindowShadeAuthoringPage.verifyAuthoringPreviewImageUrl("https://learn-resources.concord.org/tutorials/images/brogan-acadia.jpg");
     });
-    // TODO: Add a test to verify that the TE side tip saves once
-    // text is added to the form section ([LARA-154])
     it("Delete TE Window Shade", () => {
       cy.wait(4000);
       authoringPage.getSectionMenuDelete().click();

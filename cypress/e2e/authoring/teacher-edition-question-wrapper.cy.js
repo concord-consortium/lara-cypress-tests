@@ -35,10 +35,7 @@ context("Test Authoring Preview", () => {
       teQuestionWrapperAuthoringPage.getFormSection("Distractor");
       teQuestionWrapperAuthoringPage.getFormSection("Teacher Tip");
       teQuestionWrapperAuthoringPage.getFormSection("Exemplar");
-    });
-    // TODO: Add a test to verify that the TE Question Wrapper saves once
-    // text is added to the form section ([LARA-153])
-    it("Verify TE Question Wrapper", () => {
+      cy.log("Verify TE Question Wrapper");
       cy.wait(4000);
       teQuestionWrapperAuthoringPage.clickHeader("correct");
       teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Correct");
@@ -49,6 +46,20 @@ context("Test Authoring Preview", () => {
       teQuestionWrapperAuthoringPage.clickHeader("exemplar");
       teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Exemplar");
       teQuestionWrapperAuthoringPage.clickSaveButton();
+      cy.log("Verify TE Question Wrapper Text Saves after adding content");
+      // to-do: add data-testid tags to the plugin buttons once it is in LARA repo
+      cy.wait(4000);
+      teQuestionWrapperAuthoringPage.clickEditButton();
+      teQuestionWrapperAuthoringPage.clickHeader("correct");
+      teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Correct");
+      teQuestionWrapperAuthoringPage.clickHeader("distractors");
+      teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Distractor");
+      teQuestionWrapperAuthoringPage.clickHeader("teacherTip");
+      teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Teacher Tip");
+      teQuestionWrapperAuthoringPage.clickHeader("exemplar");
+      teQuestionWrapperAuthoringPage.verifyQuestionWrapperContent("Exemplar");
+      teQuestionWrapperAuthoringPage.clickSaveButton();
+
     });
     it("Delete Item", () => {
       cy.wait(4000);
