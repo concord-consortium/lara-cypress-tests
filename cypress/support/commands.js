@@ -81,16 +81,22 @@ Cypress.Commands.add("launchGlossary", (glossary) => {
 
 Cypress.Commands.add("deleteGlossary", (glossary) => {
   cy.log("Launch Test Glossary : ");
-  cy.get("#search input").eq(0).type(glossary);
-  cy.get("#search input").eq(1).click();
-  cy.wait(500);
+  // logged a new issue [LARA-167] is not deleting the glossary
+  cy.get('[data-testid="authoring-search-bar"]')
+  .should('be.visible')
+  .and('not.be.disabled')
+  .type(glossary);
+  cy.get('[data-testid="authoring-search-button"]').click();
+  cy.wait(3000);
   cy.get("body").then($body => {
     if ($body.find(".glossaries .item").length > 0) {
       cy.log("Delete Glossary");
-      cy.get('.glossaries .item .action_menu_header_right .delete a').click();
-      cy.wait(2000);
+      cy.get('.glossaries .item .action_menu_header_right .delete a')
+      .should('be.visible')
+      .click();
+      // cy.wait(2000);
       cy.get('.breadcrumbs a').click();
-      cy.wait(1000);
+      // cy.wait(1000);
     } else {
       cy.log("No Glossary To Delete");
     }
