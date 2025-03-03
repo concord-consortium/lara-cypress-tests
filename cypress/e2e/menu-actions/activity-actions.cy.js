@@ -2,11 +2,10 @@ import AuthoringPage from "../../support/authoring-page.cy.js";
 
 const authoringPage = new AuthoringPage;
 
-context.skip("Test Activity Action Menu", () => {
+context("Test Activity Action Menu", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
-    cy.deleteCopyActivity("Copy of Test Automation Activity Menu Actions");
     cy.searchActivity("Test Automation Activity Menu Actions");
   });
 
@@ -17,27 +16,35 @@ context.skip("Test Activity Action Menu", () => {
       authoringPage.getSettingsPage().should("exist");
       authoringPage.getSettingsPageSave();
       authoringPage.clickHomePageLink();
-    });
-    it("Verify Publish Actions", () => {
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
-      authoringPage.getActivityPublishMenu().click();
-      cy.wait(2000);
-      authoringPage.getPublishModel().should("exist");
-      authoringPage.getPublishLink().click();
-      cy.wait(2000);
-      authoringPage.getPublishStatus().should("contain", "published");
-      authoringPage.getPublishModelClose().click();
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
-      authoringPage.getActivityDetailPublished().should("contain", "last published");
-      cy.wait(2000);
-    });
-    it("Verify Delete Actions", () => {
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
+    
+      cy.log("Verify the copied activity");
+      cy.searchActivity("Copy of Test Automation Activity Menu Actions");
+      authoringPage.getActivity().should("exist");
+
+      // We skip the Publish action to avoid creating clutter
+      // in the Portal Staging environment.
+
+      // authoringPage.getActivityPublishMenu().click();
+      // cy.wait(2000);
+      // authoringPage.getPublishModal().should("exist");
+      // authoringPage.getPublishLink().click();
+      // cy.wait(2000);
+      // authoringPage.getPublishStatus().should("contain", "published");
+      // authoringPage.getPublishModalClose().click();
+      // authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
+      // authoringPage.getActivityDetailPublished().should("contain", "last published");
+      // cy.wait(2000);
+    
+      cy.log("Verify the delete actions");
+      cy.searchActivity("Copy of Test Automation Activity Menu Actions");
+      authoringPage.getActivity().should("have.length", 1);
       authoringPage.getActivityDeleteMenu().click();
-      cy.wait(2000);
       authoringPage.clickHomePageLink();
-      authoringPage.searchActivitySequence("Copy of Test Automation Activity Menu Actions");
+      cy.searchActivity("Copy of Test Automation Activity Menu Actions");
       authoringPage.getActivity().should("not.exist");
+
+      cy.searchActivity("Test Automation Activity Menu Actions");
+      authoringPage.getActivity().should("have.length", 1);
     });
   });
 });
