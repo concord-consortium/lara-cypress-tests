@@ -1,3 +1,5 @@
+// This test is broken [LARA-168]
+
 context.skip('Multiple choice question', function () {
   let activityUrl
   beforeEach(() => {
