@@ -56,7 +56,7 @@ context("Test Background Source As URL", () => {
     
       // NOTE: the next pieces of the Cypress test seem to produce a Typescript error
       // in Staging, so they are commented out for now. The behavior is not observed
-      // when testing manually.
+      // when testing manually [LARA-172].
       
       // cy.log("Verify Added Image Item In Authoring Preview");
       // cy.wait(6000);
