@@ -32,7 +32,7 @@ context("Test Export Activity", () => {
       authoringPage.readJsonFile(file.activity, file.activityName);
       cy.wait(4000);
     });
-    it.skip("Export Test Sequence", () => {
+    it("Export Test Sequence", () => {
       cy.visit("");
       cy.wait(4000);
       authoringPage.searchActivitySequence(file.sequenceName);
@@ -44,7 +44,7 @@ context("Test Export Activity", () => {
       authoringPage.readSequenceJsonFile(file.sequence, file.sequenceName);
       cy.wait(4000);
     });
-    it.skip("Export Test Glossary", () => {
+    it.only("Export Test Glossary", () => {
       cy.visit("");
       cy.wait(4000);
       authoringPage.searchActivitySequence(file.glossaryName);

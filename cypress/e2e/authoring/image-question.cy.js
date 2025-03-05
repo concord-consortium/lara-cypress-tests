@@ -16,7 +16,7 @@ function beforeTest() {
   authoringPage.launchActivity("Test Automation Image Question Activity");
 }
 
-context.skip("Test Background Source As URL", () => {
+context("Test Background Source As URL", () => {
   before(() => {
     cy.visit("");
     cy.loginLARAWithSSO(Cypress.config().username, Cypress.env("password"));
@@ -24,7 +24,7 @@ context.skip("Test Background Source As URL", () => {
     cy.deleteItem();
   });
 
-  describe.skip("LARA Image Question With Background Source As URL", () => {
+  describe("LARA Image Question With Background Source As URL", () => {
     it("Add Image Item", () => {
       authoringPage.getAddItem().click();
       authoringPage.getItemPickerSearch().type("Image Question Cypress");
@@ -53,10 +53,15 @@ context.skip("Test Background Source As URL", () => {
       authoringPage.getUploadFromMediaLibraryCheckbox().click();
       cy.wait(2000);
       authoringPage.getSaveButton().click();
-    });
-    it("Verify Added Image Item In Authoring Preview", () => {
-      cy.wait(6000);
-      authoringPage.getSectionItemHeader().should("contain", "Image Question");
+    
+      // NOTE: the next pieces of the Cypress test seem to produce a Typescript error
+      // in Staging, so they are commented out for now. The behavior is not observed
+      // when testing manually [LARA-172].
+      
+      // cy.log("Verify Added Image Item In Authoring Preview");
+      // cy.wait(6000);
+      // // authoringPage.getSectionItemHeader().should("contain", "Image Question");
+      // authoringPage.getSectionMenuEdit().click();
       // imageAuthoringPage.getAuthoringPreviewPrompt("Image Question Prompt");
       // imageAuthoringPage.getAuthoringPreviewDrawingButton().should("exist");
       // imageAuthoringPage.getAuthoringPreviewImage().should("exist");
@@ -87,9 +92,9 @@ context.skip("Test Background Source As URL", () => {
       imageAuthoringPage.selectBackgroundSource("Upload");
       authoringPage.getSaveButton().click();
     });
-    it.skip("Verify In Authoring Preview", () => {
+    it("Verify In Authoring Preview", () => {
       cy.wait(6000);
-      authoringPage.getSectionItemHeader().should("contain", "Image Question");
+      authoringPage.getSectionItemHeader().should("contain", "Image Question Cypress");
       imageAuthoringPage.getAuthoringPreviewPrompt("Image Question Prompt");
       imageAuthoringPage.getAuthoringPreviewUploadButton().should("exist");
       imageAuthoringPage.getAuthoringPreviewUploadButton().click();

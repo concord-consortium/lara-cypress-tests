@@ -1,3 +1,9 @@
+// this suite stopped working during a Cypress refactor.
+// The missing function is deleteMaterial
+// It may be possible to bring it back.
+// The PR of interest is https://github.com/concord-consortium/lara-cypress-tests/pull/2/
+// For now we skip the tests
+
 context.skip('Runtime state saving', function () {
   let materialUrl
   beforeEach(() => {
