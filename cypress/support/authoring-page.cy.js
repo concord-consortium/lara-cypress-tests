@@ -145,7 +145,9 @@ class AuthoringPage {
   //***************************************************************************************************************
 
   getInteractive() {
-    return cy.get(".itemsContainer .sectionItemContainer");
+    return cy.get('.itemsContainer .sectionItemContainer')
+      .should('exist')
+      .first();
   }
   getSectionItemHeader() {
     return this.getInteractive().find(".menuStart");
@@ -402,17 +404,17 @@ class AuthoringPage {
     this.getSequenceDetails().find('img').invoke("attr", "src").should("contain", url);
   }
 
-  getPublishModel() {
+  getPublishModal() {
     return cy.get('#modal .publication');
   }
   getPublishLink() {
-    return this.getPublishModel().find('.info a');
+    return this.getPublishModal().find('.info a');
   }
   getPublishStatus(){
-    return this.getPublishModel().find('.info .disabled');
+    return this.getPublishModal().find('.info .disabled');
   }
   getPublishModelClose() {
-    return this.getPublishModel().find('.header .close_link');
+    return this.getPublishModal().find('.header .close_link');
   }
   //***************************************************************************************************************
   getSettingsPage() {
