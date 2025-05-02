@@ -22,7 +22,7 @@ context("Test Sequence Action Menu", () => {
       authoringPage.searchActivitySequence("Copy of Test Automation Sequence Menu Actions");
       authoringPage.getSequencePublishMenu().click();
       cy.wait(2000);
-      authoringPage.getPublishModel().should("exist");
+      authoringPage.getPublishModal().should("exist");
       authoringPage.getPublishLink().click();
       cy.wait(2000);
       authoringPage.getPublishStatus().should("contain", "published");

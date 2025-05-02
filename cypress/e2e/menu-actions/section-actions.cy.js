@@ -46,8 +46,8 @@ context("Test Section Action Menus", () => {
     it("Add MCQ Item", () => {
       cy.log("Add a Multiple Choice Question item");
       authoringPage.getAddItem().click();
-      authoringPage.getItemPickerSearch().type("Multiple Choice");
-      authoringPage.getItemPickerList().contains("Multiple Choice AWS S3").click();
+      authoringPage.getItemPickerSearch().type("Multiple Choice Cypress");
+      authoringPage.getItemPickerList().contains("Multiple Choice Cypress").click();
       authoringPage.getAddItemButton().click();
       authoringPage.getEditItemDialog().should("exist");
       cy.log('Fill in the item fields within the iFrame');
